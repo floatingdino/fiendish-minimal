@@ -1,0 +1,345 @@
+/*
+THEME NAME: FIENDISH MINIMAL 2.0
+DESIGNED BY: FLOATINGDINO (floatingdino.tumblr.com)
+THEME IS CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
+CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
+*/
+body, article, p, h2, h3{
+    font-family: 'Anonymous Pro', Courier, monospace;
+}
+.quote h3{
+    font-family: 'IM Fell French Canon SC', serif;
+}
+body{
+    background-color:#fff;
+    margin:0;
+    padding:0;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+}
+body, article, p, h1, h2{
+    color:#e7e7e7;
+}
+a{
+    color:inherit;
+    text-decoration:none;
+    border:0;
+    letter-spacing:0;
+    transition: letter-spacing 1s ease;
+}
+a:hover{
+    font-weight:bold;
+}
+
+.wrapper{
+    margin:0 auto;
+    height:auto;
+}
+#masthead #logo{
+    text-align:center;
+    margin:0 auto;
+}
+h1, nav{
+    font-family: 'Oswald', sans-serif;
+    font-weight:300;
+    font-size:48px;
+    line-height:52px;
+    margin:0;
+    padding:0;
+    text-transform:uppercase;
+    vertical-align:top;
+}
+img{
+    background:inherit;
+}
+#title-line h1{
+    transition:margin 0.3s ease-out;
+}
+#title-line{
+    height:52px;
+    overflow:hidden;
+    text-align:center;
+    fill: currentColor;
+    z-index:1;
+    vertical-align:top;
+    position:absolute;
+    width:100%;
+    left:0;
+}
+header{
+    padding-bottom:52px;
+}
+header .black{
+    background-color:rgba(0,0,0,0.5);
+}
+header .white{
+    background-color:rgba(255,255,255,0.5);
+}
+header .none{
+    background:none;
+}
+svg{
+    display:inline-block;
+    fill: currentColor;
+    cursor:pointer;
+    vertical-align:top;
+}
+#title-line ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:block;
+}
+#title-line li{
+    display:inline-block;
+}
+main{
+    width:auto;
+    display:block;
+    margin:10px auto;
+}
+.single{
+    max-width:1280px;
+    width:auto;
+}
+.index{
+    width:60%;
+}
+article h2{
+    font-weight:normal;
+    margin:10px 0 30px 0;
+    font-size:1em;
+}
+@media screen and (min-width : 1440px){
+    .index article{
+        width:30%;
+        margin:10px 1.4%;
+        font-size:18px;
+    }
+    .index .x2{
+        width:63%;
+        font-size:20px;
+    }
+    .index .x3{
+        width:97%;
+        font-size:22px;
+    }
+}
+@media screen and (min-width : 1080px) and (max-width : 1440px){
+        .index article{
+            width:47%;
+            margin:10px 1.4%;
+            font-size:22px;
+        }
+        .index .x3, .index .x2{
+            width:97%;
+            margin:10px 1.4%;
+            font-size:24px;
+        }
+    }
+@media screen and (max-width:1080px){
+    main{
+        font-size-adjust: 150%;
+    }
+    .index{
+        width:100%;
+    }
+    .single{
+        width:100%;
+    }
+    .index article{
+        width:97%;
+        font-size:32px;
+        margin:10px 1.4%;
+    }
+    .single article{
+        font-size:32px;
+    }
+    }
+}
+/*IE 10 CAN'T DO MASONRY - REVERTS TO SINGLE COLUMN*/
+@media screen and (-ms-high-contrast: active) and (max-width : 1080px), (-ms-high-contrast: none) and (max-width : 1080px){
+    .index{
+        width:100%;
+    }
+    .single{
+        width:100%;
+    }
+    .index article{
+        width:97%;
+        margin:10px 1.4%;
+        font-size:32px;
+    }
+}
+@media screen and (-ms-high-contrast: active) and (min-width : 1081px), (-ms-high-contrast: none) and (min-width : 1081px){
+    .index{
+        width:500px;
+    }
+    .index article{
+        width:97%;
+        margin:10px 1.4%;
+        font-size:24px;
+    }
+}
+main h1{
+    text-align:center;
+    line-height:60px;
+    margin:20px 0;
+    width:100%;
+}
+article h2:first-child{
+    line-height:1em;
+    height:1em;
+    overflow:hidden;
+    white-space: nowrap;
+}
+main a img:hover{
+    border-bottom:5px solid #33ff99;
+    transition:border 0.3s ease;
+}
+img{
+    border:0;
+    border-bottom:0px solid #33ff99;
+    transition:border 0.3s ease;
+}
+#content{
+    font-size:0;
+}
+article{
+    margin:10px 1.4%;
+    float:left;
+    display:block;
+    padding:10px;
+    vertical-align:top;
+    box-sizing:border-box;
+}
+.single article{
+    text-align:center;
+    margin:10px auto;
+    float:none;
+    font-size:22px;
+}
+.single article h2{
+    text-transform:uppercase;
+}
+article h2 a{
+    text-transform:uppercase;
+    color: #33ff99;
+}
+ol.notes{
+    list-style:none;
+    margin:0;
+    padding:0;
+    font-size:0.9em;
+}
+.notes li{
+    vertical-align:top;
+    height:1.3em;
+}
+.notes img{
+    margin-right:5px;
+    vertical-align:top;
+}
+.index article img, .index article iframe{
+    width:100%;
+    height:auto;
+}
+.single article img, .single article iframe{
+    max-width:100%;
+    height:auto;
+}
+.pagination{
+    text-align:center;
+    margin:20px 0;
+    display:none;
+}
+.pagination ul{
+    list-style:none;
+    display:block;
+    margin:0;
+    padding:0;
+}
+.pagination li{
+    list-style:none;
+    display:inline-block;
+}
+article h3{
+    font-size:0.9em;
+    line-height:1.2em;
+    font-weight:normal;
+    color:inherit;
+}
+article p{
+    font-size:0.8em;
+    line-height:1.2em;
+    font-weight:normal;
+    color:inherit;
+    margin:15px;
+}
+.quote h3{
+    font-size:1.3em;
+    line-height:1.7em;
+    display:block;
+    padding:30px;
+    margin:0 0 10px 0;
+    background-color:rgba(0,0,0,0.01);
+}
+.chat em{
+    display:inline-block;
+    font-variant:normal;
+    width:24%;
+    font-weight:700;
+    font-size:0.8em;
+    line-height:1em;
+    margin:0 1% 0 0;
+    vertical-align:top;
+}
+.chat em:nth-child(odd){
+    background-color:rgba(0,0,0,0.01);
+}
+.chat p{
+    display:inline-block;
+    max-width:75%;
+    font-size:0.8em;
+    line-height:1em;
+    margin:0;
+    vertical-align:top;
+}
+.answer h3:first-child{
+    background-color:rgba(0,0,0,0.03);
+}
+.answer img{
+    height:auto;
+}
+#infscr-loading{
+    position:fixed !important;
+    bottom:0;
+    display:block;
+    width:64px;
+    height:64px;
+    left:0;
+    right:0;
+    margin:0 auto !important;
+}
+ul.tags{
+    list-style:none;
+    padding:0;
+    margin:0;
+    text-align:center;
+    display:block;
+}
+ul.tags li{
+    display:inline-block;
+    margin:0 4px;
+    font-size:0.8em;
+}
+ul.tags li:before{
+    content:'#';
+}
+.index .text blockquote{
+    margin:0.6em 0 0.6em 0.6em 0.6em;
+}
+a.black{
+    text-transform:lowercase;
+}

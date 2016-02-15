@@ -1,0 +1,633 @@
+<!DOCTYPE HTML>
+<!--
+THEME DETAILS:
+RUCKUS FIENDS MINIMAL v. 2.0
+
+DESIGNED BY:
+FLOATINGDINO (floatingdino.tumblr.com)
+
+THEME IS CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
+
+DEPENDENCIES:
+jQuery
+Masonry/imagesLoaded
+Infinite Scroll
+jQuery Sticky
+jQuery Photoset
+-->
+<html>
+<head>
+    <title>{Title}</title>
+    <link rel="shortcut icon" href="{Favicon}">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}">
+    {block:Description}
+        <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
+    <link href='http://fonts.googleapis.com/css?family=Oswald:300|Anonymous+Pro:400,700|IM+Fell+French+Canon+SC' rel='stylesheet' type='text/css'>
+
+
+        <!--Main CSS Stylesheet-->
+    <link href='http://static.tumblr.com/ii7qpmy/2sao0wegd/rf_mnml2.css' rel='stylesheet' type='text/css'>
+    {block:If4Columns}<link href='http://static.tumblr.com/ii7qpmy/d1Mnix193/rf_4col.css' rel='stylesheet' type='text/css'>{/block:If4Columns}
+        <!--Mitigates problems with Masonry in IE - unknown problem-->
+    <!--[if IE]>
+    <link href="http://static.tumblr.com/ii7qpmy/F5Onif91o/rf_mnml_ie.css" rel="stylesheet" type="text/css">
+    <![endif]-->
+
+        <!--THEME SETTINGS-->
+        <!--Initialises with mostly pre-set colours from Global appearance-->
+    <meta name="color:Background" content="{BackgroundColor}">
+    <meta name="image:Background Image" content="">
+    <meta name="select:Post Background" content="none" name="None">
+    <meta name="select:Post Background" content="white" name="White">
+    <meta name="select:Post Background" content="black" name="Black">
+    <meta name="color:Text" content="{TitleColor}">
+    <meta name="color:Links" content="{AccentColor}">
+    <meta name="color:Selection" content="{RGBAccentColor}">
+    <meta name="image:Header" content="{HeaderImage}">
+    <meta name="text:Header Size" content="256px">
+    <meta name="if:Full Width Header" content="0">
+    <meta name="if:Show Header" content="{block:ShowHeaderImage}1{/block:ShowHeaderImage}{block:HideHeaderImage}0{/block:HideHeaderImage}">
+    <meta name="if:Show Title" content="{block:ShowTitle}1{/block:ShowTitle}{block:HideTitle}0{/block:HideTitle}">
+    <meta name="if:Show Photos and Photosets only" content="0">
+    <meta name="if:4 Columns" content="1">
+    <meta name="select:Header Line Colour" content="none" name="None">
+    <meta name="select:Header Line Colour" content="white" name="White">
+    <meta name="select:Header Line Colour" content="black" name="Black">
+    <meta name="if:Alternate Colour Tags" content="0">
+    <meta name="text:Pink Tag" content="vibe">
+    <meta name="text:Blue Tag" content="vibe2">
+    <meta name="text:Green Tag" content="35mm">
+    <meta name="text:Yellow Tag" content="ruckus">
+
+    <meta name="viewport" content="width=1080"> <!--Keeps Mobile Browsers on single column-->
+    <style>
+        @media screen and (orientation : portrait){
+            @-viewport{
+                width:1080px;
+            }
+        }
+        @media screen and (orientation : landscape){
+            @-viewport{
+                width:1400px;
+            }
+            .main{
+                width:100%;
+            }
+        }
+        body{
+            background-color:{color:Background};
+            background-image:url({image:Background Image});
+            background-attachment:fixed;
+            background-repeat:no-repeat;
+            background-position:center;
+        }
+        body, article, p, h1, h2, h3, em, a.black{
+            color:{color:Text};
+        }
+        article h2 a{
+            color:{color:Links};
+        }
+        main :not(.notes) a img:hover{
+            border-bottom:5px solid {color:Links};
+            transition:border 0.3s ease;
+        }
+        main a img{
+            border-bottom:0px solid {color:Links};
+            transition:border 0.3s ease;
+        }
+        blockquote{
+            border-left:2px solid {color:Links};
+        }
+        #logo img{
+            max-height: {text:Header Size};
+            width:auto;
+            max-width:100%;
+        }
+        {block:IfNotAlternateColourTags}
+        span.{text:Pink Tag}, span.{text:Blue Tag}, span.{text:Green Tag}, span.{text:Yellow Tag}{
+            padding:0 10px;
+            margin-left:3px;
+        }
+        .index .{text:Pink Tag} img, .index .{text:Blue Tag} img, .index .{text:Green Tag} img, .index .{text:Yellow Tag} img{
+            opacity:0.7;
+        }
+        .index .{text:Pink Tag}{
+            opacity:0.95;
+            background-color:rgb(255,225,240);
+            border:5px solid #ff3399;
+        }
+        .index .{text:Blue Tag}{
+            opacity:0.95;
+            background-color:rgb(225,240,255);
+            border:5px solid #3399ff;
+        }
+        .index .{text:Green Tag}{
+            opacity:0.95;
+            background-color:rgb(225,255,240);
+            border:5px solid #33ff99;
+        }
+        .index .{text:Yellow Tag}{
+            opacity:0.95;
+            background-color:rgb(255,251,240);
+            border:5px solid #ffe199;
+        }
+        {/block:IfNotAlternateColourTags}
+        .{text:Pink Tag} h2 a, h1 .{text:Pink Tag}, .tags li.{text:Pink Tag}{
+            color:#ff3399;
+        }
+        .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
+            border-bottom-color:#ff3399 !important;
+        }
+        .{text:Blue Tag} h2 a, h1 .{text:Blue Tag}, .tags li.{text:Blue Tag}{
+            color:#3399ff;
+        }
+        .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
+            border-bottom-color:#3399ff !important;
+        }
+        .{text:Green Tag} h2 a, h1 .{text:Green Tag}, .tags li.{text:Green Tag}{
+            color:#33ff99;
+        }
+        .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
+            border-bottom-color:#33ff99 !important;
+        }
+        .{text:Yellow Tag} h2 a, h1 .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
+            color:#ffe199;
+        }
+        .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
+            border-bottom-color:#ffe199 !important;
+        }
+        ::selection{
+            background-color:rgba({RGBcolor:Selection}, 0.3);
+        }
+        ::-webkit-scrollbar{
+            width:17px;
+        }
+        ::-webkit-scrollbar-track {
+              background-color:{color:Background};
+        }
+        ::-webkit-scrollbar-thumb {
+              background-color: rgba(0, 0, 0, 0.2);
+              border-radius:15px;
+              border:4px solid {color:Background};
+              width:10px;
+        }
+        ::-webkit-scrollbar-button {
+              background-color: {color:Background};
+              height:5px;
+        }
+        div.fullwidth{
+            display:block;
+            width:100%;
+            padding:0;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            background-position: center top;
+        }
+        {CustomCSS}
+    </style>
+    <script type="text/javascript">
+    //Very simple JS function to swap out the title line with the pages navigation and ask/submit buttons
+        function titleSlider(direction){
+                title = document.getElementById("title");
+                if (direction == 0){
+                    title.style.marginTop = "-54px";
+                }else if(direction == 1){
+                    title.style.marginTop = "0px";
+                }
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://static.tumblr.com/wgijwsy/Ebfm2v4gy/jquery.masonry.min.js"></script>
+    <script src="http://static.tumblr.com/iwtk77u/Yhym2yygt/jquery.imagesloaded.min.js"></script>
+    <script src="http://static.tumblr.com/wgijwsy/u2vm2hxv6/jquery.infinitescroll.min.js"></script>
+    <script src="http://static.tumblr.com/ii7qpmy/0dXnievb7/jquery.sticky.js"></script>
+    <script src="http://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
+</head>
+<body>
+    {block:IfFullWidthHeader}
+    <div class="fullwidth" style="background-image:url('{image:Header}');height:{text:Header Size}"></div>
+    {/block:IfFullWidthHeader}
+    <div class="wrapper {block:IndexPage}index {block:If4Columns}four {/block:If4Columns}{/block:IndexPage}{block:PermalinkPage}single{/block:PermalinkPage}">
+
+        <header id="masthead">
+        {block:IfShowHeader}{block:IfNotFullWidthHeader}
+            <div id="logo">
+                <a href="{BlogURL}" title="Home">
+                    <img src="{image:Header}" alt="{Title}">
+                </a>
+            </div>
+        {/block:IfNotFullWidthHeader}{/block:IfShowHeader}
+            <div id="title-line" class="{select:Header Line Colour}">
+            {block:IfShowTitle}
+                <h1 id="title"><a href="{BlogURL}" title="Home">{Title}</a>
+                    {block:HasPages}<svg onClick="titleSlider(0)" width="52" height="52"> <!--HAMBURGER ICON-->
+                        <title>show menu</title>
+                        <rect x="5" y="9.5" width="42" height="7"/>
+                        <rect x="5" y="22.5" width="42" height="7"/>
+                        <rect x="5" y="35.5" width="42" height="7"/>
+                    </svg>{/block:HasPages}
+                </h1>
+            {/block:IfShowTitle}
+            {block:HasPages}
+                <nav>
+                    {block:IfShowTitle}
+                    <svg onClick="titleSlider(1)" width="52" height="52"> <!--CHEESEBURGER (?) ICON-->
+                        <title>show title</title>
+                        <rect x="5" y="9.5" width="42" height="7"/>
+                        <rect x="5" y="22.5" width="18" height="7"/>
+                        <rect x="29" y="22.5" width="18" height="7"/>
+                        <rect x="5" y="35.5" width="42" height="7"/>
+                    </svg>
+                    {/block:IfShowTitle}
+
+                        {block:Pages}
+                            <a href="{URL}">{Label}</a>
+                        {/block:Pages}
+                    {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}{block:SubmissionsEnabled} <a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
+                </nav>
+            {/block:HasPages}
+            </div>
+        </header>
+
+        <main id="content">
+            {block:TagPage}<h1>/tagged/<span class="{Tag}">{Tag}</span></h1>{/block:TagPage}
+            {block:IndexPage}
+                {block:Posts}
+                    {block:Photo}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            <a href="{Permalink}#title">
+                                <img src="{PhotoURL-500}" alt="{PhotoAlt}">
+                            </a>
+                        </article>
+                    {/block:Photo}
+                    {block:Photoset}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            <div class="photoset">
+                                <div class="photoset-grid" data-layout="{PhotosetLayout}">
+                                    {block:Photos}
+                                            <img src="{PhotoURL-500}" {block:Caption}alt="{Caption}"{/block:Caption} />
+                                    {/block:Photos}
+                                </div>
+                            </div>
+                        </article>
+                    {/block:Photoset}
+                    {block:IfNotShowPhotosandPhotosetsOnly}
+                        {block:Text}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
+                                {Body}
+                            </article>
+                        {/block:Text}
+                        {block:Panorama}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                {LinkOpenTag}
+                                    <img src="{PhotoURL-500}" alt="{PhotoAlt}">
+                                {LinkCloseTag}
+                            </article>
+                        {/block:Panorama}
+                        {block:Quote}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                <h3>"{Quote}"</h3>
+                                {block:Source}<p>&emsp;&mdash;&emsp;{Source}</p>{/block:Source}
+                            </article>
+                        {/block:Quote}
+                        {block:Link}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                <a href="{URL}" {Target}>
+                                    {block:Host}<h3>{Host}</h3>{/block:Host}
+                                    {block:Description}
+                                        <p>{Description}</p>
+                                    {/block:Description}
+                                </a>
+                            </article>
+                        {/block:Link}
+                        {block:Chat}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
+                                {block:Lines}
+                                    {block:Label}<em>{Label}</em>{/block:Label}<p>{Line}</p><br>
+                                {/block:Lines}
+                            </article>
+                        {/block:Chat}
+                        {block:Audio}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                {block:AudioEmbed}
+                                    {AudioEmbed-500}
+                                {/block:AudioEmbed}
+                                {block:AudioPlayer}
+                                    {AudioPlayer}
+                                {/block:AudioPlayer}
+                            </article>
+                        {/block:Audio}
+                        {block:Video}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                {VideoEmbed-500}
+                            </article>
+                        {/block:Video}
+                        {block:Answer}
+                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                <a href="{Permalink}#title"><h3>{Question}</h3></a>
+                                <h3>{Replies}</h3>
+                            </article>
+                        {/block:Answer}
+                    {/block:IfNotShowPhotosandPhotosetsOnly}
+                {/block:Posts}
+            {/block:IndexPage}
+
+            {block:PermalinkPage}
+                {block:Posts}
+                    {block:Photo}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {block:LinkURL}{LinkOpenTag}{/block:LinkURL}
+                                <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+                            {block:LinkURL}{LinkCloseTag}{/block:LinkURL}
+                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:Caption}{Caption}{/block:Caption}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Photo}
+                    {block:Text}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
+                            {Body}
+                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Text}
+                    {block:Chat}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
+                            {block:Lines}
+                                {block:Label}<em>{Label}</em>{/block:Label}<p>{Line}</p><br>
+                            {/block:Lines}
+                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Chat}
+                    {block:Answer}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <a href="{Permalink}#title"><h3>{Question}</h3></a>
+                            <h3>{Replies}</h3>
+                            <h2>{block:RebloggedFrom}via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Answer}
+                    {block:Photoset}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <div class="photoset">
+                                <div class="photoset-grid" data-layout="{PhotosetLayout}">
+                                    {block:Photos}
+                                        <img src="{PhotoURL-HighRes}" {block:Caption}alt="{Caption}"{/block:Caption} />
+                                    {/block:Photos}
+                                    {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                    {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                                    {block:Caption}{Caption}{/block:Caption}
+                                    {block:HasTags}
+                                        <ul class="tags">
+                                            {block:Tags}
+                                            <li class="{Tag}">{Tag}</li>
+                                            {/block:Tags}
+                                        </ul>
+                                    {/block:HasTags}
+                                    {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                        {PostNotes}
+                                    {/block:PostNotes}
+                                </div>
+                            </div>
+                        </article>
+                    {/block:Photoset}
+                    {block:Panorama}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {LinkOpenTag}
+                                <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
+                            {LinkCloseTag}
+                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                        {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:Caption}{Caption}{/block:Caption}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Panorama}
+                    {block:Quote}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <h3>"{Quote}"</h3>
+                            {block:Source}<p>&emsp;&mdash;&emsp;{Source}</p>{/block:Source}
+                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Quote}
+                    {block:Link}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <a href="{URL}" {Target}>
+                                {block:Host}<h3>{Host}</h3>{/block:Host}
+                                {block:Description}
+                                    <p>{Description}</p>
+                                {/block:Description}
+                            </a>
+                                {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                                {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                                {block:HasTags}
+                                    <ul class="tags">
+                                        {block:Tags}
+                                        <li class="{Tag}">{Tag}</li>
+                                        {/block:Tags}
+                                    </ul>
+                                {/block:HasTags}
+                                {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                    {PostNotes}
+                                {/block:PostNotes}
+                        </article>
+                    {/block:Link}
+                    {block:Audio}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {block:AudioEmbed}
+                                {AudioEmbed-640}
+                            {/block:AudioEmbed}
+                            {block:AudioPlayer}
+                                {AudioPlayer}
+                            {/block:AudioPlayer}
+                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:Caption}{Caption}{/block:Caption}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                    <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Audio}
+                    {block:Video}
+                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            {VideoEmbed-700}
+                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
+                            {block:Caption}{Caption}{/block:Caption}
+                            {block:HasTags}
+                                <ul class="tags">
+                                    {block:Tags}
+                                        <li class="{Tag}">{Tag}</li>
+                                    {/block:Tags}
+                                </ul>
+                            {/block:HasTags}
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                        </article>
+                    {/block:Video}
+                {/block:Posts}
+            {/block:PermalinkPage}
+        </main>
+    </div>
+    {block:Pagination}
+        <nav class="pagination">
+            <ul>
+                {block:PreviousPage}<li><a href="{PreviousPage}">Previous Page</a></li>{/block:PreviousPage}
+                {block:NextPage}<li><a href="{NextPage}">Next Page</a></li>{/block:NextPage}
+            </ul>
+        </nav>
+    {/block:Pagination}
+    {block:IndexPage}
+    <!--[if !IE]>-->
+    <script>
+    //These functions control Masonry, Infinite Scroll and Photoset Grid
+    navigator.sayswho= (function(){ //This function is here to stop IE from trying to use Masonry - it should work, but every time I've tried it hasn't.
+    var ua= navigator.userAgent, tem,
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'MSIE';
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\bOPR\/(\d+)/)
+        if(tem!= null) return 'Opera '+tem[1];
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    console.log(M[0]);
+    return(M[0]);
+})();
+    (function () {  //Initiates infinite scroll, with just a couple of custom options
+    var $tumblelog = $('#content');
+    $tumblelog.infinitescroll({
+    navSelector: ".pagination",
+    nextSelector: ".pagination a:last-child",
+    itemSelector: "article",
+    loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
+    bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
+    },
+    function (newElements) {
+        if (navigator.sayswho != "MSIE"){   //There's a bunch of jankiness here to get Masonry, Photoset Grid and Infinite Scroll to all play nicely... Maybe there's a better way
+            var msnry = $tumblelog.masonry('on', 'appended', $('.photoset-grid').photosetGrid({gutter:'10px'}));}
+        var $newElems = $(newElements).css({
+            opacity: 0
+        });
+        $newElems.imagesLoaded(function () {
+            $newElems.animate({
+                opacity: 1
+            });
+            $tumblelog.masonry('appended', $newElems);
+        });
+    });
+    if (navigator.sayswho != "MSIE"){
+        $tumblelog.imagesLoaded(function () {   //Compared to the nightmare I had getting the photosets to render properly the Colorbox lightbox was very easy. All the buttons are disappeared in CSS
+        $('.photoset-grid').photosetGrid({gutter:'10px', highresLinks: true, rel: 'gallery', onComplete: function(){$tumblelog.masonry();}});
+
+        $tumblelog.masonry({
+            columnWidth: function (containerWidth) {
+                return containerWidth / 100;
+            }
+        });
+    });
+    }
+})();
+    </script>
+    <!--<![endif]-->
+    {/block:IndexPage}
+    <script>
+        $(document).ready(function(){   //Very simple system to get the header to stick to the top of the page, although it stops the header from resizing on window events
+            $("#title-line").sticky({topSpacing:0});
+        });
+        {block:IndexPage}$("#title-line").on('sticky-start', function(){titleSlider(0)});{/block:IndexPage} //Jacks into the sticky header to bring up navigation when scrolling down
+        {block:PermalinkPage}   //Initiates the photo grid & lightbox for permalinks
+            $('.photoset-grid').photosetGrid({gutter:'10px', highresLinks: true});
+        {/block:PermalinkPage}
+    </script>
+</body>
+<!--nice-->
+</html>
