@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 THEME DETAILS:
-RUCKUS FIENDS MINIMAL v. 2.0
+RUCKUS FIENDS MINIMAL v. 2.1
 
 DESIGNED BY:
 FLOATINGDINO (floatingdino.tumblr.com)
@@ -199,10 +199,10 @@ jQuery Photoset
                 }
         }
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="http://static.tumblr.com/wgijwsy/Ebfm2v4gy/jquery.masonry.min.js"></script>
-    <script src="http://static.tumblr.com/iwtk77u/Yhym2yygt/jquery.imagesloaded.min.js"></script>
-    <script src="http://static.tumblr.com/wgijwsy/u2vm2hxv6/jquery.infinitescroll.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
+    <script src="//npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
+    <script src="//npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
     <script src="http://static.tumblr.com/ii7qpmy/0dXnievb7/jquery.sticky.js"></script>
     <script src="http://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
 </head>
@@ -267,12 +267,10 @@ jQuery Photoset
                     {block:Photoset}
                         <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
                             {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            <div class="photoset">
-                                <div class="photoset-grid" data-layout="{PhotosetLayout}">
-                                    {block:Photos}
-                                            <img src="{PhotoURL-500}" {block:Caption}alt="{Caption}"{/block:Caption} />
-                                    {/block:Photos}
-                                </div>
+                            <div class="photoset" data-layout="{PhotosetLayout}">
+                                  {block:Photos}
+                                      <img src="{PhotoURL-500}" {block:Caption}alt="{Caption}"{/block:Caption} />
+                                  {/block:Photos}
                             </div>
                         </article>
                     {/block:Photoset}
@@ -582,8 +580,17 @@ jQuery Photoset
     console.log(M[0]);
     return(M[0]);
 })();
-    (function () {  //Initiates infinite scroll, with just a couple of custom options
-    var $tumblelog = $('#content');
+
+    var msnry;
+    var imgLoad;
+    function build(){
+      imgLoad = imagesLoaded("main#content", function(){
+        $('.photoset').photosetGrid();
+        msnry = new Masonry("main#content",{itemSelector:"article"});});
+    }
+    build();
+
+    var $tumblelog = $('main#content');
     $tumblelog.infinitescroll({
     navSelector: ".pagination",
     nextSelector: ".pagination a:last-child",
@@ -591,31 +598,51 @@ jQuery Photoset
     loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
     bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
     },
-    function (newElements) {
-        if (navigator.sayswho != "MSIE"){   //There's a bunch of jankiness here to get Masonry, Photoset Grid and Infinite Scroll to all play nicely... Maybe there's a better way
-            var msnry = $tumblelog.masonry('on', 'appended', $('.photoset-grid').photosetGrid({gutter:'10px'}));}
-        var $newElems = $(newElements).css({
-            opacity: 0
-        });
-        $newElems.imagesLoaded(function () {
-            $newElems.animate({
-                opacity: 1
-            });
-            $tumblelog.masonry('appended', $newElems);
-        });
-    });
-    if (navigator.sayswho != "MSIE"){
-        $tumblelog.imagesLoaded(function () {   //Compared to the nightmare I had getting the photosets to render properly the Colorbox lightbox was very easy. All the buttons are disappeared in CSS
-        $('.photoset-grid').photosetGrid({gutter:'10px', highresLinks: true, rel: 'gallery', onComplete: function(){$tumblelog.masonry();}});
 
-        $tumblelog.masonry({
-            columnWidth: function (containerWidth) {
-                return containerWidth / 100;
-            }
-        });
+    function(newElements){
+      var $newElems = $(newElements).css({opacity:0});
+      $newElems.imagesLoaded(function(){
+        $('.photoset').photosetGrid({gutter:'10px'});
+        $tumblelog.append($newElems);
+        $newElems.animate({opacity:1});
+
+      });
     });
-    }
-})();
+
+//     (function () {  //Initiates infinite scroll, with just a couple of custom options
+//     var $tumblelog = $('#content');
+//     $tumblelog.infinitescroll({
+//     navSelector: ".pagination",
+//     nextSelector: ".pagination a:last-child",
+//     itemSelector: "article",
+//     loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
+//     bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
+//     },
+//     function (newElements) {
+//         if (navigator.sayswho != "MSIE"){   //There's a bunch of jankiness here to get Masonry, Photoset Grid and Infinite Scroll to all play nicely... Maybe there's a better way
+//             var msnry = $tumblelog.masonry('on', 'appended', $('.photoset-grid').photosetGrid({gutter:'10px'}));}
+//         var $newElems = $(newElements).css({
+//             opacity: 0
+//         });
+//         $newElems.imagesLoaded(function () {
+//             $newElems.animate({
+//                 opacity: 1
+//             });
+//             $tumblelog.masonry('appended', $newElems);
+//         });
+//     });
+//     if (navigator.sayswho != "MSIE"){
+//         $tumblelog.imagesLoaded(function () {   //Compared to the nightmare I had getting the photosets to render properly the Colorbox lightbox was very easy. All the buttons are disappeared in CSS
+//         $('.photoset-grid').photosetGrid({gutter:'10px', highresLinks: true, rel: 'gallery', onComplete: function(){$tumblelog.masonry();}});
+//
+//         $tumblelog.masonry({
+//             columnWidth: function (containerWidth) {
+//                 return containerWidth / 100;
+//             }
+//         });
+//     });
+//     }
+// })();
     </script>
     <!--<![endif]-->
     {/block:IndexPage}
