@@ -158,30 +158,6 @@ article h2{
     }
     }
 }
-/*IE 10 CAN'T DO MASONRY - REVERTS TO SINGLE COLUMN*/
-@media screen and (-ms-high-contrast: active) and (max-width : 1080px), (-ms-high-contrast: none) and (max-width : 1080px){
-    .index{
-        width:100%;
-    }
-    .single{
-        width:100%;
-    }
-    .index article{
-        width:97%;
-        margin:10px 1.4%;
-        font-size:32px;
-    }
-}
-@media screen and (-ms-high-contrast: active) and (min-width : 1081px), (-ms-high-contrast: none) and (min-width : 1081px){
-    .index{
-        width:500px;
-    }
-    .index article{
-        width:97%;
-        margin:10px 1.4%;
-        font-size:24px;
-    }
-}
 main h1{
     text-align:center;
     line-height:60px;
@@ -205,6 +181,8 @@ img{
 }
 #content{
     font-size:0;
+    opacity:0;
+    transition:opacity 0.5s;
 }
 article{
     margin:10px 1.4%;
