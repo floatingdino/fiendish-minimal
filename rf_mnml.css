@@ -1,5 +1,5 @@
 /*
-THEME NAME: FIENDISH MINIMAL 2.0
+THEME NAME: FIENDISH MINIMAL 2.3
 DESIGNED BY: FLOATINGDINO (floatingdino.tumblr.com)
 THEME IS CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
 CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
@@ -118,7 +118,7 @@ article h2{
         font-size:18px;
     }
     .index .x2{
-        width:63%;
+        width:62%;
         font-size:20px;
     }
     .index .x3{
@@ -179,7 +179,7 @@ img{
     border-bottom:0px solid #33ff99;
     transition:border 0.3s ease;
 }
-#content{
+.index #content{
     font-size:0;
     opacity:0;
     transition:opacity 0.5s;

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 THEME DETAILS:
-RUCKUS FIENDS MINIMAL v. 2.2
+RUCKUS FIENDS MINIMAL v. 2.3
 
 DESIGNED BY:
 FLOATINGDINO (floatingdino.tumblr.com)
@@ -29,8 +29,8 @@ jQuery Photoset
 
 
         <!--Main CSS Stylesheet-->
-    <link href='http://static.tumblr.com/ii7qpmy/79So2qtwf/rf_mnml.css' rel='stylesheet' type='text/css'>
-    {block:If4Columns}<link href='http://static.tumblr.com/ii7qpmy/d1Mnix193/rf_4col.css' rel='stylesheet' type='text/css'>{/block:If4Columns}
+    <link href='http://static.tumblr.com/ii7qpmy/nBto2sp2i/rf_mnml.css' rel='stylesheet' type='text/css'>
+    {block:If4Columns}<link href='http://static.tumblr.com/ii7qpmy/RgSo2sp2p/rf_4col.css' rel='stylesheet' type='text/css'>{/block:If4Columns}
         <!--THEME SETTINGS-->
         <!--Initialises with mostly pre-set colours from Global appearance-->
     <meta name="color:Background" content="{BackgroundColor}">
@@ -569,33 +569,32 @@ jQuery Photoset
     var imgLoad;
     var $tumblelog = $('main#content');
     var content = document.getElementById("content");
-
-    imagesLoaded("main#content", function(){    //Begins with whole content block invisible, Load images first
     msnry = new Masonry("main#content",{itemSelector:"article"});   //Initialise Masonry - doesn't seem to layout on its own
+    imagesLoaded("main#content", function(){    //Begins with whole content block invisible, Load images first
     msnry.stamp(".tag-header"); //Makes sure the articles don't overlap the title on tag pages
     $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout()}});    //Grids up photosets nicely
     content.style.opacity = "1";    //finally appears the content block
     });
 
-    $tumblelog.infinitescroll({ //Initialises the infinite scroll
-    navSelector: ".pagination",
-    nextSelector: ".pagination a:last-child",
-    itemSelector: "article",
-    loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
-    bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
-    },
-    function(newElements){
-      var $newElems = $(newElements).css({opacity:0});  //Fading in elements can be handled per-element with items pulled through on the infinite scroll
-      $newElems.imagesLoaded(function(){
-          msnry.appended($newElems);
-          $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();$newElems.animate({opacity:1});}});
+    $(window).load(function(){
+        $tumblelog.infinitescroll({ //Initialises the infinite scroll
+        navSelector: ".pagination",
+        nextSelector: ".pagination a:last-child",
+        itemSelector: "article",
+        loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
+        bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
+        prefill:true,
+        },
+        function(newElements){
+          var $newElems = $(newElements).css({opacity:0});  //Fading in elements can be handled per-element with items pulled through on the infinite scroll
+          $newElems.imagesLoaded(function(){
+              msnry.appended($newElems);
+              $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
 
-      });
-    });
-    $( window ).load(function(){    //if the page is not filled by the first page, automatically fires infinitescroll again
-        if($("body").height() <= $(window).height()) {
-            $tumblelog.infinitescroll("scroll");
-        }
+              $newElems.animate({opacity:1});
+
+          });
+        });
     });
 
 
