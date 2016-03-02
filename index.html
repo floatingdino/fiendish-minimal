@@ -570,12 +570,16 @@ jQuery Photoset
     var $tumblelog = $('main#content');
     var content = document.getElementById("content");
     msnry = new Masonry("main#content",{itemSelector:"article"});   //Initialise Masonry - doesn't seem to layout on its own
-    imagesLoaded("main#content", function(){    //Begins with whole content block invisible, Load images first
-    msnry.stamp(".tag-header"); //Makes sure the articles don't overlap the title on tag pages
-    $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout()}});    //Grids up photosets nicely
-    content.style.opacity = "1";    //finally appears the content block
-    });
+    imgLoad = imagesLoaded("main#content");
+    msnry.stamp(".tag-header");
 
+    imgLoad.on('always',function(){
+        content.style.opacity = 1;
+    });
+    imgLoad.on('progress', function(instance, image){
+        $(image.img).closest('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
+        msnry.layout();
+    });
     $(window).load(function(){
         $tumblelog.infinitescroll({ //Initialises the infinite scroll
         navSelector: ".pagination",
@@ -590,7 +594,7 @@ jQuery Photoset
           $newElems.imagesLoaded(function(){
               msnry.appended($newElems);
               $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
-
+              msnry.layout();
               $newElems.animate({opacity:1});
 
           });

@@ -71,10 +71,10 @@ header{
     padding-bottom:52px;
 }
 header .black{
-    background-color:rgba(0,0,0,0.5);
+    background-color:black;
 }
 header .white{
-    background-color:rgba(255,255,255,0.5);
+    background-color:white;
 }
 header .none{
     background:none;
@@ -105,6 +105,9 @@ main{
 }
 .index{
     width:60%;
+}
+.tag-header{
+    text-align:center;
 }
 article h2{
     font-weight:normal;
@@ -213,7 +216,8 @@ ol.notes{
 }
 .notes li{
     vertical-align:top;
-    height:1.3em;
+    min-height:1.3em;
+    height:auto;
 }
 .notes img{
     margin-right:5px;
