@@ -259,7 +259,7 @@ jQuery Photoset
             {block:IndexPage}
                 {block:Posts}
                     {block:Photo}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                             <a href="{Permalink}#title">
                                 <img src="{PhotoURL-500}" alt="{PhotoAlt}">
@@ -267,7 +267,7 @@ jQuery Photoset
                         </article>
                     {/block:Photo}
                     {block:Photoset}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                             <div class="photoset" data-layout="{PhotosetLayout}">
                                   {block:Photos}
@@ -278,14 +278,14 @@ jQuery Photoset
                     {/block:Photoset}
                     {block:IfNotShowPhotosandPhotosetsOnly}
                         {block:Text}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
                                 {Body}
                             </article>
                         {/block:Text}
                         {block:Panorama}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 {LinkOpenTag}
                                     <img src="{PhotoURL-500}" alt="{PhotoAlt}">
@@ -293,14 +293,14 @@ jQuery Photoset
                             </article>
                         {/block:Panorama}
                         {block:Quote}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 <h3>"{Quote}"</h3>
                                 {block:Source}<p>&emsp;&mdash;&emsp;{Source}</p>{/block:Source}
                             </article>
                         {/block:Quote}
                         {block:Link}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 <a href="{URL}" {Target}>
                                     {block:Host}<h3>{Host}</h3>{/block:Host}
@@ -311,7 +311,7 @@ jQuery Photoset
                             </article>
                         {/block:Link}
                         {block:Chat}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
                                 {block:Lines}
@@ -320,7 +320,7 @@ jQuery Photoset
                             </article>
                         {/block:Chat}
                         {block:Audio}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 {block:AudioEmbed}
                                     {AudioEmbed-500}
@@ -331,13 +331,13 @@ jQuery Photoset
                             </article>
                         {/block:Audio}
                         {block:Video}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 {VideoEmbed-500}
                             </article>
                         {/block:Video}
                         {block:Answer}
-                            <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                            <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 <a href="{Permalink}#title"><h3>{Question}</h3></a>
                                 <h3>{Replies}</h3>
@@ -350,7 +350,7 @@ jQuery Photoset
             {block:PermalinkPage}
                 {block:Posts}
                     {block:Photo}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {block:LinkURL}{LinkOpenTag}{/block:LinkURL}
                                 <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
                             {block:LinkURL}{LinkCloseTag}{/block:LinkURL}
@@ -370,7 +370,7 @@ jQuery Photoset
                         </article>
                     {/block:Photo}
                     {block:Text}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
                             {Body}
                             {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
@@ -388,7 +388,7 @@ jQuery Photoset
                         </article>
                     {/block:Text}
                     {block:Chat}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
                             {block:Lines}
                                 {block:Label}<em>{Label}</em>{/block:Label}<p>{Line}</p><br>
@@ -408,7 +408,7 @@ jQuery Photoset
                         </article>
                     {/block:Chat}
                     {block:Answer}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             <a href="{Permalink}#title"><h3>{Question}</h3></a>
                             <h3>{Replies}</h3>
                             <h2>{block:RebloggedFrom}via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
@@ -426,7 +426,7 @@ jQuery Photoset
                         </article>
                     {/block:Answer}
                     {block:Photoset}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             <div class="photoset">
                                 <div class="photoset-grid" data-layout="{PhotosetLayout}">
                                     {block:Photos}
@@ -450,7 +450,7 @@ jQuery Photoset
                         </article>
                     {/block:Photoset}
                     {block:Panorama}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {LinkOpenTag}
                                 <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
                             {LinkCloseTag}
@@ -470,7 +470,7 @@ jQuery Photoset
                         </article>
                     {/block:Panorama}
                     {block:Quote}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             <h3>"{Quote}"</h3>
                             {block:Source}<p>&emsp;&mdash;&emsp;{Source}</p>{/block:Source}
                             {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
@@ -488,7 +488,7 @@ jQuery Photoset
                         </article>
                     {/block:Quote}
                     {block:Link}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             <a href="{URL}" {Target}>
                                 {block:Host}<h3>{Host}</h3>{/block:Host}
                                 {block:Description}
@@ -510,7 +510,7 @@ jQuery Photoset
                         </article>
                     {/block:Link}
                     {block:Audio}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {block:AudioEmbed}
                                 {AudioEmbed-640}
                             {/block:AudioEmbed}
@@ -533,7 +533,7 @@ jQuery Photoset
                         </article>
                     {/block:Audio}
                     {block:Video}
-                        <article class="{PostType} {block:HasTags}{block:Tags}{Tag} {/block:Tags}{/block:HasTags}">
+                        <article class="{PostType} {TagsAsClasses}">
                             {VideoEmbed-700}
                             {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                             {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
