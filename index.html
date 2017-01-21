@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 THEME DETAILS:
-RUCKUS FIENDS MINIMAL v. 2.3
+RUCKUS FIENDS MINIMAL v. 2.4
 
 DESIGNED BY:
 FLOATINGDINO (floatingdino.tumblr.com)
@@ -25,11 +25,11 @@ jQuery Photoset
     {block:Description}
         <meta name="description" content="{MetaDescription}" />
     {/block:Description}
-    <link href='http://fonts.googleapis.com/css?family=Oswald:300|Anonymous+Pro:400,700|IM+Fell+French+Canon+SC' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:300|Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
 
 
         <!--Main CSS Stylesheet-->
-    <link href='http://static.tumblr.com/ii7qpmy/nBto2sp2i/rf_mnml.css' rel='stylesheet' type='text/css'>
+    <link href='http://static.tumblr.com/ii7qpmy/dJlok3wz8/rf_mnml.css' rel='stylesheet' type='text/css'>
     {block:If4Columns}<link href='http://static.tumblr.com/ii7qpmy/RgSo2sp2p/rf_4col.css' rel='stylesheet' type='text/css'>{/block:If4Columns}
         <!--THEME SETTINGS-->
         <!--Initialises with mostly pre-set colours from Global appearance-->
@@ -57,21 +57,8 @@ jQuery Photoset
     <meta name="text:Green Tag" content="35mm">
     <meta name="text:Yellow Tag" content="ruckus">
 
-    <meta name="viewport" content="width=1080"> <!--Keeps Mobile Browsers on single column-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        @media screen and (orientation : portrait){
-            @-viewport{
-                width:1080px;
-            }
-        }
-        @media screen and (orientation : landscape){
-            @-viewport{
-                width:1400px;
-            }
-            .main{
-                width:100%;
-            }
-        }
         body{
             background-color:{color:Background};
             background-image:url({image:Background Image});
@@ -181,6 +168,13 @@ jQuery Photoset
             background-attachment:fixed;
             background-position: center top;
         }
+        .notes li{
+             min-height:1.3em;
+             height:auto;
+         }
+         .tag-header{
+             text-align:center;
+         }
         {CustomCSS}
     </style>
     <script type="text/javascript">
@@ -569,12 +563,13 @@ jQuery Photoset
     var imgLoad;
     var $tumblelog = $('main#content');
     var content = document.getElementById("content");
-    msnry = new Masonry("main#content",{itemSelector:"article"});   //Initialise Masonry - doesn't seem to layout on its own
+    msnry = new Masonry("main#content",{itemSelector:"article",columnWidth:"article:not(.x2):not(.x3)"});   //Initialise Masonry - doesn't seem to layout on its own
     imgLoad = imagesLoaded("main#content");
     msnry.stamp(".tag-header");
 
     imgLoad.on('always',function(){
         content.style.opacity = 1;
+        msnry.layout();
     });
     imgLoad.on('progress', function(instance, image){
         $(image.img).closest('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
