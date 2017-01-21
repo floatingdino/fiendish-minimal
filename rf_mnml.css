@@ -115,33 +115,25 @@ article h2{
     .index article{
         width:30%;
         margin:10px 1.4%;
-        font-size:18px;
     }
     .index .x2{
         width:62%;
-        font-size:20px;
     }
     .index .x3{
         width:97%;
-        font-size:22px;
     }
 }
 @media screen and (min-width : 1080px) and (max-width : 1440px){
         .index article{
             width:47%;
             margin:10px 1.4%;
-            font-size:22px;
         }
         .index .x3, .index .x2{
             width:97%;
             margin:10px 1.4%;
-            font-size:24px;
         }
     }
 @media screen and (max-width:1080px){
-    main{
-        font-size-adjust: 150%;
-    }
     .index{
         width:100%;
     }
@@ -152,9 +144,6 @@ article h2{
         width:97%;
         font-size:32px;
         margin:10px 1.4%;
-    }
-    .single article{
-        font-size:32px;
     }
     }
 }
@@ -180,7 +169,7 @@ img{
     transition:border 0.3s ease;
 }
 .index #content{
-    font-size:0;
+    font-size:18px;
     opacity:0;
     transition:opacity 0.5s;
 }
