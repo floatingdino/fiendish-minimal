@@ -267,11 +267,13 @@ jQuery Photoset
                     {block:Photoset}
                         <article class="{PostType} {TagsAsClasses}">
                             {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                            <a href="{Permalink}#title">
                             <div class="photoset" data-layout="{PhotosetLayout}">
                                   {block:Photos}
                                       <img src="{PhotoURL-500}" {block:Caption}alt="{Caption}"{/block:Caption} />
                                   {/block:Photos}
                             </div>
+                            </a>
                         </article>
                     {/block:Photoset}
                     {block:IfNotShowPhotosandPhotosetsOnly}
