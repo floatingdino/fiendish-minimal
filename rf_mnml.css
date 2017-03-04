@@ -1,5 +1,5 @@
 /*
-THEME NAME: FIENDISH MINIMAL 2.3
+THEME NAME: FIENDISH MINIMAL 2.5
 DESIGNED BY: FLOATINGDINO (floatingdino.tumblr.com)
 THEME IS CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
 CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
@@ -40,12 +40,18 @@ a:hover{
 h1, nav{
     font-family: 'Oswald', sans-serif;
     font-weight:300;
-    font-size:48px;
+    font-size:2.5em;
     line-height:52px;
     margin:0;
     padding:0;
     text-transform:uppercase;
     vertical-align:top;
+}
+#pages-nav{
+   height:71px;
+   white-space:nowrap;
+   overflow:auto;
+   padding-right:10px;
 }
 img{
     background:inherit;
@@ -100,6 +106,11 @@ main{
     max-width:1280px;
     width:auto;
 }
+.single:after{
+   content:'';
+   display:table;
+   clear:both;
+}
 .index{
     width:60%;
 }
@@ -110,6 +121,28 @@ article h2{
     font-weight:normal;
     margin:10px 0 30px 0;
     font-size:1em;
+}
+.single article.text{
+   width:800px;
+   max-width:100%;
+}
+.single .halved{
+   text-align:left;
+   margin-bottom:40px;
+   width:70%;
+   float:left;
+}
+.halved.notes{
+   font-size:0.8em;
+   width:30%;
+}
+.halved.notes:after{
+   content:'';
+   display:table;
+   clear:both;
+}
+.halved.notes + h2{
+   clear:both;
 }
 @media screen and (min-width : 1440px){
     .index article{
@@ -123,7 +156,7 @@ article h2{
         width:97%;
     }
 }
-@media screen and (min-width : 1080px) and (max-width : 1440px){
+@media screen and (min-width : 768px) and (max-width : 1440px){
         .index article{
             width:47%;
             margin:10px 1.4%;
@@ -133,7 +166,10 @@ article h2{
             margin:10px 1.4%;
         }
     }
-@media screen and (max-width:1080px){
+@media screen and (max-width:768px){
+   body{
+      font-size:18px;
+   }
     .index{
         width:100%;
     }
@@ -142,10 +178,13 @@ article h2{
     }
     .index article{
         width:97%;
-        font-size:32px;
+        /*font-size:32px;*/
         margin:10px 1.4%;
     }
-    }
+    .single .halved{
+      width:100% !important;
+      float:none;
+   }
 }
 main h1{
     text-align:center;
@@ -169,7 +208,7 @@ img{
     transition:border 0.3s ease;
 }
 .index #content{
-    font-size:18px;
+    /*font-size:18px;*/
     opacity:0;
     transition:opacity 0.5s;
 }
@@ -185,10 +224,11 @@ article{
     text-align:center;
     margin:10px auto;
     float:none;
-    font-size:22px;
+    /*font-size:22px;*/
 }
 .single article h2{
     text-transform:uppercase;
+    clear:both;
 }
 article h2 a{
     text-transform:uppercase;
@@ -233,17 +273,18 @@ ol.notes{
     display:inline-block;
 }
 article h3{
-    font-size:0.9em;
+   font-size:1.1em;
     line-height:1.2em;
     font-weight:normal;
     color:inherit;
 }
 article p{
-    font-size:0.8em;
     line-height:1.2em;
     font-weight:normal;
     color:inherit;
-    margin:15px;
+    /*margin:15px;*/
+    margin:0;
+    margin-bottom:15px;
 }
 .quote h3{
     font-size:1.3em;
@@ -269,7 +310,6 @@ article p{
 .chat p{
     display:inline-block;
     max-width:75%;
-    font-size:0.8em;
     line-height:1em;
     margin:0;
     vertical-align:top;
@@ -305,9 +345,43 @@ ul.tags li{
 ul.tags li:before{
     content:'#';
 }
-.index .text blockquote{
+/*.index .text blockquote{
     margin:0.6em 0 0.6em 0.6em 0.6em;
-}
+}*/
+
 a.black{
     text-transform:lowercase;
 }
+div.fullwidth{
+    display:block;
+    width:100%;
+    padding:0;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position: center top;
+}
+.notes li{
+     min-height:1.3em;
+     margin:5px 0;
+     height:auto;
+ }
+ .tag-header{
+     text-align:center;
+ }
+ .index .audio iframe, .index .video iframe{
+   height:500px !important;
+ }
+ .index .audio iframe, .index .video iframe{
+    height:500px !important;
+ }
+ .theme-author{
+    position:fixed;
+    text-transform:uppercase;
+    bottom:10px;
+    right:10px;
+ }
+ @media(max-width:768px){
+    .theme-author{
+       display:none;
+    }
+ }

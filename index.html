@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 THEME DETAILS:
-RUCKUS FIENDS MINIMAL v. 2.4
+RUCKUS FIENDS MINIMAL v. 2.5
 
 DESIGNED BY:
 FLOATINGDINO (floatingdino.tumblr.com)
@@ -29,7 +29,7 @@ jQuery Photoset
 
 
         <!--Main CSS Stylesheet-->
-    <link href='https://static.tumblr.com/ii7qpmy/Xekok3xfa/rf_mnml.css' rel='stylesheet' type='text/css'>
+    <link href='https://static.tumblr.com/ii7qpmy/vbIom9r5z/rf_mnml.css' rel='stylesheet' type='text/css'>
     {block:If4Columns}<link href='https://static.tumblr.com/ii7qpmy/RgSo2sp2p/rf_4col.css' rel='stylesheet' type='text/css'>{/block:If4Columns}
         <!--THEME SETTINGS-->
         <!--Initialises with mostly pre-set colours from Global appearance-->
@@ -48,6 +48,7 @@ jQuery Photoset
     <meta name="if:Show Title" content="{block:ShowTitle}1{/block:ShowTitle}{block:HideTitle}0{/block:HideTitle}">
     <meta name="if:Show Photos and Photosets only" content="0">
     <meta name="if:4 Columns" content="1">
+    <meta name="if:Theme Attribution" content="1">
     <meta name="select:Header Line Colour" content="none" name="None">
     <meta name="select:Header Line Colour" content="white" name="White">
     <meta name="select:Header Line Colour" content="black" name="Black">
@@ -80,9 +81,45 @@ jQuery Photoset
             border-bottom:0px solid {color:Links};
             transition:border 0.3s ease;
         }
+        .text blockquote{
+           margin:0;
+           margin-left:-22px;
+           padding:5px 20px;
+        }
+        .text blockquote :last-child{
+           margin-bottom:0;
+      }
         blockquote{
             border-left:2px solid {color:Links};
+            margin-left:-22px;
         }
+
+        blockquote > blockquote{
+           border-left:2px solid #ff3399;
+        }
+        article blockquote a.tumblr_blog{
+           background-image: linear-gradient(to right, #ff3399, #ff3399);
+        }
+        blockquote > blockquote > blockquote{
+           border-left:2px solid #3399ff;
+        }
+        blockquote > blockquote a.tumblr_blog{
+           background-image: linear-gradient(to right, #3399ff, #3399ff);
+        }
+        blockquote > blockquote > blockquote > blockquote{
+           border-left:2px solid #ffe199;
+        }
+        blockquote > blockquote > blockquote a.tumblr_blog{
+           background-image: linear-gradient(to right, #ffe199, #ffe199);
+        }
+        article a.tumblr_blog{
+           background-image: linear-gradient(to right, {color:Links}, {color:Links});
+          background-repeat: repeat-x;
+          background-position: 0 90%;
+          background-size: 100% .18em;
+          text-decoration: none;
+        }
+
         #logo img{
             max-height: {text:Header Size};
             width:auto;
@@ -160,24 +197,10 @@ jQuery Photoset
               background-color: {color:Background};
               height:5px;
         }
-        div.fullwidth{
-            display:block;
-            width:100%;
-            padding:0;
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-            background-position: center top;
+        .theme-author a{
+           color:{color:Links};
         }
-        .notes li{
-             min-height:1.3em;
-             height:auto;
-         }
-         .tag-header{
-             text-align:center;
-         }
-         .index .audio iframe, .index .video iframe{
-           height:500px !important;
-         }
+
         {CustomCSS}
     </style>
     <script type="text/javascript">
@@ -200,8 +223,8 @@ jQuery Photoset
             }
         }
     </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.0b2.120519/jquery.infinitescroll.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> <!-- newer versions don't play well with infinite scroll -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js"></script>
     <script src="//unpkg.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
     <script src="//unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
     <script src="https://static.tumblr.com/ii7qpmy/0dXnievb7/jquery.sticky.js"></script>
@@ -260,7 +283,7 @@ jQuery Photoset
                         <article class="{PostType} {TagsAsClasses}">
                             {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                             <a href="{Permalink}#title">
-                                <img src="{PhotoURL-500}" alt="{PhotoAlt}">
+                                <img src="{PhotoURL-400}" alt="{PhotoAlt}">
                             </a>
                         </article>
                     {/block:Photo}
@@ -270,7 +293,7 @@ jQuery Photoset
                             <a href="{Permalink}#title">
                             <div class="photoset" data-layout="{PhotosetLayout}">
                                   {block:Photos}
-                                      <img src="{PhotoURL-500}" {block:Caption}alt="{Caption}"{/block:Caption} />
+                                      <img src="{PhotoURL-400}" {block:Caption}alt="{Caption}"{/block:Caption} />
                                   {/block:Photos}
                             </div>
                             </a>
@@ -288,7 +311,7 @@ jQuery Photoset
                             <article class="{PostType} {TagsAsClasses}">
                                 {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                                 {LinkOpenTag}
-                                    <img src="{PhotoURL-500}" alt="{PhotoAlt}">
+                                    <img src="{PhotoURL-400}" alt="{PhotoAlt}">
                                 {LinkCloseTag}
                             </article>
                         {/block:Panorama}
@@ -371,8 +394,15 @@ jQuery Photoset
                     {/block:Photo}
                     {block:Text}
                         <article class="{PostType} {TagsAsClasses}">
+                           <div class="halved">
                             {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
                             {Body}
+                         </div>
+                         <div class="halved notes">
+                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
+                                {PostNotes}
+                            {/block:PostNotes}
+                         </div>
                             {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
                             {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
                             {block:HasTags}
@@ -382,9 +412,7 @@ jQuery Photoset
                                     {/block:Tags}
                                 </ul>
                             {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
+
                         </article>
                     {/block:Text}
                     {block:Chat}
@@ -552,6 +580,7 @@ jQuery Photoset
                     {/block:Video}
                 {/block:Posts}
             {/block:PermalinkPage}
+            {block:IfThemeAttribution}<div class="theme-author">Theme by <a href="https://samhaakman.com">Sam</a></div>{/block:IfThemeAttribution}
         </main>
     </div>
     {block:Pagination}
@@ -581,26 +610,26 @@ jQuery Photoset
         $(image.img).closest('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
         msnry.layout();
     });
-    $(window).load(function(){
-        $tumblelog.infinitescroll({ //Initialises the infinite scroll
-        navSelector: ".pagination",
-        nextSelector: ".pagination a:last-child",
-        itemSelector: "article",
-        loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
-        bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
-        prefill:true,
-        },
-        function(newElements){
-          var $newElems = $(newElements).css({opacity:0});  //Fading in elements can be handled per-element with items pulled through on the infinite scroll
-          $newElems.imagesLoaded(function(){
-              msnry.appended($newElems);
-              $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
-              msnry.layout();
-              $newElems.animate({opacity:1});
+     $tumblelog.infinitescroll({ //Initialises the infinite scroll
+     navSelector: ".pagination",
+     nextSelector: ".pagination a:last-child",
+     itemSelector: "article",
+     loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
+     bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
+     prefill:true,
+     },
+     function(newElements){
+       var $newElems = $(newElements);
+       $newElems.css({opacity:0,pointerEvents:'none'});  //Fading in elements can be handled per-element with items pulled through on the infinite scroll
+       $newElems.imagesLoaded(function(){
+           msnry.appended($newElems);
+           $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
+           msnry.layout();
+           $newElems.css({pointerEvents:'initial'});
+           $newElems.animate({opacity:1});
 
-          });
-        });
-    });
+       });
+     });
 
 
     </script>
