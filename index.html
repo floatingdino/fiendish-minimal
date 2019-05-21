@@ -178,60 +178,125 @@ jQuery Photoset
         .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
             border-bottom-color:#ffe199 !important;
         }
-        ::selection{
-            background-color:rgba({RGBcolor:Selection}, 0.3);
-        }
-        ::-webkit-scrollbar{
-            width:17px;
-        }
-        ::-webkit-scrollbar-track {
-              background-color:{color:Background};
-        }
-        ::-webkit-scrollbar-thumb {
-              background-color: rgba(0, 0, 0, 0.2);
-              border-radius:15px;
-              border:4px solid {color:Background};
-              width:10px;
-        }
-        ::-webkit-scrollbar-button {
-              background-color: {color:Background};
-              height:5px;
-        }
         .theme-author a{
            color:{color:Links};
         }
 
         {CustomCSS}
     </style>
-    <script type="text/javascript">
-    var pages = false;
-    var ask = false;
-    var subs = false;
-    {block:HasPages}pages = true;{/block:HasPages}
-    {block:AskEnabled}ask = true;{/block:AskEnabled}
-    {block:SubmissionsEnabled}subs = true;{/block:SubmissionsEnabled}
-
-    //Very simple JS function to swap out the title line with the pages navigation and ask/submit buttons
-        function titleSlider(direction){
-            if(pages || ask || subs){
-                title = document.getElementById("title");
-                if (direction == 0){
-                    title.style.marginTop = "-54px";
-                }else if(direction == 1){
-                    title.style.marginTop = "0px";
-                }
-            }
-        }
-    </script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> <!-- newer versions don't play well with infinite scroll -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js"></script>
-    <script src="//unpkg.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
-    <script src="//unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
-    <script src="https://static.tumblr.com/ii7qpmy/0dXnievb7/jquery.sticky.js"></script>
-    <script src="https://static.tumblr.com/wgijwsy/jgemkyt9x/jquery.photoset-grid.min.js"></script>
 
 </head>
 <body>
+  <script>
+    var data =  {
+      blog: {
+        Title: "{Title}",
+        Header: "{image:Header}",
+        BlogURL: "{BlogURL}",
+        FullWidthHeader: {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
+        HeaderLineColour: "{select:Header Line Colour}",
+        ShowTitle: {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
+        Pages: [
+          {block:Pages}
+            {
+              URL: {URL},
+              Label: {Label}
+            }
+          {/block:Pages}
+        ],
+        {block:AskEnabled}Ask:{AskLabel},{/block:AskEnabled}
+        {block:SubmissionsEnabled}Submissions:{SubmitLabel},{/block:SubmissionsEnabled}
+        ThemeAttribution:{block:IfThemeAttribution}true{/block:IfThemeAttribution}{block:IfNotThemeAttribution}false{/block:IfNotThemeAttribution},
+        ShowPhotosandPhotosetsOnly:{block:IfShowPhotosandPhotosetsOnly}true{/block:IfShowPhotosandPhotosetsOnly}{block:IfNotShowPhotosandPhotosetsOnly}false{/block:IfNotShowPhotosandPhotosetsOnly}
+      },
+      page: {
+        {block:IndexPage}type: "index",{/block:IndexPage}
+        {block:PermalinkPage}type: "single",{/block:PermalinkPage}
+        {block:TagPage}Tag: "{Tag}",{/block:TagPage}
+        {block:Pagination}
+          Pagination: {
+            {block:PreviousPage}PreviousPage: "{PreviousPage}",{/block:PreviousPage}
+            {block:NextPage}NextPage: "{NextPage}"{/block:NextPage}
+          }
+        {/block:Pagination}
+      }
+      {block:IndexPage},
+        Posts: [
+          {block:Posts}
+            {
+              PostType: {JSPostType},
+              TagsAsClasses: {JSTagsAsClasses},
+              Permalink: {JSPermalink},
+              {block:RebloggedFrom}
+                ReblogRootURL: {JSReblogRootURL},
+                ReblogRootName: {JSReblogRootName},
+              {/block:RebloggedFrom}
+              {block:Photo}
+                "PhotoURL-400": {JSPhotoURL-400},
+                "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                PhotoAlt: {JSPhotoAlt},
+                Caption: {JSCaption}
+              {/block:Photo}
+              {block:Photoset}
+                PhotosetLayout: {JSPhotosetLayout},
+                Caption: {JSCaption},
+                Photos: [
+                  {block:Photos}
+                    {
+                      "PhotoURL-400": {JSPhotoURL-400},
+                      "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                      PhotoAlt: {JSPhotoAlt},
+                    },
+                  {/block:Photos}
+                ]
+              {/block:Photoset}
+              {block:Text}
+                Title: {JSTitle},
+                Body: {JSBody}
+              {/block:Text}
+              {block:Panorama}
+                "PhotoURL-400": {JSPhotoURL-400},
+                "PhotoURL-Panorama": {JSPhotoURL-Panorama},
+                PhotoAlt: {JSPhotoAlt},
+                Caption: {JSCaption}
+              {/block:Panorama}
+              {block:Quote}
+                Quote: {JSQuote},
+                Source: {JSSource}
+              {/block:Quote}
+              {block:Link}
+                Host: {JSHost},
+                URL: {JSURL},
+                Description: {JSDescription}
+              {/block:Link}
+              {block:Chat}
+                Lines: [
+                  {block:Lines}
+                    {
+                      Label: {JSLabel},
+                      Line: {JSLine}
+                    },
+                  {/block:Lines}
+                ]
+              {/block:Chat}
+              {block:Audio}
+                AudioEmbed: {JSAudioEmbed-400}
+              {/block:Audio}
+              {block:Video}
+                VideoThumbnailURL: {JSVideoThumbnailURL},
+                VideoEmbed: {JSVideoEmbed-400}
+              {/block:Video}
+              {block:Answer}
+                Question: {JSQuestion},
+                Replies: {JSReplies}
+              {/block:Answer}
+            },
+          {/block:Posts}
+        ]
+      {/block:IndexPage}
+    }
+  </script>
+
     {block:IfFullWidthHeader}
     <div class="fullwidth" style="background-image:url('{image:Header}');height:{text:Header Size}"></div>
     {/block:IfFullWidthHeader}
@@ -591,65 +656,8 @@ jQuery Photoset
             </ul>
         </nav>
     {/block:Pagination}
-    {block:IndexPage}
-    <script>
-    //These functions control Masonry, Infinite Scroll and Photoset Grid
-    var msnry;
-    var imgLoad;
-    var $tumblelog = $('main#content');
-    var content = document.getElementById("content");
-    msnry = new Masonry("main#content",{itemSelector:"article",columnWidth:"article:not(.x2):not(.x3)"});   //Initialise Masonry - doesn't seem to layout on its own
-    imgLoad = imagesLoaded("main#content");
-    msnry.stamp(".tag-header");
 
-    imgLoad.on('always',function(){
-        content.style.opacity = 1;
-        msnry.layout();
-    });
-    imgLoad.on('progress', function(instance, image){
-        $(image.img).closest('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
-        msnry.layout();
-    });
-     $tumblelog.infinitescroll({ //Initialises the infinite scroll
-     navSelector: ".pagination",
-     nextSelector: ".pagination a:last-child",
-     itemSelector: "article",
-     loading: {img: "http://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"},   //This is hella cute, but you really don't see it much
-     bufferPx: 1500, //Since photosets can get quite long, and this is a 3/4-column theme, the buffer is extra long to stop people from having to scroll up too much
-     prefill:true,
-     },
-     function(newElements){
-       var $newElems = $(newElements);
-       $newElems.css({opacity:0,pointerEvents:'none'});  //Fading in elements can be handled per-element with items pulled through on the infinite scroll
-       $newElems.imagesLoaded(function(){
-           msnry.appended($newElems);
-           $('.photoset').photosetGrid({gutter:'10px', onComplete:function(){msnry.layout();}});
-           msnry.layout();
-           $newElems.css({pointerEvents:'initial'});
-           $newElems.animate({opacity:1});
-
-       });
-     });
-
-
-    </script>
-    {/block:IndexPage}
-    <script>
-        $(document).ready(function(){   //Very simple system to get the header to stick to the top of the page, although it stops the header from resizing on window events
-            $("#title-line").sticky({topSpacing:0});
-        });
-        {block:IndexPage}$("#title-line").on('sticky-start', function(){titleSlider(0)});{/block:IndexPage} //Jacks into the sticky header to bring up navigation when scrolling down
-        {block:PermalinkPage}   //Initiates the photo grid for permalinks
-            $('.photoset-grid').photosetGrid({gutter:'10px', highresLinks: true});
-        {/block:PermalinkPage}
-        if(pages || ask || subs){
-            document.getElementById('pages-nav').style.display = "block";
-            document.getElementById('hamburger').style.display = "inline-block";
-        }else{
-            document.getElementById('pages-nav').style.display = "none";
-            document.getElementById('hamburger').style.display = "none";
-        }
-    </script>
+<script src="main.js"></script>
 </body>
 <!--nice-->
 </html>

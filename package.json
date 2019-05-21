@@ -1,0 +1,36 @@
+{
+  "name": "fiendish-minimal",
+  "version": "3.0.0",
+  "description": "3/4 column masonry tumblr theme",
+  "main": "index.js",
+  "dependencies": {
+    "masonry-layout": "^4.2.2",
+    "preact": "^8.4.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.32.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "browserslist": [
+    ">3%"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floatingdino/fiendish-minimal.git"
+  },
+  "author": "Sam Haakman (floatingdino@gmail.com)",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/floatingdino/fiendish-minimal/issues"
+  },
+  "homepage": "https://github.com/floatingdino/fiendish-minimal#readme"
+}
