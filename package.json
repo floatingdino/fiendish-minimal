@@ -32,5 +32,13 @@
   "bugs": {
     "url": "https://github.com/floatingdino/fiendish-minimal/issues"
   },
-  "homepage": "https://github.com/floatingdino/fiendish-minimal#readme"
+  "homepage": "https://github.com/floatingdino/fiendish-minimal#readme",
+  "optionalDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-react": "^7.13.0",
+    "prettier": "^1.17.1",
+    "prettier-eslint": "^8.8.2"
+  }
 }

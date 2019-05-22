@@ -1,0 +1,37 @@
+{
+  "extends": ["prettier"],
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "quotes": ["warn", "double"],
+    "no-unused-vars": ["warn", { "vars": "local" }],
+    "no-console": "off",
+    "no-new": "off",
+    "consistent-this": "error",
+    "prefer-promise-reject-errors": "off",
+    "react/jsx-curly-spacing": ["warn", "always"],
+    "react/jsx-equals-spacing": ["warn", "never"],
+    "react/jsx-key": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-sort-props": "warn",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-pascal-case": "warn",
+    "react/jsx-no-undef": "error",
+    "react/jsx-filename-extension": "error",
+    "react/jsx-wrap-multilines": "error"
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "react": {
+      "pragma": "h"
+    }
+  }
+}

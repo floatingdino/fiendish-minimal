@@ -7,7 +7,9 @@ export default class Tumblog extends Component {
     return (
       <div>
         <h1>hello world</h1>
-        {props.Posts.map(post => <Post {...post} />)}
+        {props.Posts.map(post => (
+          <Post {...post} />
+        ))}
       </div>
     );
   }
