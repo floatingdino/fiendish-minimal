@@ -1,14 +1,14 @@
 import { h, Component, render } from "preact";
 
 import Header from "./header";
-import Post from "./post";
+import Home from "./pages/home";
 
 export default class Tumblog extends Component {
   render(props, state) {
     return (
-      <div>
+      <div class={`wrapper ${props.page.type}`}>
         <Header {...props.blog} />
-        <main id="content">{props.Posts.map(post => <Post {...post} />)}</main>
+        <Home Posts={props.Posts} />
       </div>
     );
   }

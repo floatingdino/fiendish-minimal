@@ -2,19 +2,27 @@ import { h, Component, render } from "preact";
 
 import Masonry from "masonry-layout";
 
+import Post from "../post";
+
 export default class Home extends Component {
   constructor() {
     super();
-    this.Masonry = new Masonry({
-      columnWidth: "article:not(.x2):not(.x3)"
+  }
+  componentDidMount() {
+    this.Masonry = new Masonry(this.grid, {
+      columnWidth: "article.sizer",
+      itemSelector: "article",
+      percentPosition: true,
+      initLayout: false
     });
   }
   render(props, state) {
     return (
-      <main id="content">
+      <main id="content" ref={grid => (this.grid = grid)}>
         {props.Posts.map(post => (
-          <Post {...post} Masonry={this.Masonry} />
+          <Post {...post} Masonry={() => this.Masonry} />
         ))}
+        <article class="sizer" />
       </main>
     );
   }
