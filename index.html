@@ -1,21 +1,18 @@
 <!DOCTYPE HTML>
 <!--
 THEME DETAILS:
-RUCKUS FIENDS MINIMAL v. 2.5
+RUCKUS FIENDS MINIMAL v. 3.0
 
 DESIGNED BY:
 FLOATINGDINO (floatingdino.tumblr.com)
 
-THEME IS CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
+THEME IS CC BY-NC-SA: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
 
 DEPENDENCIES:
-jQuery
-Masonry/imagesLoaded
-Infinite Scroll
-jQuery Sticky
-jQuery Photoset
+Preact
+Masonry
 -->
 <html>
 <head>
@@ -59,6 +56,117 @@ jQuery Photoset
     <meta name="text:Yellow Tag" content="ruckus">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+      var data =  {
+        blog: {
+          Title: "{Title}",
+          Header: "{image:Header}",
+          BlogURL: "{BlogURL}",
+          FullWidthHeader: {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
+          ShowHeader: {block:IfShowHeader}true{/block:IfShowHeader}{block:IfNotShowHeader}false{/block:IfNotShowHeader},
+          HeaderLineColour: "{select:Header Line Colour}",
+          ShowTitle: {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
+          Pages: [
+            {block:Pages}
+              {
+                URL: {URL},
+                Label: {Label}
+              }
+            {/block:Pages}
+          ],
+          {block:AskEnabled}Ask:{AskLabel},{/block:AskEnabled}
+          {block:SubmissionsEnabled}Submissions:{SubmitLabel},{/block:SubmissionsEnabled}
+          ThemeAttribution:{block:IfThemeAttribution}true{/block:IfThemeAttribution}{block:IfNotThemeAttribution}false{/block:IfNotThemeAttribution},
+          ShowPhotosandPhotosetsOnly:{block:IfShowPhotosandPhotosetsOnly}true{/block:IfShowPhotosandPhotosetsOnly}{block:IfNotShowPhotosandPhotosetsOnly}false{/block:IfNotShowPhotosandPhotosetsOnly}
+        },
+        page: {
+          {block:IndexPage}type: "index",{/block:IndexPage}
+          {block:PermalinkPage}type: "single",{/block:PermalinkPage}
+          {block:TagPage}Tag: "{Tag}",{/block:TagPage}
+          {block:Pagination}
+            Pagination: {
+              {block:PreviousPage}PreviousPage: "{PreviousPage}",{/block:PreviousPage}
+              {block:NextPage}NextPage: "{NextPage}"{/block:NextPage}
+            }
+          {/block:Pagination}
+        }
+        {block:IndexPage},
+          Posts: [
+            {block:Posts}
+              {
+                PostType: {JSPostType},
+                TagsAsClasses: {JSTagsAsClasses},
+                Permalink: {JSPermalink},
+                {block:RebloggedFrom}
+                  ReblogRootURL: {JSReblogRootURL},
+                  ReblogRootName: {JSReblogRootName},
+                {/block:RebloggedFrom}
+                {block:Photo}
+                  "PhotoURL-400": {JSPhotoURL-400},
+                  "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                  PhotoAlt: {JSPhotoAlt},
+                  Caption: {JSCaption}
+                {/block:Photo}
+                {block:Photoset}
+                  PhotosetLayout: {JSPhotosetLayout},
+                  Caption: {JSCaption},
+                  Photos: [
+                    {block:Photos}
+                      {
+                        "PhotoURL-400": {JSPhotoURL-400},
+                        "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                        PhotoAlt: {JSPhotoAlt},
+                      },
+                    {/block:Photos}
+                  ]
+                {/block:Photoset}
+                {block:Text}
+                  Title: {JSTitle},
+                  Body: {JSBody}
+                {/block:Text}
+                {block:Panorama}
+                  "PhotoURL-400": {JSPhotoURL-400},
+                  "PhotoURL-Panorama": {JSPhotoURL-Panorama},
+                  PhotoAlt: {JSPhotoAlt},
+                  Caption: {JSCaption}
+                {/block:Panorama}
+                {block:Quote}
+                  Quote: {JSQuote},
+                  Source: {JSSource}
+                {/block:Quote}
+                {block:Link}
+                  Host: {JSHost},
+                  URL: {JSURL},
+                  Description: {JSDescription}
+                {/block:Link}
+                {block:Chat}
+                  Lines: [
+                    {block:Lines}
+                      {
+                        Label: {JSLabel},
+                        Line: {JSLine}
+                      },
+                    {/block:Lines}
+                  ]
+                {/block:Chat}
+                {block:Audio}
+                  AudioEmbed: {JSAudioEmbed-400}
+                {/block:Audio}
+                {block:Video}
+                  VideoThumbnailURL: {JSVideoThumbnailURL},
+                  VideoEmbed: {JSVideoEmbed-400}
+                {/block:Video}
+                {block:Answer}
+                  Question: {JSQuestion},
+                  Replies: {JSReplies}
+                {/block:Answer}
+              },
+            {/block:Posts}
+          ]
+        {/block:IndexPage}
+      }
+    </script>
     <style>
         body{
             background-color:{color:Background};
@@ -187,476 +295,6 @@ jQuery Photoset
 
 </head>
 <body>
-  <script>
-    var data =  {
-      blog: {
-        Title: "{Title}",
-        Header: "{image:Header}",
-        BlogURL: "{BlogURL}",
-        FullWidthHeader: {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
-        HeaderLineColour: "{select:Header Line Colour}",
-        ShowTitle: {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
-        Pages: [
-          {block:Pages}
-            {
-              URL: {URL},
-              Label: {Label}
-            }
-          {/block:Pages}
-        ],
-        {block:AskEnabled}Ask:{AskLabel},{/block:AskEnabled}
-        {block:SubmissionsEnabled}Submissions:{SubmitLabel},{/block:SubmissionsEnabled}
-        ThemeAttribution:{block:IfThemeAttribution}true{/block:IfThemeAttribution}{block:IfNotThemeAttribution}false{/block:IfNotThemeAttribution},
-        ShowPhotosandPhotosetsOnly:{block:IfShowPhotosandPhotosetsOnly}true{/block:IfShowPhotosandPhotosetsOnly}{block:IfNotShowPhotosandPhotosetsOnly}false{/block:IfNotShowPhotosandPhotosetsOnly}
-      },
-      page: {
-        {block:IndexPage}type: "index",{/block:IndexPage}
-        {block:PermalinkPage}type: "single",{/block:PermalinkPage}
-        {block:TagPage}Tag: "{Tag}",{/block:TagPage}
-        {block:Pagination}
-          Pagination: {
-            {block:PreviousPage}PreviousPage: "{PreviousPage}",{/block:PreviousPage}
-            {block:NextPage}NextPage: "{NextPage}"{/block:NextPage}
-          }
-        {/block:Pagination}
-      }
-      {block:IndexPage},
-        Posts: [
-          {block:Posts}
-            {
-              PostType: {JSPostType},
-              TagsAsClasses: {JSTagsAsClasses},
-              Permalink: {JSPermalink},
-              {block:RebloggedFrom}
-                ReblogRootURL: {JSReblogRootURL},
-                ReblogRootName: {JSReblogRootName},
-              {/block:RebloggedFrom}
-              {block:Photo}
-                "PhotoURL-400": {JSPhotoURL-400},
-                "PhotoURL-HighRes": {JSPhotoURL-HighRes},
-                PhotoAlt: {JSPhotoAlt},
-                Caption: {JSCaption}
-              {/block:Photo}
-              {block:Photoset}
-                PhotosetLayout: {JSPhotosetLayout},
-                Caption: {JSCaption},
-                Photos: [
-                  {block:Photos}
-                    {
-                      "PhotoURL-400": {JSPhotoURL-400},
-                      "PhotoURL-HighRes": {JSPhotoURL-HighRes},
-                      PhotoAlt: {JSPhotoAlt},
-                    },
-                  {/block:Photos}
-                ]
-              {/block:Photoset}
-              {block:Text}
-                Title: {JSTitle},
-                Body: {JSBody}
-              {/block:Text}
-              {block:Panorama}
-                "PhotoURL-400": {JSPhotoURL-400},
-                "PhotoURL-Panorama": {JSPhotoURL-Panorama},
-                PhotoAlt: {JSPhotoAlt},
-                Caption: {JSCaption}
-              {/block:Panorama}
-              {block:Quote}
-                Quote: {JSQuote},
-                Source: {JSSource}
-              {/block:Quote}
-              {block:Link}
-                Host: {JSHost},
-                URL: {JSURL},
-                Description: {JSDescription}
-              {/block:Link}
-              {block:Chat}
-                Lines: [
-                  {block:Lines}
-                    {
-                      Label: {JSLabel},
-                      Line: {JSLine}
-                    },
-                  {/block:Lines}
-                ]
-              {/block:Chat}
-              {block:Audio}
-                AudioEmbed: {JSAudioEmbed-400}
-              {/block:Audio}
-              {block:Video}
-                VideoThumbnailURL: {JSVideoThumbnailURL},
-                VideoEmbed: {JSVideoEmbed-400}
-              {/block:Video}
-              {block:Answer}
-                Question: {JSQuestion},
-                Replies: {JSReplies}
-              {/block:Answer}
-            },
-          {/block:Posts}
-        ]
-      {/block:IndexPage}
-    }
-  </script>
-
-    {block:IfFullWidthHeader}
-    <div class="fullwidth" style="background-image:url('{image:Header}');height:{text:Header Size}"></div>
-    {/block:IfFullWidthHeader}
-    <div class="wrapper {block:IndexPage}index {block:If4Columns}four {/block:If4Columns}{/block:IndexPage}{block:PermalinkPage}single{/block:PermalinkPage}">
-
-        <header id="masthead">
-        {block:IfShowHeader}{block:IfNotFullWidthHeader}
-            <div id="logo">
-                <a href="{BlogURL}" title="Home">
-                    <img src="{image:Header}" alt="{Title}">
-                </a>
-            </div>
-        {/block:IfNotFullWidthHeader}{/block:IfShowHeader}
-            <div id="title-line" class="{select:Header Line Colour}">
-            {block:IfShowTitle}
-                <h1 id="title"><a href="{BlogURL}" title="Home">{Title}</a>
-                    <svg onClick="titleSlider(0)" width="52" height="52" id="hamburger"> <!--HAMBURGER ICON-->
-                        <title>show menu</title>
-                        <rect x="5" y="9.5" width="42" height="7"/>
-                        <rect x="5" y="22.5" width="42" height="7"/>
-                        <rect x="5" y="35.5" width="42" height="7"/>
-                    </svg>
-                </h1>
-            {/block:IfShowTitle}
-                <nav id="pages-nav">
-                    {block:IfShowTitle}
-                    <svg onClick="titleSlider(1)" width="52" height="52" id="cheeseburger"> <!--CHEESEBURGER (?) ICON-->
-                        <title>show title</title>
-                        <rect x="5" y="9.5" width="42" height="7"/>
-                        <rect x="5" y="22.5" width="18" height="7"/>
-                        <rect x="29" y="22.5" width="18" height="7"/>
-                        <rect x="5" y="35.5" width="42" height="7"/>
-                    </svg>
-                    {/block:IfShowTitle}
-
-                        {block:Pages}
-                            <a href="{URL}">{Label}</a>
-                        {/block:Pages}
-                    {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}{block:SubmissionsEnabled} <a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
-                </nav>
-            </div>
-        </header>
-
-        <main id="content">
-            {block:TagPage}<h1 class="tag-header">/tagged/<span class="{Tag}">{Tag}</span></h1>{/block:TagPage}
-            {block:IndexPage}
-                {block:Posts}
-                    {block:Photo}
-                        <article class="{PostType} {TagsAsClasses}">
-                            {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            <a href="{Permalink}#title">
-                                <img src="{PhotoURL-400}" alt="{PhotoAlt}">
-                            </a>
-                        </article>
-                    {/block:Photo}
-                    {block:Photoset}
-                        <article class="{PostType} {TagsAsClasses}">
-                            {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            <a href="{Permalink}#title">
-                            <div class="photoset" data-layout="{PhotosetLayout}">
-                                  {block:Photos}
-                                      <img src="{PhotoURL-400}" {block:Caption}alt="{Caption}"{/block:Caption} />
-                                  {/block:Photos}
-                            </div>
-                            </a>
-                        </article>
-                    {/block:Photoset}
-                    {block:IfNotShowPhotosandPhotosetsOnly}
-                        {block:Text}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
-                                {Body}
-                            </article>
-                        {/block:Text}
-                        {block:Panorama}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                {LinkOpenTag}
-                                    <img src="{PhotoURL-400}" alt="{PhotoAlt}">
-                                {LinkCloseTag}
-                            </article>
-                        {/block:Panorama}
-                        {block:Quote}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                <h3>"{Quote}"</h3>
-                                {block:Source}<p>&emsp;&mdash;&emsp;{Source}</p>{/block:Source}
-                            </article>
-                        {/block:Quote}
-                        {block:Link}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                <a href="{URL}" {Target}>
-                                    {block:Host}<h3>{Host}</h3>{/block:Host}
-                                    {block:Description}
-                                        <p>{Description}</p>
-                                    {/block:Description}
-                                </a>
-                            </article>
-                        {/block:Link}
-                        {block:Chat}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
-                                {block:Lines}
-                                    {block:Label}<em>{Label}</em>{/block:Label}<p>{Line}</p><br>
-                                {/block:Lines}
-                            </article>
-                        {/block:Chat}
-                        {block:Audio}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                {block:AudioEmbed}
-                                    {AudioEmbed-500}
-                                {/block:AudioEmbed}
-                                {block:AudioPlayer}
-                                    {AudioPlayer}
-                                {/block:AudioPlayer}
-                            </article>
-                        {/block:Audio}
-                        {block:Video}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                {VideoEmbed-500}
-                            </article>
-                        {/block:Video}
-                        {block:Answer}
-                            <article class="{PostType} {TagsAsClasses}">
-                                {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                <a href="{Permalink}#title"><h3>{Question}</h3></a>
-                                <h3>{Replies}</h3>
-                            </article>
-                        {/block:Answer}
-                    {/block:IfNotShowPhotosandPhotosetsOnly}
-                {/block:Posts}
-            {/block:IndexPage}
-
-            {block:PermalinkPage}
-                {block:Posts}
-                    {block:Photo}
-                        <article class="{PostType} {TagsAsClasses}">
-                            {block:LinkURL}{LinkOpenTag}{/block:LinkURL}
-                                <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
-                            {block:LinkURL}{LinkCloseTag}{/block:LinkURL}
-                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:Caption}{Caption}{/block:Caption}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                    <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                        </article>
-                    {/block:Photo}
-                    {block:Text}
-                        <article class="{PostType} {TagsAsClasses}">
-                           <div class="halved">
-                            {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
-                            {Body}
-                         </div>
-                         <div class="halved notes">
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                         </div>
-                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                    <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-
-                        </article>
-                    {/block:Text}
-                    {block:Chat}
-                        <article class="{PostType} {TagsAsClasses}">
-                            {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
-                            {block:Lines}
-                                {block:Label}<em>{Label}</em>{/block:Label}<p>{Line}</p><br>
-                            {/block:Lines}
-                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                    <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                        </article>
-                    {/block:Chat}
-                    {block:Answer}
-                        <article class="{PostType} {TagsAsClasses}">
-                            <a href="{Permalink}#title"><h3>{Question}</h3></a>
-                            <h3>{Replies}</h3>
-                            <h2>{block:RebloggedFrom}via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                    <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                        </article>
-                    {/block:Answer}
-                    {block:Photoset}
-                        <article class="{PostType} {TagsAsClasses}">
-                            <div class="photoset">
-                                <div class="photoset-grid" data-layout="{PhotosetLayout}">
-                                    {block:Photos}
-                                        <img src="{PhotoURL-HighRes}" {block:Caption}alt="{Caption}"{/block:Caption} />
-                                    {/block:Photos}
-                                    {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                    {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                                    {block:Caption}{Caption}{/block:Caption}
-                                    {block:HasTags}
-                                        <ul class="tags">
-                                            {block:Tags}
-                                            <li class="{Tag}">{Tag}</li>
-                                            {/block:Tags}
-                                        </ul>
-                                    {/block:HasTags}
-                                    {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                        {PostNotes}
-                                    {/block:PostNotes}
-                                </div>
-                            </div>
-                        </article>
-                    {/block:Photoset}
-                    {block:Panorama}
-                        <article class="{PostType} {TagsAsClasses}">
-                            {LinkOpenTag}
-                                <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
-                            {LinkCloseTag}
-                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                        {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:Caption}{Caption}{/block:Caption}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                    <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                        </article>
-                    {/block:Panorama}
-                    {block:Quote}
-                        <article class="{PostType} {TagsAsClasses}">
-                            <h3>"{Quote}"</h3>
-                            {block:Source}<p>&emsp;&mdash;&emsp;{Source}</p>{/block:Source}
-                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                    <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                        </article>
-                    {/block:Quote}
-                    {block:Link}
-                        <article class="{PostType} {TagsAsClasses}">
-                            <a href="{URL}" {Target}>
-                                {block:Host}<h3>{Host}</h3>{/block:Host}
-                                {block:Description}
-                                    <p>{Description}</p>
-                                {/block:Description}
-                            </a>
-                                {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                                {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                                {block:HasTags}
-                                    <ul class="tags">
-                                        {block:Tags}
-                                        <li class="{Tag}">{Tag}</li>
-                                        {/block:Tags}
-                                    </ul>
-                                {/block:HasTags}
-                                {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                    {PostNotes}
-                                {/block:PostNotes}
-                        </article>
-                    {/block:Link}
-                    {block:Audio}
-                        <article class="{PostType} {TagsAsClasses}">
-                            {block:AudioEmbed}
-                                {AudioEmbed-640}
-                            {/block:AudioEmbed}
-                            {block:AudioPlayer}
-                                {AudioPlayer}
-                            {/block:AudioPlayer}
-                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:Caption}{Caption}{/block:Caption}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                    <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                        </article>
-                    {/block:Audio}
-                    {block:Video}
-                        <article class="{PostType} {TagsAsClasses}">
-                            {VideoEmbed-700}
-                            {block:RebloggedFrom}<h2>via: <a href="{ReblogParentURL}">{ReblogParentName}</a> src: <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
-                            {block:Date}<h2>{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H</h2>{/block:Date}
-                            {block:Caption}{Caption}{/block:Caption}
-                            {block:HasTags}
-                                <ul class="tags">
-                                    {block:Tags}
-                                        <li class="{Tag}">{Tag}</li>
-                                    {/block:Tags}
-                                </ul>
-                            {/block:HasTags}
-                            {block:PostNotes} <h2>{NoteCountWithLabel}</h2>
-                                {PostNotes}
-                            {/block:PostNotes}
-                        </article>
-                    {/block:Video}
-                {/block:Posts}
-            {/block:PermalinkPage}
-            {block:IfThemeAttribution}<div class="theme-author">Theme by <a href="https://samhaakman.com">Sam</a></div>{/block:IfThemeAttribution}
-        </main>
-    </div>
-    {block:Pagination}
-        <nav class="pagination">
-            <ul>
-                {block:PreviousPage}<li><a href="{PreviousPage}">Previous Page</a></li>{/block:PreviousPage}
-                {block:NextPage}<li><a href="{NextPage}">Next Page</a></li>{/block:NextPage}
-            </ul>
-        </nav>
-    {/block:Pagination}
-
 <script src="main.js"></script>
 </body>
 <!--nice-->

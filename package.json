@@ -2,7 +2,7 @@
   "name": "fiendish-minimal",
   "version": "3.0.0",
   "description": "3/4 column masonry tumblr theme",
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
     "masonry-layout": "^4.2.2",
     "preact": "^8.4.2"
@@ -28,7 +28,7 @@
     "url": "git+https://github.com/floatingdino/fiendish-minimal.git"
   },
   "author": "Sam Haakman (floatingdino@gmail.com)",
-  "license": "CC0-1.0",
+  "license": "CCBY-NC-SA-4.0",
   "bugs": {
     "url": "https://github.com/floatingdino/fiendish-minimal/issues"
   },

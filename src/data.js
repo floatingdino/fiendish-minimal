@@ -5,6 +5,7 @@ const data = {
       "https://static.tumblr.com/e8c14f44c0599425df7d6145fa1ff8e3/ii7qpmy/kxUo2qng1/tumblr_static_czd4vk1oc1wk8ok8g80cs8ogg.gif",
     BlogURL: "https://fiendish-minimal.tumblr.com/",
     FullWidthHeader: false,
+    ShowHeader: true,
     HeaderLineColour: "none",
     ShowTitle: true,
     Pages: [],
