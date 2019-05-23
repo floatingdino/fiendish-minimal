@@ -1,14 +1,18 @@
 import { h, Component } from "preact";
 
-import PhotoPost from "./posts/photo";
+import PhotoPost from "./photo";
 
 export default class Post extends Component {
   componentDidMount() {
-    setTimeout(() => {
-      if (this.props.Masonry()) {
-        this.props.Masonry().appended(this.post);
-      }
-    }, 500);
+    if (this.props.PostType === "text") {
+      this.loadPost();
+    }
+  }
+  loadPost() {
+    this.props.loadPost();
+    // if (this.props.Masonry()) {
+    //   this.props.Masonry().appended(this.post);
+    // }
   }
   render(props) {
     return (
@@ -20,7 +24,11 @@ export default class Post extends Component {
             x {props.ReblogRootName || ""}
           </a>
         </h2>
-        {props.PostType === "photo" ? <PhotoPost {...props} /> : ""}
+        {props.PostType === "photo" ? (
+          <PhotoPost {...props} loadPost={() => this.loadPost()} />
+        ) : (
+          ""
+        )}
       </article>
     );
   }
