@@ -4,21 +4,34 @@ import PhotoPost from "./photo";
 import TextPost from "./text";
 
 export default class Post extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loaded: false
+    };
+  }
   componentDidMount() {
     if (this.props.PostType === "text") {
       this.loadPost();
     }
+    if (this.props.Masonry()) {
+      this.props.Masonry().appended(this.post);
+    }
   }
   loadPost() {
     this.props.loadPost();
-    // if (this.props.Masonry()) {
-    //   this.props.Masonry().appended(this.post);
-    // }
+    if (this.props.Masonry()) {
+      this.props.Masonry().layout();
+    }
+    this.setState({
+      loaded: true
+    });
   }
-  render(props) {
+  render(props, state) {
     return (
       <article
-        class={`${props.PostType} ${props.TagsAsClasses}`}
+        class={`${props.PostType} ${props.TagsAsClasses} ${state.loaded &&
+          "loaded"}`}
         ref={post => (this.post = post)}>
         <h2>
           <a class="black" href={`${props.Permalink}`}>

@@ -8,13 +8,14 @@ export default class Single extends Component {
     this.state = {
       post:
         props.Post ||
-        props.Posts.filter(post => post.Permalink === props.url)[0]
+        props.Posts().filter(post => post.Permalink === props.url)[0]
     };
   }
   componentWillMount() {
     this.props.setPageType("single");
   }
   render(props, state) {
+    console.log(props.Posts, state);
     const post = state.post;
     return (
       <article class={`${post.PostType} ${post.TagsAsClasses}`}>
