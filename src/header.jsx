@@ -1,5 +1,7 @@
 import { h, Component } from "preact";
 
+import { route } from "preact-router";
+
 export default class Header extends Component {
   constructor(props) {
     super();
@@ -14,12 +16,17 @@ export default class Header extends Component {
       navShown: !this.state.navShown
     });
   }
+  handleLink(e, url) {
+    e.preventDefault();
+    // console.log(e);
+    route(url);
+  }
   render(props, state) {
     return (
       <header id="masthead">
         {props.ShowHeader && (
           <div id="logo">
-            <a href={props.BlogURL} title="Home">
+            <a href="/" onClick={e => this.handleLink(e, "/")} title="Home">
               <img alt={props.Title} src={props.Header} />
             </a>
           </div>
@@ -27,7 +34,7 @@ export default class Header extends Component {
         <div class={props.HeaderLineColour} id="title-line">
           {props.ShowTitle && (
             <h1 id="title" style={state.navShown && "margin-top: -54px"}>
-              <a href={props.BlogURL} title="Home">
+              <a href="/" onClick={e => this.handleLink(e, "/")} title="Home">
                 {props.Title}
               </a>
               {this.hasNavLine && (
@@ -60,13 +67,22 @@ export default class Header extends Component {
                 </svg>
               )}
               {props.Pages.map(page => (
-                <a href={page.URL} key={page.Label}>
+                <a
+                  href={page.URL}
+                  key={page.Label}
+                  onClick={e => this.handleLink(e, page.URL)}>
                   {page.Label}
                 </a>
               ))}
-              {props.AskEnabled && <a href="/ask">{props.AskLabel}</a>}
+              {props.AskEnabled && (
+                <a href="/ask" onClick={e => this.handleLink(e, "/ask")}>
+                  {props.AskLabel}
+                </a>
+              )}
               {props.SubmissionsEnabled && (
-                <a href="/submit">{props.SubmitLabel}</a>
+                <a href="/submit" onClick={e => this.handleLink(e, "/submit")}>
+                  {props.SubmitLabel}
+                </a>
               )}
             </nav>
           )}

@@ -17,116 +17,183 @@ Masonry
 -->
 <html>
 <head>
-    <title>{Title}</title>
-    <link rel="shortcut icon" href="{Favicon}">
-    <link rel="alternate" type="application/rss+xml" href="{RSS}">
-    {block:Description}
-        <meta name="description" content="{MetaDescription}" />
-    {/block:Description}
-    <link href='https://fonts.googleapis.com/css?family=Anonymous+Pro|Oswald:500&display=swap' rel='stylesheet' type='text/css'>
+  <title>{Title}</title>
+  <link rel="shortcut icon" href="{Favicon}">
+  <link rel="alternate" type="application/rss+xml" href="{RSS}">
+  {block:Description}
+      <meta name="description" content="{MetaDescription}" />
+  {/block:Description}
+  <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro|Oswald:500&display=swap" rel="stylesheet">
 
+  <!--THEME SETTINGS-->
+  <!--Initialises with mostly pre-set colours from Global appearance-->
+  <meta name="color:Background" content="{BackgroundColor}">
+  <meta name="image:Background Image" content="">
+  <meta name="color:Text" content="{TitleColor}">
+  <meta name="color:Links" content="{AccentColor}">
+  <meta name="color:Selection" content="{RGBAccentColor}">
+  <meta name="image:Header" content="{HeaderImage}">
+  <meta name="text:Header Size" content="350px">
+  <meta name="if:Full Width Header" content="0">
+  <meta name="if:Show Header" content="{block:ShowHeaderImage}1{/block:ShowHeaderImage}{block:HideHeaderImage}0{/block:HideHeaderImage}">
+  <meta name="if:Show Title" content="{block:ShowTitle}1{/block:ShowTitle}{block:HideTitle}0{/block:HideTitle}">
+  <meta name="if:Show Photos and Photosets only" content="0">
+  <meta name="if:Theme Attribution" content="1">
+  <meta name="if:Alternate Colour Tags" content="0">
+  <meta name="text:Pink Tag" content="vibe">
+  <meta name="text:Blue Tag" content="vibe2">
+  <meta name="text:Green Tag" content="35mm">
+  <meta name="text:Yellow Tag" content="ruckus">
 
-        <!--Main CSS Stylesheet-->
-    {block:If4Columns}<link href='https://static.tumblr.com/ii7qpmy/RgSo2sp2p/rf_4col.css' rel='stylesheet' type='text/css'>{/block:If4Columns}
-        <!--THEME SETTINGS-->
-        <!--Initialises with mostly pre-set colours from Global appearance-->
-    <meta name="color:Background" content="{BackgroundColor}">
-    <meta name="image:Background Image" content="">
-    <meta name="select:Post Background" content="none" name="None">
-    <meta name="select:Post Background" content="white" name="White">
-    <meta name="select:Post Background" content="black" name="Black">
-    <meta name="color:Text" content="{TitleColor}">
-    <meta name="color:Links" content="{AccentColor}">
-    <meta name="color:Selection" content="{RGBAccentColor}">
-    <meta name="image:Header" content="{HeaderImage}">
-    <meta name="text:Header Size" content="256px">
-    <meta name="if:Full Width Header" content="0">
-    <meta name="if:Show Header" content="{block:ShowHeaderImage}1{/block:ShowHeaderImage}{block:HideHeaderImage}0{/block:HideHeaderImage}">
-    <meta name="if:Show Title" content="{block:ShowTitle}1{/block:ShowTitle}{block:HideTitle}0{/block:HideTitle}">
-    <meta name="if:Show Photos and Photosets only" content="0">
-    <meta name="if:4 Columns" content="1">
-    <meta name="if:Theme Attribution" content="1">
-    <meta name="select:Header Line Colour" content="none" name="None">
-    <meta name="select:Header Line Colour" content="white" name="White">
-    <meta name="select:Header Line Colour" content="black" name="Black">
-    <meta name="if:Alternate Colour Tags" content="0">
-    <meta name="text:Pink Tag" content="vibe">
-    <meta name="text:Blue Tag" content="vibe2">
-    <meta name="text:Green Tag" content="35mm">
-    <meta name="text:Yellow Tag" content="ruckus">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <script id="data">
-      var data =  {
-        "blog": {
-          "Title": {JSTitle},
-          "Header": "{image:Header}",
-          "BlogURL": {JSBlogURL},
-          "FullWidthHeader": {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
-          "ShowHeader": {block:IfShowHeader}true{/block:IfShowHeader}{block:IfNotShowHeader}false{/block:IfNotShowHeader},
-          "HeaderLineColour": "{select:Header Line Colour}",
-          "ShowTitle": {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
-          "Pages": [
-            {block:Pages}
-              {
-                "URL": {JSURL},
-                "Label": {JSLabel}
-              },
-            {/block:Pages}
+  <script id="data">
+    var data =  {
+      "blog": {
+        "Title": {JSTitle},
+        "Header": "{image:Header}",
+        "BlogURL": {JSBlogURL},
+        "FullWidthHeader": {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
+        "ShowHeader": {block:IfShowHeader}true{/block:IfShowHeader}{block:IfNotShowHeader}false{/block:IfNotShowHeader},
+        "ShowTitle": {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
+        "Pages": [
+          {block:Pages}
+            {
+              "URL": {JSURL},
+              "Label": {JSLabel}
+            },
+          {/block:Pages}
+        ],
+        {block:AskEnabled}"Ask":{JSAskLabel},{/block:AskEnabled}
+        {block:SubmissionsEnabled}"Submissions":{JSSubmitLabel},{/block:SubmissionsEnabled}
+        "ThemeAttribution":{block:IfThemeAttribution}true{/block:IfThemeAttribution}{block:IfNotThemeAttribution}false{/block:IfNotThemeAttribution},
+        "ShowPhotosandPhotosetsOnly":{block:IfShowPhotosandPhotosetsOnly}true{/block:IfShowPhotosandPhotosetsOnly}{block:IfNotShowPhotosandPhotosetsOnly}false{/block:IfNotShowPhotosandPhotosetsOnly}
+      },
+      "page": {
+        {block:IndexPage}"type": "index",{/block:IndexPage}
+        {block:PermalinkPage}"type": "single",{/block:PermalinkPage}
+        {block:TagPage}"Tag": {JSTag},{/block:TagPage}
+        {block:Pagination}
+          "Pagination": {
+            {block:PreviousPage}"PreviousPage": {JSPreviousPage},{/block:PreviousPage}
+            {block:NextPage}"NextPage": {JSNextPage}{/block:NextPage}
+          }
+        {/block:Pagination}
+      }
+      {block:PermalinkPage},
+      "Post": {
+        "Permalink": {JSRelativePermalink},
+        {block:Posts}
+          "PostType": {JSPostType},
+          "TagsAsClasses": {JSTagsAsClasses},
+          {block:RebloggedFrom}
+            "ReblogRootURL": {JSReblogRootURL},
+            "ReblogRootName": {JSReblogRootName},
+          {/block:RebloggedFrom}
+          {block:Date}
+          "Date": "{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H",
+          {/block:Date}
+          {block:HasTags}
+          "Tags": [
+            {block:Tags}
+              {JSTag},
+            {/block:Tags}
           ],
-          {block:AskEnabled}"Ask":{JSAskLabel},{/block:AskEnabled}
-          {block:SubmissionsEnabled}"Submissions":{JSSubmitLabel},{/block:SubmissionsEnabled}
-          "ThemeAttribution":{block:IfThemeAttribution}true{/block:IfThemeAttribution}{block:IfNotThemeAttribution}false{/block:IfNotThemeAttribution},
-          "ShowPhotosandPhotosetsOnly":{block:IfShowPhotosandPhotosetsOnly}true{/block:IfShowPhotosandPhotosetsOnly}{block:IfNotShowPhotosandPhotosetsOnly}false{/block:IfNotShowPhotosandPhotosetsOnly}
-        },
-        "page": {
-          {block:IndexPage}"type": "index",{/block:IndexPage}
-          {block:PermalinkPage}"type": "single",{/block:PermalinkPage}
-          {block:TagPage}"Tag": {JSTag},{/block:TagPage}
-          {block:Pagination}
-            "Pagination": {
-              {block:PreviousPage}"PreviousPage": {JSPreviousPage},{/block:PreviousPage}
-              {block:NextPage}"NextPage": {JSNextPage}{/block:NextPage}
-            }
-          {/block:Pagination}
-        }
-        {block:PermalinkPage},
-        "Post": {
-          "Permalink": {JSRelativePermalink},
+          {/block:HasTags}
+          "PostNotesURL": {JSPostNotesURL},
+          "NoteCount": {JSNoteCountWithLabel},
+          "PostNotes": {JSPostNotes},
+          {block:Photo}
+            "PhotoURL-400": {JSPhotoURL-400},
+            "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+            "PhotoWidth-HighRes": {JSPhotoWidth-HighRes},
+            "PhotoHeight-HighRes": {JSPhotoHeight-HighRes},
+            "PhotoAlt": {JSPhotoAlt},
+            "Caption": {JSCaption}
+          {/block:Photo}
+          {block:Photoset}
+            "PhotosetLayout": {JSPhotosetLayout},
+            "Caption": {JSCaption},
+            "Photos": [
+              {block:Photos}
+                {
+                  "PhotoURL-400": {JSPhotoURL-400},
+                  "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                  "PhotoAlt": {JSPhotoAlt},
+                },
+              {/block:Photos}
+            ]
+          {/block:Photoset}
+          {block:Text}
+            "Title": {JSTitle},
+            "Body": {JSBody}
+          {/block:Text}
+          {block:Panorama}
+            "PhotoURL-400": {JSPhotoURL-400},
+            "PhotoURL-Panorama": {JSPhotoURL-Panorama},
+            "PhotoAlt": {JSPhotoAlt},
+            "Caption": {JSCaption}
+          {/block:Panorama}
+          {block:Quote}
+            "Quote": {JSQuote},
+            "Source": {JSSource}
+          {/block:Quote}
+          {block:Link}
+            "Host": {JSHost},
+            "URL": {JSURL},
+            "Target": {JSTarget},
+            "Description": {JSDescription}{block:Excerpt},
+            "Excerpt": {JSExcerpt}{/block:Excerpt}{block:Thumbnail},
+            "Thumbnail": {JSThumbnail},
+            "Thumbnail-HighRes": {JSThumbnail-HighRes}{/block:Thumbnail}
+          {/block:Link}
+          {block:Chat}
+          {block:Title}
+          "Title": {JSTitle},
+          {/block:Title}
+            "Lines": [
+              {block:Lines}
+                {
+                  "Label": {JSLabel},
+                  "Line": {JSLine}
+                },
+              {/block:Lines}
+            ]
+          {/block:Chat}
+          {block:Audio}
+            "AudioEmbed": {JSAudioEmbed-400}
+          {/block:Audio}
+          {block:Video}
+            "VideoThumbnailURL": {JSVideoThumbnailURL},
+            "VideoEmbed": {JSVideoEmbed-400}
+          {/block:Video}
+          {block:Answer}
+            "Question": {JSQuestion},
+            "Replies": {JSReplies}
+          {/block:Answer}
+        {/block:Posts}
+      },
+      {/block:PermalinkPage}
+      {block:IndexPage},
+        "Posts": [
           {block:Posts}
+          {
+            "Permalink": {JSRelativePermalink},
             "PostType": {JSPostType},
             "TagsAsClasses": {JSTagsAsClasses},
             {block:RebloggedFrom}
               "ReblogRootURL": {JSReblogRootURL},
               "ReblogRootName": {JSReblogRootName},
             {/block:RebloggedFrom}
-            {block:Date}
-            "Date": "{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H",
-            {/block:Date}
-            {block:HasTags}
-            "Tags": [
-              {block:Tags}
-                {JSTag},
-              {/block:Tags}
-            ],
-            {/block:HasTags}
-            "PostNotesURL": {JSPostNotesURL},
-            {block:PostNotes}
-            "NoteCount": {JSNoteCountWithLabel},
-            "PostNotes": {JSPostNotes},
-            {/block:PostNotes}
             {block:Photo}
               "PhotoURL-400": {JSPhotoURL-400},
               "PhotoURL-HighRes": {JSPhotoURL-HighRes},
               "PhotoWidth-HighRes": {JSPhotoWidth-HighRes},
               "PhotoHeight-HighRes": {JSPhotoHeight-HighRes},
-              "PhotoAlt": {JSPhotoAlt},
-              "Caption": {JSCaption}
+              "PhotoAlt": {JSPhotoAlt}
             {/block:Photo}
             {block:Photoset}
               "PhotosetLayout": {JSPhotosetLayout},
-              "Caption": {JSCaption},
               "Photos": [
                 {block:Photos}
                   {
@@ -144,8 +211,7 @@ Masonry
             {block:Panorama}
               "PhotoURL-400": {JSPhotoURL-400},
               "PhotoURL-Panorama": {JSPhotoURL-Panorama},
-              "PhotoAlt": {JSPhotoAlt},
-              "Caption": {JSCaption}
+              "PhotoAlt": {JSPhotoAlt}
             {/block:Panorama}
             {block:Quote}
               "Quote": {JSQuote},
@@ -184,189 +250,112 @@ Masonry
               "Question": {JSQuestion},
               "Replies": {JSReplies}
             {/block:Answer}
+          },
           {/block:Posts}
-        },
-        {/block:PermalinkPage}
-        {block:IndexPage},
-          "Posts": [
-            {block:Posts}
-            {
-              "Permalink": {JSRelativePermalink},
-              "PostType": {JSPostType},
-              "TagsAsClasses": {JSTagsAsClasses},
-              {block:RebloggedFrom}
-                "ReblogRootURL": {JSReblogRootURL},
-                "ReblogRootName": {JSReblogRootName},
-              {/block:RebloggedFrom}
-              {block:Photo}
-                "PhotoURL-400": {JSPhotoURL-400},
-                "PhotoURL-HighRes": {JSPhotoURL-HighRes},
-                "PhotoWidth-HighRes": {JSPhotoWidth-HighRes},
-                "PhotoHeight-HighRes": {JSPhotoHeight-HighRes},
-                "PhotoAlt": {JSPhotoAlt}
-              {/block:Photo}
-              {block:Photoset}
-                "PhotosetLayout": {JSPhotosetLayout},
-                "Photos": [
-                  {block:Photos}
-                    {
-                      "PhotoURL-400": {JSPhotoURL-400},
-                      "PhotoURL-HighRes": {JSPhotoURL-HighRes},
-                      "PhotoAlt": {JSPhotoAlt},
-                    },
-                  {/block:Photos}
-                ]
-              {/block:Photoset}
-              {block:Text}
-                "Title": {JSTitle},
-                "Body": {JSBody}
-              {/block:Text}
-              {block:Panorama}
-                "PhotoURL-400": {JSPhotoURL-400},
-                "PhotoURL-Panorama": {JSPhotoURL-Panorama},
-                "PhotoAlt": {JSPhotoAlt}
-              {/block:Panorama}
-              {block:Quote}
-                "Quote": {JSQuote},
-                "Source": {JSSource}
-              {/block:Quote}
-              {block:Link}
-                "Host": {JSHost},
-                "URL": {JSURL},
-                "Target": {JSTarget},
-                "Description": {JSDescription}{block:Excerpt},
-                "Excerpt": {JSExcerpt}{/block:Excerpt}{block:Thumbnail},
-                "Thumbnail": {JSThumbnail},
-                "Thumbnail-HighRes": {JSThumbnail-HighRes}{/block:Thumbnail}
-              {/block:Link}
-              {block:Chat}
-              {block:Title}
-              "Title": {JSTitle},
-              {/block:Title}
-                "Lines": [
-                  {block:Lines}
-                    {
-                      "Label": {JSLabel},
-                      "Line": {JSLine}
-                    },
-                  {/block:Lines}
-                ]
-              {/block:Chat}
-              {block:Audio}
-                "AudioEmbed": {JSAudioEmbed-400}
-              {/block:Audio}
-              {block:Video}
-                "VideoThumbnailURL": {JSVideoThumbnailURL},
-                "VideoEmbed": {JSVideoEmbed-400}
-              {/block:Video}
-              {block:Answer}
-                "Question": {JSQuestion},
-                "Replies": {JSReplies}
-              {/block:Answer}
-            },
-            {/block:Posts}
-          ]
-        {/block:IndexPage}
-      }
-    </script>
+        ]
+      {/block:IndexPage}
+    }
+  </script>
 
 </head>
 <body>
+  <h1>DON'T FREAK OUT THAT THIS LOOKS BROKEN - THIS THEME IS CURRENTLY UNDER ACTIVE DEVELOPMENT. COME BACK IN A BIT TO SEE THE NEW VERSION!</h1>
 <script src="//localhost:8080/main.js"></script>
 <style>
-    body{
-        background-color:{color:Background};
-        background-image:url({image:Background Image});
-        background-attachment:fixed;
-        background-repeat:no-repeat;
-        background-position:center;
-    }
-    body, article, p, h1, h2, h3, em, a.black{
-        color:{color:Text};
-    }
-    article h2 a{
-        color:{color:Links};
-    }
-    main :not(.notes) a img:hover{
-        border-bottom:5px solid {color:Links};
-        transition:border 0.3s ease;
-    }
-    main a img{
-        border-bottom:0px solid {color:Links};
-        transition:border 0.3s ease;
-    }
-    .text blockquote{
-       margin:0;
-       margin-left:-22px;
-       padding:5px 20px;
-    }
-    .text blockquote :last-child{
-       margin-bottom:0;
+  body{
+      background-color:{color:Background};
+      background-image:url({image:Background Image});
+      background-attachment:fixed;
+      background-repeat:no-repeat;
+      background-position:center;
   }
-    blockquote{
-        border-left:2px solid {color:Links};
-    }
+  body, article, p, h1, h2, h3, em, a.black{
+      color:{color:Text};
+  }
+  article h2 a{
+      color:{color:Links};
+  }
+  main :not(.notes) a img:hover{
+      border-bottom:5px solid {color:Links};
+      transition:border 0.3s ease;
+  }
+  main a img{
+      border-bottom:0px solid {color:Links};
+      transition:border 0.3s ease;
+  }
+  blockquote{
+      margin: 0;
+      padding: 5px 20px;
+      border-left:2px solid {color:Links};
+  }
+  .text blockquote{
+     margin-left:-22px;
+  }
+  .text blockquote :last-child{
+     margin-bottom:0;
+}
 
-    blockquote > blockquote{
-       border-left:2px solid #ff3399;
-    }
-    article blockquote a.tumblr_blog{
-       background-image: linear-gradient(to right, #ff3399, #ff3399);
-    }
-    blockquote > blockquote > blockquote{
-       border-left:2px solid #3399ff;
-    }
-    blockquote > blockquote a.tumblr_blog{
-       background-image: linear-gradient(to right, #3399ff, #3399ff);
-    }
-    blockquote > blockquote > blockquote > blockquote{
-       border-left:2px solid #ffe199;
-    }
-    blockquote > blockquote > blockquote a.tumblr_blog{
-       background-image: linear-gradient(to right, #ffe199, #ffe199);
-    }
-    article a.tumblr_blog{
-       background-image: linear-gradient(to right, {color:Links}, {color:Links});
-      background-repeat: repeat-x;
-      background-position: 0 90%;
-      background-size: 100% .18em;
-      text-decoration: none;
-    }
 
-    #logo img{
-        max-height: {text:Header Size};
-        width:auto;
-        max-width:100%;
-    }
-    .{text:Pink Tag} h2 a, h1 .{text:Pink Tag}, .tags li.{text:Pink Tag}{
-        color:#ff3399;
-    }
-    .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
-        border-bottom-color:#ff3399 !important;
-    }
-    .{text:Blue Tag} h2 a, h1 .{text:Blue Tag}, .tags li.{text:Blue Tag}{
-        color:#3399ff;
-    }
-    .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
-        border-bottom-color:#3399ff !important;
-    }
-    .{text:Green Tag} h2 a, h1 .{text:Green Tag}, .tags li.{text:Green Tag}{
-        color:#33ff99;
-    }
-    .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
-        border-bottom-color:#33ff99 !important;
-    }
-    .{text:Yellow Tag} h2 a, h1 .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
-        color:#ffe199;
-    }
-    .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
-        border-bottom-color:#ffe199 !important;
-    }
-    .theme-author a{
-       color:{color:Links};
-    }
+  blockquote > blockquote{
+     border-left:2px solid #ff3399;
+  }
+  article blockquote a.tumblr_blog{
+     background-image: linear-gradient(to right, #ff3399, #ff3399);
+  }
+  blockquote > blockquote > blockquote{
+     border-left:2px solid #3399ff;
+  }
+  blockquote > blockquote a.tumblr_blog{
+     background-image: linear-gradient(to right, #3399ff, #3399ff);
+  }
+  blockquote > blockquote > blockquote > blockquote{
+     border-left:2px solid #ffe199;
+  }
+  blockquote > blockquote > blockquote a.tumblr_blog{
+     background-image: linear-gradient(to right, #ffe199, #ffe199);
+  }
+  article a.tumblr_blog{
+     background-image: linear-gradient(to right, {color:Links}, {color:Links});
+    background-repeat: repeat-x;
+    background-position: 0 90%;
+    background-size: 100% .18em;
+    text-decoration: none;
+  }
 
-    {CustomCSS}
+  #logo img{
+      max-height: {text:Header Size};
+      width:auto;
+      max-width:100%;
+  }
+  .{text:Pink Tag} h2 a, h1 .{text:Pink Tag}, .tags li.{text:Pink Tag}{
+      color:#ff3399;
+  }
+  .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
+      border-bottom-color:#ff3399 !important;
+  }
+  .{text:Blue Tag} h2 a, h1 .{text:Blue Tag}, .tags li.{text:Blue Tag}{
+      color:#3399ff;
+  }
+  .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
+      border-bottom-color:#3399ff !important;
+  }
+  .{text:Green Tag} h2 a, h1 .{text:Green Tag}, .tags li.{text:Green Tag}{
+      color:#33ff99;
+  }
+  .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
+      border-bottom-color:#33ff99 !important;
+  }
+  .{text:Yellow Tag} h2 a, h1 .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
+      color:#ffe199;
+  }
+  .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
+      border-bottom-color:#ffe199 !important;
+  }
+  .theme-author a{
+     color:{color:Links};
+  }
+
+  {CustomCSS}
 </style>
 </body>
 <!--nice-->

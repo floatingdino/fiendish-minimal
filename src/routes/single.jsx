@@ -10,25 +10,39 @@ export default class Single extends Component {
     this.state = {
       post:
         props.Post ||
-        props.Posts().filter(post => post.Permalink === props.url)[0]
+        props.Posts().filter(post => post.Permalink === props.url)[0],
+      notes: ""
     };
   }
   componentWillMount() {
     this.props.setPageType("single");
     if (!this.props.Post) {
       this.fetchPost();
+    } else {
+      this.fetchNotes();
     }
   }
+  fetchNotes() {
+    fetch(this.state.post.PostNotesURL)
+      .then(resp => resp.text())
+      .then(notes => {
+        this.setState({
+          post: {
+            ...this.state.post,
+            PostNotes: notes
+          }
+        });
+      });
+  }
   fetchPost() {
-    console.log(this);
     fetch(this.props.url)
       .then(resp => resp.text())
       .then(resp => {
         const data = getDataFromResponse(resp);
-        console.log(data);
         this.setState({
           post: data.Post
         });
+        this.fetchNotes();
       });
   }
 

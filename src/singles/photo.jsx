@@ -7,7 +7,11 @@ export default class PhotoSingle {
     return (
       <figure>
         {props["PhotoURL-HighRes"] && (
-          <img alt={props.PhotoAlt} src={props["PhotoURL-HighRes"]} />
+          <img
+            alt={props.PhotoAlt}
+            class="post-photo"
+            src={props["PhotoURL-HighRes"]}
+          />
         )}
         {props.PhotosetLayout &&
           props.PhotosetLayout.map((layout, layoutIndex) => (
@@ -20,7 +24,7 @@ export default class PhotoSingle {
               ).map(photo => (
                 <img
                   alt={photo.PhotoAlt}
-                  class={`col-${12 / parseInt(layout, 10)}`}
+                  class={`col-${12 / parseInt(layout, 10)} post-photo`}
                   key={photo["PhotoURL-HighRes"]}
                   src={photo["PhotoURL-HighRes"]}
                 />

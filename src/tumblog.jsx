@@ -1,5 +1,5 @@
 import { h, Component } from "preact";
-import Router from "preact-router";
+import { Router } from "preact-router";
 
 import getDataFromResponse from "./functions/getDataFromResponse";
 
@@ -22,6 +22,7 @@ export default class Tumblog extends Component {
   setPageType(type) {
     this.setState({
       page: {
+        ...this.state.page,
         type
       }
     });
@@ -45,11 +46,24 @@ export default class Tumblog extends Component {
       }
     });
   }
+  handleRoute(e) {
+    if (this.state && e.url === "/" && this.state.Posts.length <= 0) {
+      this.setState({
+        page: {
+          ...this.state.page,
+          Pagination: {
+            NextPage: "/"
+          }
+        }
+      });
+      this.loadNextPage();
+    }
+  }
   render(props, state) {
     return (
       <div class={`wrapper ${state.page.type}`}>
         <Header {...props.blog} />
-        <Router onChange={this.handleRoute}>
+        <Router onChange={e => this.handleRoute(e)}>
           <Home
             loadNextPage={() => this.loadNextPage()}
             Pagination={() => state.page.Pagination}
@@ -64,6 +78,17 @@ export default class Tumblog extends Component {
             setPageType={type => this.setPageType(type)}
           />
         </Router>
+        {props.blog.ThemeAttribution && (
+          <div class="theme-author">
+            Theme by{" "}
+            <a
+              href="https://samhaakman.com"
+              target="_blank"
+              rel="nofollow noopener">
+              Sam
+            </a>
+          </div>
+        )}
       </div>
     );
   }
