@@ -10,7 +10,7 @@ module.exports = {
   output: {
     filename: "[name].js",
     chunkFilename: "[name].bundle.js",
-    publicPath: "http://localhost:8080/"
+    publicPath: "//localhost:8080/"
   },
   module: {
     rules: [
@@ -26,17 +26,28 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {
-    extensions: [".js", ".jsx", ".json"],
+    extensions: [".js", ".jsx", ".json", ".css"]
   },
   devServer: {
     disableHostCheck: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-    hot: true
+    hot: true,
+    https: true
   }
 };

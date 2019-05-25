@@ -1,5 +1,7 @@
 import { h, Component } from "preact";
 
+import fetchRowPhotos from "../fetchRowPhotos";
+
 export default class PhotoPost extends Component {
   constructor(props) {
     super();
@@ -26,30 +28,33 @@ export default class PhotoPost extends Component {
   }
   render(props) {
     return (
-      <a href={`${props.Permalink}#title`}>
-        {props["PhotoURL-400"] ? (
+      <a href={`${props.Permalink}`}>
+        {props["PhotoURL-400"] && (
           <img
-            src={props["PhotoURL-400"]}
             alt={props.PhotoAlt}
             onLoad={() => this.loadPhoto()}
+            src={props["PhotoURL-400"]}
           />
-        ) : (
-          ""
         )}
-        {props.PhotosetLayout
-          ? props.PhotosetLayout.map((layout, layoutIndex) => (
-              <div class="row">
-                {this.fetchRowPhotos(layout, layoutIndex).map(photo => (
-                  <img
-                    class={`col-${12 / parseInt(layout, 10)}`}
-                    src={photo["PhotoURL-400"]}
-                    alt={photo.PhotoAlt}
-                    onLoad={() => this.loadPhoto()}
-                  />
-                ))}
-              </div>
-            ))
-          : ""}
+        {props.PhotosetLayout &&
+          props.PhotosetLayout.map((layout, layoutIndex) => (
+            <div class="row" key={`${props.Permalink}-${layoutIndex}`}>
+              {fetchRowPhotos(
+                layout,
+                layoutIndex,
+                props.PhotosetLayout,
+                props.Photos
+              ).map(photo => (
+                <img
+                  alt={photo.PhotoAlt}
+                  class={`col-${12 / parseInt(layout, 10)}`}
+                  key={photo["PhotoURL-400"]}
+                  onLoad={() => this.loadPhoto()}
+                  src={photo["PhotoURL-400"]}
+                />
+              ))}
+            </div>
+          ))}
       </a>
     );
   }

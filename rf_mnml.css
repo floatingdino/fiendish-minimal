@@ -11,6 +11,9 @@ h2,
 h3 {
   font-family: "Anonymous Pro", Courier, monospace;
 }
+figure {
+  margin: 0;
+}
 body {
   background-color: #fff;
   margin: 0;
@@ -34,9 +37,11 @@ a {
   transition: letter-spacing 1s ease;
 }
 a:hover {
-  font-weight: bold;
+  background-image: linear-gradient(to right, currentColor, currentColor);
+  background-repeat: repeat-x;
+  background-position: 0 92%;
+  background-size: 100% 0.15em;
 }
-
 .wrapper {
   margin: 0 auto;
   height: auto;
@@ -45,16 +50,22 @@ a:hover {
   text-align: center;
   margin: 0 auto;
 }
+#logo a:hover {
+  background: none;
+}
 h1,
 nav {
-  font-family: "Oswald", sans-serif;
-  font-weight: 300;
   font-size: 2.5em;
   line-height: 52px;
   margin: 0;
   padding: 0;
-  text-transform: uppercase;
   vertical-align: top;
+  font-weight: 500;
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+}
+nav a {
+  margin-right: 10px;
 }
 #pages-nav {
   height: 71px;
@@ -231,7 +242,6 @@ article {
   padding: 10px;
   vertical-align: top;
   box-sizing: border-box;
-  width: 25%;
 }
 .single article {
   text-align: center;

@@ -1,4 +1,5 @@
-import { h, Component, render } from "preact";
+/* eslint-disable quotes */
+import { h, Component } from "preact";
 
 import Masonry from "masonry-layout";
 
@@ -10,9 +11,30 @@ export default class Home extends Component {
     this.state = {
       loaded: 0,
       initialLoaded: false,
-      Posts: props.Posts
+      Posts: props.Posts,
+      Pagination: props.Pagination
     };
     this.initialPosts = props.Posts.length;
+  }
+  sanitiseJSON(node) {
+    return node.innerHTML
+      .replace("var data =", "")
+      .replace(/'/g, '"')
+      .replace(/\\x/g, "%")
+      .replace(/,[ \r\n]*]/gs, "]")
+      .replace(/,[ \r\n]*}/gs, "}")
+      .replace(/\\?[\r\n]+/g, " ")
+      .replace(/ +/g, " ");
+  }
+  fetchPosts() {
+    fetch(this.state.Pagination.NextPage)
+      .then(resp => resp.text())
+      .then(resp => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(resp, "text/html");
+        const data = JSON.parse(this.sanitiseJSON(doc.getElementById("data")));
+        console.log(data);
+      });
   }
   componentDidMount() {
     this.Masonry = new Masonry(this.grid, {
@@ -21,6 +43,7 @@ export default class Home extends Component {
       percentPosition: true,
       initLayout: false
     });
+    this.fetchPosts();
   }
   loadPost() {
     this.setState({
@@ -34,14 +57,15 @@ export default class Home extends Component {
   render(props, state) {
     return (
       <main
+        class={state.initialLoaded && "loaded"}
         id="content"
-        ref={grid => (this.grid = grid)}
-        class={state.initialLoaded ? "loaded" : ""}>
+        ref={grid => (this.grid = grid)}>
         {state.Posts.map(post => (
           <Post
             {...post}
-            Masonry={() => this.Masonry}
+            key={post.Permalink}
             loadPost={() => this.loadPost()}
+            Masonry={() => this.Masonry}
           />
         ))}
         <article class="sizer" />

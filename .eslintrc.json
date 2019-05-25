@@ -8,7 +8,6 @@
     "no-new": "off",
     "consistent-this": "error",
     "prefer-promise-reject-errors": "off",
-    "react/jsx-curly-spacing": ["warn", "always"],
     "react/jsx-equals-spacing": ["warn", "never"],
     "react/jsx-key": "error",
     "react/jsx-no-duplicate-props": "error",

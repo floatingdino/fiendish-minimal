@@ -12,6 +12,7 @@ CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
 
 DEPENDENCIES:
 Preact
+Preact Router
 Masonry
 -->
 <html>
@@ -22,11 +23,10 @@ Masonry
     {block:Description}
         <meta name="description" content="{MetaDescription}" />
     {/block:Description}
-    <link href='https://fonts.googleapis.com/css?family=Oswald:300|Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Anonymous+Pro|Oswald:500&display=swap' rel='stylesheet' type='text/css'>
 
 
         <!--Main CSS Stylesheet-->
-    <link href='rf_mnml.css' rel='stylesheet' type='text/css'>
     {block:If4Columns}<link href='https://static.tumblr.com/ii7qpmy/RgSo2sp2p/rf_4col.css' rel='stylesheet' type='text/css'>{/block:If4Columns}
         <!--THEME SETTINGS-->
         <!--Initialises with mostly pre-set colours from Global appearance-->
@@ -57,245 +57,335 @@ Masonry
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script>
+    <script id="data">
       var data =  {
-        blog: {
-          Title: "{Title}",
-          Header: "{image:Header}",
-          BlogURL: "{BlogURL}",
-          FullWidthHeader: {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
-          ShowHeader: {block:IfShowHeader}true{/block:IfShowHeader}{block:IfNotShowHeader}false{/block:IfNotShowHeader},
-          HeaderLineColour: "{select:Header Line Colour}",
-          ShowTitle: {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
-          Pages: [
+        "blog": {
+          "Title": {JSTitle},
+          "Header": "{image:Header}",
+          "BlogURL": {JSBlogURL},
+          "FullWidthHeader": {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
+          "ShowHeader": {block:IfShowHeader}true{/block:IfShowHeader}{block:IfNotShowHeader}false{/block:IfNotShowHeader},
+          "HeaderLineColour": "{select:Header Line Colour}",
+          "ShowTitle": {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
+          "Pages": [
             {block:Pages}
               {
-                URL: {JSURL},
-                Label: {JSLabel}
+                "URL": {JSURL},
+                "Label": {JSLabel}
               },
             {/block:Pages}
           ],
-          {block:AskEnabled}Ask:{AskLabel},{/block:AskEnabled}
-          {block:SubmissionsEnabled}Submissions:{SubmitLabel},{/block:SubmissionsEnabled}
-          ThemeAttribution:{block:IfThemeAttribution}true{/block:IfThemeAttribution}{block:IfNotThemeAttribution}false{/block:IfNotThemeAttribution},
-          ShowPhotosandPhotosetsOnly:{block:IfShowPhotosandPhotosetsOnly}true{/block:IfShowPhotosandPhotosetsOnly}{block:IfNotShowPhotosandPhotosetsOnly}false{/block:IfNotShowPhotosandPhotosetsOnly}
+          {block:AskEnabled}"Ask":{JSAskLabel},{/block:AskEnabled}
+          {block:SubmissionsEnabled}"Submissions":{JSSubmitLabel},{/block:SubmissionsEnabled}
+          "ThemeAttribution":{block:IfThemeAttribution}true{/block:IfThemeAttribution}{block:IfNotThemeAttribution}false{/block:IfNotThemeAttribution},
+          "ShowPhotosandPhotosetsOnly":{block:IfShowPhotosandPhotosetsOnly}true{/block:IfShowPhotosandPhotosetsOnly}{block:IfNotShowPhotosandPhotosetsOnly}false{/block:IfNotShowPhotosandPhotosetsOnly}
         },
-        page: {
-          {block:IndexPage}type: "index",{/block:IndexPage}
-          {block:PermalinkPage}type: "single",{/block:PermalinkPage}
-          {block:TagPage}Tag: "{Tag}",{/block:TagPage}
+        "page": {
+          {block:IndexPage}"type": "index",{/block:IndexPage}
+          {block:PermalinkPage}"type": "single",{/block:PermalinkPage}
+          {block:TagPage}"Tag": {JSTag},{/block:TagPage}
           {block:Pagination}
-            Pagination: {
-              {block:PreviousPage}PreviousPage: "{PreviousPage}",{/block:PreviousPage}
-              {block:NextPage}NextPage: "{NextPage}"{/block:NextPage}
+            "Pagination": {
+              {block:PreviousPage}"PreviousPage": {JSPreviousPage},{/block:PreviousPage}
+              {block:NextPage}"NextPage": {JSNextPage}{/block:NextPage}
             }
           {/block:Pagination}
         }
+        {block:PermalinkPage},
+        "Post": {
+          "Permalink": {JSRelativePermalink},
+          {block:Posts}
+            "PostType": {JSPostType},
+            "TagsAsClasses": {JSTagsAsClasses},
+            {block:RebloggedFrom}
+              "ReblogRootURL": {JSReblogRootURL},
+              "ReblogRootName": {JSReblogRootName},
+            {/block:RebloggedFrom}
+            {block:Date}
+            "Date": "{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H",
+            {/block:Date}
+            {block:HasTags}
+            "Tags": [
+              {block:Tags}
+                {JSTag},
+              {/block:Tags}
+            ],
+            {/block:HasTags}
+            "PostNotesURL": {JSPostNotesURL},
+            {block:PostNotes}
+            "NoteCount": {JSNoteCountWithLabel},
+            "PostNotes": {JSPostNotes},
+            {/block:PostNotes}
+            {block:Photo}
+              "PhotoURL-400": {JSPhotoURL-400},
+              "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+              "PhotoWidth-HighRes": {JSPhotoWidth-HighRes},
+              "PhotoHeight-HighRes": {JSPhotoHeight-HighRes},
+              "PhotoAlt": {JSPhotoAlt},
+              "Caption": {JSCaption}
+            {/block:Photo}
+            {block:Photoset}
+              "PhotosetLayout": {JSPhotosetLayout},
+              "Caption": {JSCaption},
+              "Photos": [
+                {block:Photos}
+                  {
+                    "PhotoURL-400": {JSPhotoURL-400},
+                    "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                    "PhotoAlt": {JSPhotoAlt},
+                  },
+                {/block:Photos}
+              ]
+            {/block:Photoset}
+            {block:Text}
+              "Title": {JSTitle},
+              "Body": {JSBody}
+            {/block:Text}
+            {block:Panorama}
+              "PhotoURL-400": {JSPhotoURL-400},
+              "PhotoURL-Panorama": {JSPhotoURL-Panorama},
+              "PhotoAlt": {JSPhotoAlt},
+              "Caption": {JSCaption}
+            {/block:Panorama}
+            {block:Quote}
+              "Quote": {JSQuote},
+              "Source": {JSSource}
+            {/block:Quote}
+            {block:Link}
+              "Host": {JSHost},
+              "URL": {JSURL},
+              "Target": {JSTarget},
+              "Description": {JSDescription}{block:Excerpt},
+              "Excerpt": {JSExcerpt}{/block:Excerpt}{block:Thumbnail},
+              "Thumbnail": {JSThumbnail},
+              "Thumbnail-HighRes": {JSThumbnail-HighRes}{/block:Thumbnail}
+            {/block:Link}
+            {block:Chat}
+            {block:Title}
+            "Title": {JSTitle},
+            {/block:Title}
+              "Lines": [
+                {block:Lines}
+                  {
+                    "Label": {JSLabel},
+                    "Line": {JSLine}
+                  },
+                {/block:Lines}
+              ]
+            {/block:Chat}
+            {block:Audio}
+              "AudioEmbed": {JSAudioEmbed-400}
+            {/block:Audio}
+            {block:Video}
+              "VideoThumbnailURL": {JSVideoThumbnailURL},
+              "VideoEmbed": {JSVideoEmbed-400}
+            {/block:Video}
+            {block:Answer}
+              "Question": {JSQuestion},
+              "Replies": {JSReplies}
+            {/block:Answer}
+          {/block:Posts}
+        },
+        {/block:PermalinkPage}
         {block:IndexPage},
-          Posts: [
+          "Posts": [
             {block:Posts}
-              {
-                PostType: {JSPostType},
-                TagsAsClasses: {JSTagsAsClasses},
-                Permalink: {JSPermalink},
-                {block:RebloggedFrom}
-                  ReblogRootURL: {JSReblogRootURL},
-                  ReblogRootName: {JSReblogRootName},
-                {/block:RebloggedFrom}
-                {block:Photo}
-                  "PhotoURL-400": {JSPhotoURL-400},
-                  "PhotoURL-HighRes": {JSPhotoURL-HighRes},
-                  PhotoAlt: {JSPhotoAlt},
-                  Caption: {JSCaption}
-                {/block:Photo}
-                {block:Photoset}
-                  PhotosetLayout: {JSPhotosetLayout},
-                  Caption: {JSCaption},
-                  Photos: [
-                    {block:Photos}
-                      {
-                        "PhotoURL-400": {JSPhotoURL-400},
-                        "PhotoURL-HighRes": {JSPhotoURL-HighRes},
-                        PhotoAlt: {JSPhotoAlt},
-                      },
-                    {/block:Photos}
-                  ]
-                {/block:Photoset}
-                {block:Text}
-                  Title: {JSTitle},
-                  Body: {JSBody}
-                {/block:Text}
-                {block:Panorama}
-                  "PhotoURL-400": {JSPhotoURL-400},
-                  "PhotoURL-Panorama": {JSPhotoURL-Panorama},
-                  PhotoAlt: {JSPhotoAlt},
-                  Caption: {JSCaption}
-                {/block:Panorama}
-                {block:Quote}
-                  Quote: {JSQuote},
-                  Source: {JSSource}
-                {/block:Quote}
-                {block:Link}
-                  Host: {JSHost},
-                  URL: {JSURL},
-                  Description: {JSDescription}
-                {/block:Link}
-                {block:Chat}
-                  Lines: [
-                    {block:Lines}
-                      {
-                        Label: {JSLabel},
-                        Line: {JSLine}
-                      },
-                    {/block:Lines}
-                  ]
-                {/block:Chat}
-                {block:Audio}
-                  AudioEmbed: {JSAudioEmbed-400}
-                {/block:Audio}
-                {block:Video}
-                  VideoThumbnailURL: {JSVideoThumbnailURL},
-                  VideoEmbed: {JSVideoEmbed-400}
-                {/block:Video}
-                {block:Answer}
-                  Question: {JSQuestion},
-                  Replies: {JSReplies}
-                {/block:Answer}
-              },
+            {
+              "Permalink": {JSRelativePermalink},
+              "PostType": {JSPostType},
+              "TagsAsClasses": {JSTagsAsClasses},
+              {block:RebloggedFrom}
+                "ReblogRootURL": {JSReblogRootURL},
+                "ReblogRootName": {JSReblogRootName},
+              {/block:RebloggedFrom}
+              {block:Date}
+              "Date": "{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H",
+              {/block:Date}
+              {block:HasTags}
+              "Tags": [
+                {block:Tags}
+                  {JSTag},
+                {/block:Tags}
+              ],
+              {/block:HasTags}
+              "PostNotesURL": {JSPostNotesURL},
+              {block:PostNotes}
+              "NoteCount": {JSNoteCountWithLabel},
+              "PostNotes": {JSPostNotes},
+              {/block:PostNotes}
+              {block:Photo}
+                "PhotoURL-400": {JSPhotoURL-400},
+                "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                "PhotoWidth-HighRes": {JSPhotoWidth-HighRes},
+                "PhotoHeight-HighRes": {JSPhotoHeight-HighRes},
+                "PhotoAlt": {JSPhotoAlt},
+                "Caption": {JSCaption}
+              {/block:Photo}
+              {block:Photoset}
+                "PhotosetLayout": {JSPhotosetLayout},
+                "Caption": {JSCaption},
+                "Photos": [
+                  {block:Photos}
+                    {
+                      "PhotoURL-400": {JSPhotoURL-400},
+                      "PhotoURL-HighRes": {JSPhotoURL-HighRes},
+                      "PhotoAlt": {JSPhotoAlt},
+                    },
+                  {/block:Photos}
+                ]
+              {/block:Photoset}
+              {block:Text}
+                "Title": {JSTitle},
+                "Body": {JSBody}
+              {/block:Text}
+              {block:Panorama}
+                "PhotoURL-400": {JSPhotoURL-400},
+                "PhotoURL-Panorama": {JSPhotoURL-Panorama},
+                "PhotoAlt": {JSPhotoAlt},
+                "Caption": {JSCaption}
+              {/block:Panorama}
+              {block:Quote}
+                "Quote": {JSQuote},
+                "Source": {JSSource}
+              {/block:Quote}
+              {block:Link}
+                "Host": {JSHost},
+                "URL": {JSURL},
+                "Target": {JSTarget},
+                "Description": {JSDescription}{block:Excerpt},
+                "Excerpt": {JSExcerpt}{/block:Excerpt}{block:Thumbnail},
+                "Thumbnail": {JSThumbnail},
+                "Thumbnail-HighRes": {JSThumbnail-HighRes}{/block:Thumbnail}
+              {/block:Link}
+              {block:Chat}
+              {block:Title}
+              "Title": {JSTitle},
+              {/block:Title}
+                "Lines": [
+                  {block:Lines}
+                    {
+                      "Label": {JSLabel},
+                      "Line": {JSLine}
+                    },
+                  {/block:Lines}
+                ]
+              {/block:Chat}
+              {block:Audio}
+                "AudioEmbed": {JSAudioEmbed-400}
+              {/block:Audio}
+              {block:Video}
+                "VideoThumbnailURL": {JSVideoThumbnailURL},
+                "VideoEmbed": {JSVideoEmbed-400}
+              {/block:Video}
+              {block:Answer}
+                "Question": {JSQuestion},
+                "Replies": {JSReplies}
+              {/block:Answer}
+            },
             {/block:Posts}
           ]
         {/block:IndexPage}
       }
     </script>
-    <style>
-        body{
-            background-color:{color:Background};
-            background-image:url({image:Background Image});
-            background-attachment:fixed;
-            background-repeat:no-repeat;
-            background-position:center;
-        }
-        body, article, p, h1, h2, h3, em, a.black{
-            color:{color:Text};
-        }
-        article h2 a{
-            color:{color:Links};
-        }
-        main :not(.notes) a img:hover{
-            border-bottom:5px solid {color:Links};
-            transition:border 0.3s ease;
-        }
-        main a img{
-            border-bottom:0px solid {color:Links};
-            transition:border 0.3s ease;
-        }
-        .text blockquote{
-           margin:0;
-           margin-left:-22px;
-           padding:5px 20px;
-        }
-        .text blockquote :last-child{
-           margin-bottom:0;
-      }
-        blockquote{
-            border-left:2px solid {color:Links};
-            margin-left:-22px;
-        }
-
-        blockquote > blockquote{
-           border-left:2px solid #ff3399;
-        }
-        article blockquote a.tumblr_blog{
-           background-image: linear-gradient(to right, #ff3399, #ff3399);
-        }
-        blockquote > blockquote > blockquote{
-           border-left:2px solid #3399ff;
-        }
-        blockquote > blockquote a.tumblr_blog{
-           background-image: linear-gradient(to right, #3399ff, #3399ff);
-        }
-        blockquote > blockquote > blockquote > blockquote{
-           border-left:2px solid #ffe199;
-        }
-        blockquote > blockquote > blockquote a.tumblr_blog{
-           background-image: linear-gradient(to right, #ffe199, #ffe199);
-        }
-        article a.tumblr_blog{
-           background-image: linear-gradient(to right, {color:Links}, {color:Links});
-          background-repeat: repeat-x;
-          background-position: 0 90%;
-          background-size: 100% .18em;
-          text-decoration: none;
-        }
-
-        #logo img{
-            max-height: {text:Header Size};
-            width:auto;
-            max-width:100%;
-        }
-        {block:IfNotAlternateColourTags}
-        span.{text:Pink Tag}, span.{text:Blue Tag}, span.{text:Green Tag}, span.{text:Yellow Tag}{
-            padding:0 10px;
-            margin-left:3px;
-        }
-        .index .{text:Pink Tag} img, .index .{text:Blue Tag} img, .index .{text:Green Tag} img, .index .{text:Yellow Tag} img{
-            opacity:0.7;
-        }
-        .index .{text:Pink Tag}{
-            opacity:0.95;
-            background-color:rgb(255,225,240);
-            border:5px solid #ff3399;
-        }
-        .index .{text:Blue Tag}{
-            opacity:0.95;
-            background-color:rgb(225,240,255);
-            border:5px solid #3399ff;
-        }
-        .index .{text:Green Tag}{
-            opacity:0.95;
-            background-color:rgb(225,255,240);
-            border:5px solid #33ff99;
-        }
-        .index .{text:Yellow Tag}{
-            opacity:0.95;
-            background-color:rgb(255,251,240);
-            border:5px solid #ffe199;
-        }
-        {/block:IfNotAlternateColourTags}
-        .{text:Pink Tag} h2 a, h1 .{text:Pink Tag}, .tags li.{text:Pink Tag}{
-            color:#ff3399;
-        }
-        .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
-            border-bottom-color:#ff3399 !important;
-        }
-        .{text:Blue Tag} h2 a, h1 .{text:Blue Tag}, .tags li.{text:Blue Tag}{
-            color:#3399ff;
-        }
-        .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
-            border-bottom-color:#3399ff !important;
-        }
-        .{text:Green Tag} h2 a, h1 .{text:Green Tag}, .tags li.{text:Green Tag}{
-            color:#33ff99;
-        }
-        .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
-            border-bottom-color:#33ff99 !important;
-        }
-        .{text:Yellow Tag} h2 a, h1 .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
-            color:#ffe199;
-        }
-        .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
-            border-bottom-color:#ffe199 !important;
-        }
-        .theme-author a{
-           color:{color:Links};
-        }
-
-        {CustomCSS}
-    </style>
 
 </head>
 <body>
-<script src="main.js"></script>
+<script src="//localhost:8080/main.js"></script>
+<style>
+    body{
+        background-color:{color:Background};
+        background-image:url({image:Background Image});
+        background-attachment:fixed;
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+    body, article, p, h1, h2, h3, em, a.black{
+        color:{color:Text};
+    }
+    article h2 a{
+        color:{color:Links};
+    }
+    main :not(.notes) a img:hover{
+        border-bottom:5px solid {color:Links};
+        transition:border 0.3s ease;
+    }
+    main a img{
+        border-bottom:0px solid {color:Links};
+        transition:border 0.3s ease;
+    }
+    .text blockquote{
+       margin:0;
+       margin-left:-22px;
+       padding:5px 20px;
+    }
+    .text blockquote :last-child{
+       margin-bottom:0;
+  }
+    blockquote{
+        border-left:2px solid {color:Links};
+    }
+
+    blockquote > blockquote{
+       border-left:2px solid #ff3399;
+    }
+    article blockquote a.tumblr_blog{
+       background-image: linear-gradient(to right, #ff3399, #ff3399);
+    }
+    blockquote > blockquote > blockquote{
+       border-left:2px solid #3399ff;
+    }
+    blockquote > blockquote a.tumblr_blog{
+       background-image: linear-gradient(to right, #3399ff, #3399ff);
+    }
+    blockquote > blockquote > blockquote > blockquote{
+       border-left:2px solid #ffe199;
+    }
+    blockquote > blockquote > blockquote a.tumblr_blog{
+       background-image: linear-gradient(to right, #ffe199, #ffe199);
+    }
+    article a.tumblr_blog{
+       background-image: linear-gradient(to right, {color:Links}, {color:Links});
+      background-repeat: repeat-x;
+      background-position: 0 90%;
+      background-size: 100% .18em;
+      text-decoration: none;
+    }
+
+    #logo img{
+        max-height: {text:Header Size};
+        width:auto;
+        max-width:100%;
+    }
+    .{text:Pink Tag} h2 a, h1 .{text:Pink Tag}, .tags li.{text:Pink Tag}{
+        color:#ff3399;
+    }
+    .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
+        border-bottom-color:#ff3399 !important;
+    }
+    .{text:Blue Tag} h2 a, h1 .{text:Blue Tag}, .tags li.{text:Blue Tag}{
+        color:#3399ff;
+    }
+    .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
+        border-bottom-color:#3399ff !important;
+    }
+    .{text:Green Tag} h2 a, h1 .{text:Green Tag}, .tags li.{text:Green Tag}{
+        color:#33ff99;
+    }
+    .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
+        border-bottom-color:#33ff99 !important;
+    }
+    .{text:Yellow Tag} h2 a, h1 .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
+        color:#ffe199;
+    }
+    .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
+        border-bottom-color:#ffe199 !important;
+    }
+    .theme-author a{
+       color:{color:Links};
+    }
+
+    {CustomCSS}
+</style>
 </body>
 <!--nice-->
 </html>
