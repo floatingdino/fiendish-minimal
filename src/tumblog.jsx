@@ -1,6 +1,8 @@
 import { h, Component } from "preact";
 import Router from "preact-router";
 
+import getDataFromResponse from "./functions/getDataFromResponse";
+
 import Header from "./header";
 import Home from "./routes/home";
 import Single from "./routes/single";
@@ -20,42 +22,27 @@ export default class Tumblog extends Component {
   setPageType(type) {
     this.setState({
       page: {
-        ...this.state.page,
         type
       }
     });
-  }
-  sanitiseJSON(node) {
-    return node.innerHTML
-      .replace("var data =", "")
-      .replace(/'/g, '"')
-      .replace(/\\x/g, "%")
-      .replace(/,[ \r\n]*]/gs, "]")
-      .replace(/,[ \r\n]*}/gs, "}")
-      .replace(/\\?[\r\n]+/g, " ")
-      .replace(/ +/g, " ");
   }
   fetchNextPage() {
     return fetch(this.state.page.Pagination.NextPage)
       .then(resp => resp.text())
       .then(resp => {
-        this.setState({
-          fetching: false
-        });
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(resp, "text/html");
-        return JSON.parse(this.sanitiseJSON(doc.getElementById("data")));
+        return getDataFromResponse(resp);
       });
   }
   loadNextPage() {
     return this.fetchNextPage().then(data => {
-      this.setState({
-        Posts: [...this.state.Posts, ...data.Posts],
-        page: {
-          ...this.state.page,
-          ...data.page
-        }
-      });
+      if (this.state.page.type === "index") {
+        this.setState({
+          Posts: [...this.state.Posts, ...data.Posts],
+          page: {
+            ...data.page
+          }
+        });
+      }
     });
   }
   render(props, state) {

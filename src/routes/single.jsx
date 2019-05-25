@@ -1,5 +1,7 @@
 import { h, Component } from "preact";
 
+import getDataFromResponse from "../functions/getDataFromResponse";
+
 import PhotoSingle from "../singles/photo";
 
 export default class Single extends Component {
@@ -13,9 +15,24 @@ export default class Single extends Component {
   }
   componentWillMount() {
     this.props.setPageType("single");
+    if (!this.props.Post) {
+      this.fetchPost();
+    }
   }
+  fetchPost() {
+    console.log(this);
+    fetch(this.props.url)
+      .then(resp => resp.text())
+      .then(resp => {
+        const data = getDataFromResponse(resp);
+        console.log(data);
+        this.setState({
+          post: data.Post
+        });
+      });
+  }
+
   render(props, state) {
-    console.log(props.Posts, state);
     const post = state.post;
     return (
       <article class={`${post.PostType} ${post.TagsAsClasses}`}>
@@ -33,7 +50,9 @@ export default class Single extends Component {
         {post.NoteCount && (
           <div>
             <h2>{post.NoteCount}</h2>
-            <div dangerouslySetInnerHTML={{ __html: post.PostNotes }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: decodeURI(post.PostNotes) }}
+            />
           </div>
         )}
       </article>

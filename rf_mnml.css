@@ -4,6 +4,9 @@ DESIGNED BY: FLOATINGDINO (floatingdino.tumblr.com)
 THEME IS CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
 CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
 */
+* {
+  box-sizing: border-box;
+}
 body,
 article,
 p,
@@ -13,6 +16,9 @@ h3 {
 }
 figure {
   margin: 0;
+}
+caption {
+  display: block;
 }
 body {
   background-color: #fff;
@@ -180,6 +186,34 @@ article h2 {
 .index article.loaded {
   opacity: 1;
 }
+body {
+  font-size: 18px;
+}
+article {
+  margin: 10px 1.4%;
+  padding: 10px;
+  vertical-align: top;
+}
+.index article {
+  width: 97%;
+  /*font-size:32px;*/
+  margin: 10px 1.4%;
+}
+.single .halved {
+  width: 100% !important;
+  float: none;
+}
+@media screen and (min-width: 768px) {
+  .index article {
+    width: 47%;
+    margin: 10px 1.4%;
+  }
+  .index .x3,
+  .index .x2 {
+    width: 97%;
+    margin: 10px 1.4%;
+  }
+}
 @media screen and (min-width: 1440px) {
   .index article {
     width: 30%;
@@ -192,37 +226,25 @@ article h2 {
     width: 97%;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1440px) {
-  .index article {
-    width: 47%;
-    margin: 10px 1.4%;
+@media screen and (min-width: 1800px) {
+  .wrapper.index {
+    width: 80%;
   }
-  .index .x3,
-  .index .x2 {
-    width: 97%;
+  article {
+    width: 22%;
     margin: 10px 1.4%;
+    font-size: 16px;
   }
-}
-@media screen and (max-width: 768px) {
-  body {
+  article.x2 {
+    width: 46%;
     font-size: 18px;
   }
-  .index {
-    width: 100%;
-  }
-  .single {
-    width: 100%;
-  }
-  .index article {
-    width: 97%;
-    /*font-size:32px;*/
-    margin: 10px 1.4%;
-  }
-  .single .halved {
-    width: 100% !important;
-    float: none;
+  article.x3 {
+    width: 71%;
+    font-size: 20px;
   }
 }
+
 main h1 {
   text-align: center;
   line-height: 60px;
@@ -243,14 +265,6 @@ img {
   border: 0;
   border-bottom: 0px solid #33ff99;
   transition: border 0.3s ease;
-}
-article {
-  margin: 10px 1.4%;
-  float: left;
-  display: block;
-  padding: 10px;
-  vertical-align: top;
-  box-sizing: border-box;
 }
 .single article {
   text-align: center;

@@ -198,32 +198,15 @@ Masonry
                 "ReblogRootURL": {JSReblogRootURL},
                 "ReblogRootName": {JSReblogRootName},
               {/block:RebloggedFrom}
-              {block:Date}
-              "Date": "{DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear} {24HourWithZero}{Minutes}H",
-              {/block:Date}
-              {block:HasTags}
-              "Tags": [
-                {block:Tags}
-                  {JSTag},
-                {/block:Tags}
-              ],
-              {/block:HasTags}
-              "PostNotesURL": {JSPostNotesURL},
-              {block:PostNotes}
-              "NoteCount": {JSNoteCountWithLabel},
-              "PostNotes": {JSPostNotes},
-              {/block:PostNotes}
               {block:Photo}
                 "PhotoURL-400": {JSPhotoURL-400},
                 "PhotoURL-HighRes": {JSPhotoURL-HighRes},
                 "PhotoWidth-HighRes": {JSPhotoWidth-HighRes},
                 "PhotoHeight-HighRes": {JSPhotoHeight-HighRes},
-                "PhotoAlt": {JSPhotoAlt},
-                "Caption": {JSCaption}
+                "PhotoAlt": {JSPhotoAlt}
               {/block:Photo}
               {block:Photoset}
                 "PhotosetLayout": {JSPhotosetLayout},
-                "Caption": {JSCaption},
                 "Photos": [
                   {block:Photos}
                     {
@@ -241,8 +224,7 @@ Masonry
               {block:Panorama}
                 "PhotoURL-400": {JSPhotoURL-400},
                 "PhotoURL-Panorama": {JSPhotoURL-Panorama},
-                "PhotoAlt": {JSPhotoAlt},
-                "Caption": {JSCaption}
+                "PhotoAlt": {JSPhotoAlt}
               {/block:Panorama}
               {block:Quote}
                 "Quote": {JSQuote},

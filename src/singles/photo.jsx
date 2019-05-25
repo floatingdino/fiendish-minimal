@@ -1,11 +1,11 @@
 import { h } from "preact";
 
-import fetchRowPhotos from "../fetchRowPhotos";
+import fetchRowPhotos from "../functions/fetchRowPhotos";
 
 export default class PhotoSingle {
   render(props) {
     return (
-      <div>
+      <figure>
         {props["PhotoURL-HighRes"] && (
           <img alt={props.PhotoAlt} src={props["PhotoURL-HighRes"]} />
         )}
@@ -27,8 +27,12 @@ export default class PhotoSingle {
               ))}
             </div>
           ))}
-        <div dangerouslySetInnerHTML={{ __html: props.Caption }} />
-      </div>
+        <caption
+          dangerouslySetInnerHTML={{
+            __html: props.Caption && decodeURI(props.Caption)
+          }}
+        />
+      </figure>
     );
   }
 }

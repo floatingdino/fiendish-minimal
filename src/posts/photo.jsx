@@ -1,6 +1,6 @@
 import { h, Component } from "preact";
 
-import fetchRowPhotos from "../fetchRowPhotos";
+import fetchRowPhotos from "../functions/fetchRowPhotos";
 
 export default class PhotoPost extends Component {
   constructor(props) {

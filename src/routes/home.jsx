@@ -26,6 +26,11 @@ export default class Home extends Component {
       transitionDuration: 0
     });
   }
+  componentWillUnmount() {
+    this.observer.disconnect();
+    this.observer = null;
+    this.Masonry.destroy();
+  }
   setupInfiniteScroll() {
     this.observer = new IntersectionObserver(
       entries => this.infiniteScrollCallback(entries),
