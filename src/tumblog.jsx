@@ -27,15 +27,15 @@ export default class Tumblog extends Component {
       }
     });
   }
-  fetchNextPage() {
-    return fetch(this.state.page.Pagination.NextPage)
+  fetchNextPage(route = this.state.page.Pagination.NextPage) {
+    return fetch(route)
       .then(resp => resp.text())
       .then(resp => {
         return getDataFromResponse(resp);
       });
   }
-  loadNextPage() {
-    return this.fetchNextPage().then(data => {
+  loadNextPage(route = this.state.page.Pagination.NextPage) {
+    return this.fetchNextPage(route).then(data => {
       if (this.state.page.type === "index") {
         this.setState({
           Posts: [...this.state.Posts, ...data.Posts],
@@ -47,16 +47,13 @@ export default class Tumblog extends Component {
     });
   }
   handleRoute(e) {
-    if (this.state && e.url === "/" && this.state.Posts.length <= 0) {
+    if (this.state.Post && /post/.test(e.url)) {
       this.setState({
-        page: {
-          ...this.state.page,
-          Pagination: {
-            NextPage: "/"
-          }
-        }
+        Post: null
       });
-      this.loadNextPage();
+    }
+    if (this.state && e.url === "/" && this.state.Posts.length <= 0) {
+      this.loadNextPage("/");
     }
   }
   render(props, state) {
@@ -71,9 +68,26 @@ export default class Tumblog extends Component {
             Posts={state.Posts}
             setPageType={type => this.setPageType(type)}
           />
+          <Home
+            loadNextPage={() => this.loadNextPage()}
+            Pagination={() => state.page.Pagination}
+            path="/tagged/:Tag"
+            Posts={state.Posts}
+            setPageType={type => this.setPageType(type)}
+          />
           <Single
             path="/post/:PostID?/:PostSlug?"
             Posts={() => state.Posts}
+            Post={state.Post}
+            setPageType={type => this.setPageType(type)}
+          />
+          <Single
+            path="/ask"
+            Post={state.Post}
+            setPageType={type => this.setPageType(type)}
+          />
+          <Single
+            path="/submit"
             Post={state.Post}
             setPageType={type => this.setPageType(type)}
           />
@@ -83,8 +97,8 @@ export default class Tumblog extends Component {
             Theme by{" "}
             <a
               href="https://samhaakman.com"
-              target="_blank"
-              rel="nofollow noopener">
+              rel="nofollow noopener"
+              target="_blank">
               Sam
             </a>
           </div>

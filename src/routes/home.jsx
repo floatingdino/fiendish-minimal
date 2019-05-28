@@ -15,7 +15,12 @@ export default class Home extends Component {
       fetching: false
     };
     this.initialPosts = props.Posts.length;
-    this.triggerDistance = "500px";
+
+    // Less aggressive infinite scroll when on "Data Saver" mode
+    this.triggerDistance =
+      "connection" in navigator && navigator.connection.saveData
+        ? "0px"
+        : "500px";
   }
   componentWillMount() {
     this.props.setPageType("index");
@@ -29,6 +34,8 @@ export default class Home extends Component {
       transitionDuration: 0
     });
     this.setupInfiniteScroll();
+
+    // If the images are already cached / first page contains text posts only they can be loaded before this component mounts
     if (this.state.loaded >= this.initialPosts) {
       requestAnimationFrame(() => {
         this.Masonry.layout();
@@ -39,21 +46,24 @@ export default class Home extends Component {
     }
   }
   componentWillUnmount() {
+    // Cleanup
     this.observer.disconnect();
     this.observer = null;
     this.Masonry.destroy();
   }
-  fetchPosts() {
-    fetch(this.props.url)
-      .then(resp => resp.text())
-      .then(resp => {
-        const data = getDataFromResponse(resp);
-        this.setState({
-          Posts: data.Posts
-        });
-      });
+  componentDidUpdate(prevProps) {
+    // If you load up from a permalink and then go back to the homepage, this will trigger the infinite scroll "prefill"
+    if (
+      prevProps.Posts.length <= 0 &&
+      this.props.Posts.length > 0 &&
+      this.lastRatio > 0 &&
+      !this.state.fetching
+    ) {
+      this.runLoadNext();
+    }
   }
   setupInfiniteScroll() {
+    // Super simple hand-rolled infinite scroll using IntersectionObserver
     this.observer = new IntersectionObserver(
       entries => this.infiniteScrollCallback(entries),
       {
@@ -63,11 +73,13 @@ export default class Home extends Component {
     this.observer.observe(this.trigger);
   }
   infiniteScrollCallback(entries) {
+    // Keep track of the ratio as this callback only triggers when the element enters or leaves the screen
     this.lastRatio = entries[0].intersectionRatio;
     requestIdleCallback(() => {
       if (
         entries[0].intersectionRatio > 0 &&
         !this.state.fetching &&
+        this.props.Pagination() &&
         this.props.Pagination().NextPage
       ) {
         this.runLoadNext();
@@ -79,9 +91,11 @@ export default class Home extends Component {
       fetching: true
     });
     this.props.loadNextPage().then(() => {
+      console.log("fetched next page");
       this.setState({
         fetching: false
       });
+      // Will keep grabbing pages until the observer threshold is passed
       if (this.lastRatio >= 1 && this.props.Pagination().NextPage) {
         requestIdleCallback(() => {
           this.runLoadNext();
@@ -90,6 +104,7 @@ export default class Home extends Component {
     });
   }
   loadPost() {
+    // Triggered by child components when they're considered "loaded"
     this.setState({
       loaded: this.state.loaded + 1,
       initialLoaded: this.Masonry && this.state.loaded + 1 >= this.initialPosts
@@ -111,14 +126,15 @@ export default class Home extends Component {
         ))}
         <article class="sizer" />
         <div class="page-trigger" ref={trigger => (this.trigger = trigger)} />
-        {state.fetching && (
-          <div class="loader">
-            <img
-              alt="Loading."
-              src="https://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"
-            />
-          </div>
-        )}
+        {state.fetching ||
+          (state.loaded < props.Posts.length && (
+            <div class="loader">
+              <img
+                alt="Loading."
+                src="https://static.tumblr.com/ii7qpmy/Q11nihd1m/loading.gif"
+              />
+            </div>
+          ))}
       </main>
     );
   }

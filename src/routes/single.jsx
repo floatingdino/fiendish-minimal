@@ -3,6 +3,7 @@ import { h, Component } from "preact";
 import getDataFromResponse from "../functions/getDataFromResponse";
 
 import PhotoSingle from "../singles/photo";
+import TextSingle from "../singles/text";
 
 export default class Single extends Component {
   constructor(props) {
@@ -10,7 +11,9 @@ export default class Single extends Component {
     this.state = {
       post:
         props.Post ||
-        props.Posts().filter(post => post.Permalink === props.url)[0],
+        (props.Posts &&
+          props.Posts().filter(post => post.Permalink === props.url)[0]) ||
+        false,
       notes: ""
     };
   }
@@ -23,16 +26,18 @@ export default class Single extends Component {
     }
   }
   fetchNotes() {
-    fetch(this.state.post.PostNotesURL)
-      .then(resp => resp.text())
-      .then(notes => {
-        this.setState({
-          post: {
-            ...this.state.post,
-            PostNotes: notes
-          }
+    if (this.state.post.PostNotesURL) {
+      fetch(this.state.post.PostNotesURL)
+        .then(resp => resp.text())
+        .then(notes => {
+          this.setState({
+            post: {
+              ...this.state.post,
+              PostNotes: notes
+            }
+          });
         });
-      });
+    }
   }
   fetchPost() {
     fetch(this.props.url)
@@ -51,7 +56,8 @@ export default class Single extends Component {
     return (
       <article class={`${post.PostType} ${post.TagsAsClasses}`}>
         {post.PostType === "photo" && <PhotoSingle {...post} />}
-        {post.Date && <h2>{post.Date}</h2>}
+        {post.PostType === "text" && <TextSingle {...post} />}
+        {post.Date && <time>{post.Date}</time>}
         {post.Tags && (
           <ul class="tags">
             {post.Tags.map(Tag => (
@@ -63,9 +69,11 @@ export default class Single extends Component {
         )}
         {post.NoteCount && (
           <div>
-            <h2>{post.NoteCount}</h2>
+            <h2>{post.NoteCount} Notes</h2>
             <div
-              dangerouslySetInnerHTML={{ __html: decodeURI(post.PostNotes) }}
+              dangerouslySetInnerHTML={{
+                __html: decodeURIComponent(post.PostNotes)
+              }}
             />
           </div>
         )}

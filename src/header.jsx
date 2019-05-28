@@ -8,8 +8,8 @@ export default class Header extends Component {
     this.state = {
       navShown: false
     };
-    this.hasNavLine =
-      props.Pages.length || props.AskEnabled || props.SubmissionsEnabled;
+    console.log(props);
+    this.hasNavLine = props.Pages.length || props.Ask || props.Submissions;
   }
   toggleNav() {
     this.setState({
@@ -17,9 +17,11 @@ export default class Header extends Component {
     });
   }
   handleLink(e, url) {
-    e.preventDefault();
-    // console.log(e);
-    route(url);
+    const relativeURL = url.replace(window.location.hostname, "");
+    if (!/^(https?:)?\/\//.test(relativeURL)) {
+      e.preventDefault();
+      route(relativeURL);
+    }
   }
   render(props, state) {
     return (
@@ -74,14 +76,14 @@ export default class Header extends Component {
                   {page.Label}
                 </a>
               ))}
-              {props.AskEnabled && (
+              {props.Ask && (
                 <a href="/ask" onClick={e => this.handleLink(e, "/ask")}>
-                  {props.AskLabel}
+                  {props.Ask}
                 </a>
               )}
-              {props.SubmissionsEnabled && (
+              {props.Submissions && (
                 <a href="/submit" onClick={e => this.handleLink(e, "/submit")}>
-                  {props.SubmitLabel}
+                  {props.Submissions}
                 </a>
               )}
             </nav>

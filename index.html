@@ -34,12 +34,10 @@ Masonry
   <meta name="color:Selection" content="{RGBAccentColor}">
   <meta name="image:Header" content="{HeaderImage}">
   <meta name="text:Header Size" content="350px">
-  <meta name="if:Full Width Header" content="0">
   <meta name="if:Show Header" content="{block:ShowHeaderImage}1{/block:ShowHeaderImage}{block:HideHeaderImage}0{/block:HideHeaderImage}">
   <meta name="if:Show Title" content="{block:ShowTitle}1{/block:ShowTitle}{block:HideTitle}0{/block:HideTitle}">
   <meta name="if:Show Photos and Photosets only" content="0">
   <meta name="if:Theme Attribution" content="1">
-  <meta name="if:Alternate Colour Tags" content="0">
   <meta name="text:Pink Tag" content="vibe">
   <meta name="text:Blue Tag" content="vibe2">
   <meta name="text:Green Tag" content="35mm">
@@ -53,7 +51,6 @@ Masonry
         "Title": {JSTitle},
         "Header": "{image:Header}",
         "BlogURL": {JSBlogURL},
-        "FullWidthHeader": {block:IfFullWidthHeader}true{/block:IfFullWidthHeader}{block:IfNotFullWidthHeader}false{/block:IfNotFullWidthHeader},
         "ShowHeader": {block:IfShowHeader}true{/block:IfShowHeader}{block:IfNotShowHeader}false{/block:IfNotShowHeader},
         "ShowTitle": {block:IfShowTitle}true{/block:IfShowTitle}{block:IfNotShowTitle}false{/block:IfNotShowTitle},
         "Pages": [
@@ -101,7 +98,7 @@ Masonry
           ],
           {/block:HasTags}
           "PostNotesURL": {JSPostNotesURL},
-          "NoteCount": {JSNoteCountWithLabel},
+          "NoteCount": {JSNoteCount},
           "PostNotes": {JSPostNotes},
           {block:Photo}
             "PhotoURL-400": {JSPhotoURL-400},

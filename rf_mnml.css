@@ -2,7 +2,7 @@
 THEME NAME: FIENDISH MINIMAL 3.0
 DESIGNED BY: FLOATINGDINO (floatingdino.tumblr.com)
 THEME IS CC BY-NC-SA: http://creativecommons.org/licenses/by-nc-sa/4.0/
-CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
+HIT ME UP ON floatingdino@gmail.com OR MY [TUMBLR ASK BOX](https://floatingdino.tumblr.com/ask) FOR QUESTIONS OR BUG REPORTS
 */
 * {
   box-sizing: border-box;
@@ -140,7 +140,8 @@ main {
 .tag-header {
   text-align: center;
 }
-article h2 {
+article h2,
+article time {
   font-weight: normal;
   margin: 10px 0 30px 0;
   font-size: 1em;

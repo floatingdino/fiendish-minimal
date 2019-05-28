@@ -20,9 +20,6 @@ export default class Post extends Component {
   }
   loadPost() {
     this.props.loadPost();
-    if (this.props.Masonry()) {
-      this.props.Masonry().layout();
-    }
     this.setState({
       loaded: true
     });
