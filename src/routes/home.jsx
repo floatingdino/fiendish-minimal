@@ -35,13 +35,11 @@ export default class Home extends Component {
     });
     this.setupInfiniteScroll();
 
-    // If the images are already cached / first page contains text posts only they can be loaded before this component mounts
+    // If the images are already cached / first page contains no "loadable" components they can be loaded before this component mounts
     if (this.state.loaded >= this.initialPosts) {
-      requestAnimationFrame(() => {
-        this.Masonry.layout();
-        this.setState({
-          initialLoaded: true
-        });
+      this.Masonry.layout();
+      this.setState({
+        initialLoaded: true
       });
     }
   }

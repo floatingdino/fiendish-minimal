@@ -16,6 +16,7 @@ export default class Header extends Component {
     });
   }
   handleLink(e, url) {
+    // Pass header links to router if they're local
     const relativeURL = url.replace(window.location.hostname, "");
     if (!/^(https?:)?\/\//.test(relativeURL)) {
       e.preventDefault();

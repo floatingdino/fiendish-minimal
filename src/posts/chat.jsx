@@ -10,8 +10,8 @@ export default class ChatPost extends Loadable {
         <dl>
           {props.Lines.map(line => (
             <div key={`${line.Line}-${line.Label}`}>
-              {line.Label && <dt>{line.Label}</dt>}
-              <dd>{line.Line}</dd>
+              {line.Label && <dt class="speaker">{line.Label}</dt>}
+              <dd class="tailed-answer">{line.Line}</dd>
             </div>
           ))}
         </dl>

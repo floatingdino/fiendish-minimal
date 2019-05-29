@@ -21,6 +21,9 @@ export default class Post extends Component {
       this.props.Masonry().appended(this.post);
     }
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    return !(this.state == nextState);
+  }
   loadPost() {
     this.props.loadPost();
     this.setState({

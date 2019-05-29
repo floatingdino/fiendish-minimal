@@ -6,7 +6,7 @@ export default class QuotePost extends Loadable {
   render(props) {
     return (
       <div ref={frame => (this.frame = frame)}>
-        <h3>"{props.Quote}"</h3>
+        <h3>{props.Quote}</h3>
         {props.Source && (
           <p>
             &emsp;&mdash;&emsp;

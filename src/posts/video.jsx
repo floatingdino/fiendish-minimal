@@ -13,8 +13,6 @@ export default class VideoPost extends Loadable {
       embed.match(/height=(?:'|")(\d+)(?:'|")/)[1],
       10
     );
-
-    console.log(this.embedHeight, this.embedWidth);
   }
   render(props) {
     return (

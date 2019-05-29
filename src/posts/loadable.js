@@ -22,7 +22,7 @@ export default class LoadablePost extends Component {
   handleLoad() {
     this.loaded++;
     if (this.loaded >= this.loadables.length) {
-      this.props.loadPost();
+      requestAnimationFrame(this.props.loadPost);
     }
   }
 }

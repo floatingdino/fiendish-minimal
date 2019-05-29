@@ -26,7 +26,12 @@ export default class Single extends Component {
     }
   }
   fetchNotes() {
-    if (this.state.post.PostNotesURL) {
+    // Fetch notes if we know it has notes and the user isn't on "Data saver" mode
+    if (
+      parseInt(this.state.post.NoteCount, 10) > 0 &&
+      !("connection" in navigator && navigator.connection.saveData) &&
+      this.state.post.PostNotesURL
+    ) {
       fetch(this.state.post.PostNotesURL)
         .then(resp => resp.text())
         .then(notes => {
@@ -67,7 +72,7 @@ export default class Single extends Component {
             ))}
           </ul>
         )}
-        {post.NoteCount && (
+        {parseInt(post.NoteCount, 10) > 0 && (
           <div>
             <h2>{post.NoteCount} Notes</h2>
             <div

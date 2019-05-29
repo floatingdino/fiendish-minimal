@@ -42,8 +42,7 @@ h6 {
   left: 0;
   right: 0;
   height: 100px;
-  /* visibility: hidden; */
-  background-color: yellow;
+  visibility: hidden;
 }
 a {
   color: inherit;
@@ -302,10 +301,7 @@ ol.notes {
   vertical-align: top;
 }
 article h3 {
-  font-size: 1.1em;
-  line-height: 1.2em;
-  font-weight: normal;
-  color: inherit;
+  font-size: 1.2rem;
 }
 article p {
   line-height: 1.2;
@@ -316,24 +312,22 @@ article p {
 }
 .quote h3 {
   font-size: 1.3em;
-  line-height: 1.7em;
+  line-height: 1.5;
   display: block;
-  padding: 30px;
+  padding: 20px 30px;
   margin: 0 0 10px 0;
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: #f6f6f6;
+  border-left: 2px solid #33ff99;
 }
-.chat em {
+.quote h3::before {
+  content: "“";
   display: inline-block;
-  font-variant: normal;
-  width: 24%;
-  font-weight: 700;
-  font-size: 0.8em;
-  line-height: 1em;
-  margin: 0 1% 0 0;
-  vertical-align: top;
+  margin-left: -0.5em;
 }
-.chat em:nth-child(odd) {
-  background-color: rgba(0, 0, 0, 0.01);
+.quote h3::after {
+  content: "”";
+  display: inline-block;
+  margin-right: -0.5em;
 }
 .chat p {
   display: inline-block;
@@ -341,9 +335,6 @@ article p {
   line-height: 1em;
   margin: 0;
   vertical-align: top;
-}
-.answer h3:first-child {
-  background-color: rgba(0, 0, 0, 0.03);
 }
 .answer img {
   height: auto;
@@ -421,7 +412,7 @@ div.fullwidth {
   height: 0;
   width: 100%;
   padding-bottom: 66%;
-  background-color: #eee;
+  background-color: #f6f6f6;
 }
 .embed-wrapper iframe {
   position: absolute;
@@ -431,4 +422,50 @@ div.fullwidth {
   bottom: 0;
   width: 100% !important;
   height: 100% !important;
+}
+.speaker {
+  font-weight: 700;
+  margin-bottom: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.speaker-comment,
+.answer-body blockquote,
+.tailed-answer {
+  background-color: #f6f6f6;
+  padding: 20px 30px;
+  border-left: 2px solid #33ff99;
+  position: relative;
+  margin-bottom: 15px;
+}
+.speaker-comment :last-child {
+  margin-bottom: 0;
+}
+.answer-body,
+.tailed-answer {
+  margin-top: 12px;
+  margin-left: 0;
+}
+.answer-body blockquote::before,
+.tailed-answer::before {
+  content: "";
+  height: 10px;
+  border: 10px solid;
+  border-left-color: #f6f6f6;
+  border-bottom-color: #f6f6f6;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  position: absolute;
+  top: -10px;
+  left: 0;
+}
+.answer-body blockquote::after,
+.tailed-answer::after {
+  content: "";
+  height: 10px;
+  border-left: 2px solid #33ff99;
+  position: absolute;
+  top: -10px;
+  left: -2px;
 }
