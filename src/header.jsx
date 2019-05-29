@@ -8,7 +8,6 @@ export default class Header extends Component {
     this.state = {
       navShown: false
     };
-    console.log(props);
     this.hasNavLine = props.Pages.length || props.Ask || props.Submissions;
   }
   toggleNav() {

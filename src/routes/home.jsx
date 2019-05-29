@@ -16,7 +16,7 @@ export default class Home extends Component {
     };
     this.initialPosts = props.Posts.length;
 
-    // Less aggressive infinite scroll when on "Data Saver" mode
+    // Less aggressive infinite scroll if the user has "Data Saver" turned on
     this.triggerDistance =
       "connection" in navigator && navigator.connection.saveData
         ? "0px"
@@ -91,11 +91,10 @@ export default class Home extends Component {
       fetching: true
     });
     this.props.loadNextPage().then(() => {
-      console.log("fetched next page");
       this.setState({
         fetching: false
       });
-      // Will keep grabbing pages until the observer threshold is passed
+      // Will keep grabbing pages until the observer threshold is passed ("Prefill")
       if (this.lastRatio >= 1 && this.props.Pagination().NextPage) {
         requestIdleCallback(() => {
           this.runLoadNext();

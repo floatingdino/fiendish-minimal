@@ -151,7 +151,9 @@ Masonry
             "Lines": [
               {block:Lines}
                 {
-                  "Label": {JSLabel},
+                  {block:Label}
+                    "Label": {JSLabel},
+                  {/block:Label}
                   "Line": {JSLine}
                 },
               {/block:Lines}
@@ -166,7 +168,9 @@ Masonry
           {/block:Video}
           {block:Answer}
             "Question": {JSQuestion},
-            "Replies": {JSReplies}
+            "Replies": {JSReplies},
+            "Asker": {JSAsker},
+            "AskerPortrait": {JSAskerPortraitURL-30}
           {/block:Answer}
         {/block:Posts}
       },
@@ -230,7 +234,9 @@ Masonry
               "Lines": [
                 {block:Lines}
                   {
-                    "Label": {JSLabel},
+                    {block:Label}
+                      "Label": {JSLabel},
+                    {/block:Label}
                     "Line": {JSLine}
                   },
                 {/block:Lines}
@@ -245,7 +251,9 @@ Masonry
             {/block:Video}
             {block:Answer}
               "Question": {JSQuestion},
-              "Replies": {JSReplies}
+              "Asker": {JSAsker},
+              "AskerPortrait": {JSAskerPortraitURL-30},
+              "Replies": {JSReplies},
             {/block:Answer}
           },
           {/block:Posts}

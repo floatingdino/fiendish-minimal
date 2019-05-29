@@ -28,12 +28,13 @@ body {
   background-position: center;
   background-size: cover;
 }
-body,
-article,
-p,
 h1,
-h2 {
-  color: #e7e7e7;
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
 }
 .page-trigger {
   position: absolute;
@@ -68,8 +69,7 @@ a:hover {
 #logo a:hover {
   background: none;
 }
-h1,
-nav {
+header {
   font-size: 2.5em;
   line-height: 52px;
   margin: 0;
@@ -93,6 +93,8 @@ img {
 }
 #title-line h1 {
   transition: margin 0.3s ease-out;
+  margin: 0;
+  font-size: inherit;
 }
 #title-line {
   height: 52px;
@@ -255,13 +257,6 @@ article.photo .row:last-child {
     font-size: 20px;
   }
 }
-
-main h1 {
-  text-align: center;
-  line-height: 60px;
-  margin: 20px 0;
-  width: 100%;
-}
 article h2:first-child {
   line-height: 1em;
   height: 1em;
@@ -409,14 +404,6 @@ div.fullwidth {
 .tag-header {
   text-align: center;
 }
-.index .audio iframe,
-.index .video iframe {
-  height: 500px !important;
-}
-.index .audio iframe,
-.index .video iframe {
-  height: 500px !important;
-}
 .theme-author {
   position: fixed;
   text-transform: uppercase;
@@ -427,4 +414,21 @@ div.fullwidth {
   .theme-author {
     display: none;
   }
+}
+
+.embed-wrapper {
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-bottom: 66%;
+  background-color: #eee;
+}
+.embed-wrapper iframe {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
