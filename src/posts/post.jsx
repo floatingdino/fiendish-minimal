@@ -22,7 +22,7 @@ export default class Post extends Component {
     }
   }
   shouldComponentUpdate(nextProps, nextState) {
-    return !(this.state == nextState);
+    return !(this.state == nextState) || !this.props.Masonry();
   }
   loadPost() {
     this.props.loadPost();
@@ -36,7 +36,8 @@ export default class Post extends Component {
         class={`${props.PostType} ${props.TagsAsClasses} ${state.loaded &&
           this.props.Masonry() &&
           "loaded"}`}
-        ref={post => (this.post = post)}>
+        ref={post => (this.post = post)}
+      >
         <h2>
           <a class="black" href={`${props.Permalink}`}>
             x {props.ReblogRootName || ""}

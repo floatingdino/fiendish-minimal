@@ -15,7 +15,7 @@ export default class Home extends Component {
       fetching: false
     };
     this.initialPosts = props.Posts.length;
-
+    this.Masonry = false;
     // Less aggressive infinite scroll if the user has "Data Saver" turned on
     this.triggerDistance =
       "connection" in navigator && navigator.connection.saveData
@@ -37,9 +37,13 @@ export default class Home extends Component {
 
     // If the images are already cached / first page contains no "loadable" components they can be loaded before this component mounts
     if (this.state.loaded >= this.initialPosts) {
-      this.Masonry.layout();
-      this.setState({
-        initialLoaded: true
+      requestAnimationFrame(() => {
+        this.Masonry.layout();
+        this.Masonry.once("layoutComplete", () => {
+          this.setState({
+            initialLoaded: true
+          });
+        });
       });
     }
   }
@@ -112,7 +116,11 @@ export default class Home extends Component {
   }
   render(props, state) {
     return (
-      <main id="content" ref={grid => (this.grid = grid)}>
+      <main
+        class={state.initialLoaded && "loaded"}
+        id="content"
+        ref={grid => (this.grid = grid)}
+      >
         {props.Posts.map(post => (
           <Post
             {...post}

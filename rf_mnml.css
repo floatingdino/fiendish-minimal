@@ -132,6 +132,14 @@ main {
   width: auto;
   display: block;
   margin: 10px auto;
+  opacity: 0;
+}
+.index main {
+  opacity: 0;
+}
+.index main.loaded {
+  opacity: 1;
+  transition: opacity 0.3s;
 }
 .single {
   max-width: 1280px;
@@ -490,4 +498,7 @@ div.fullwidth {
 }
 .link-post-body {
   padding: 20px 30px;
+}
+main :not(.notes) a.link-post img:hover {
+  border: none;
 }
