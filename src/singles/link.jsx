@@ -1,19 +1,11 @@
 import { h } from "preact";
 
-import Loadable from "./loadable";
-
-export default class LinkPost extends Loadable {
+export default class LinkSingle {
   render(props) {
     return (
-      <a
-        class="link-post"
-        href={props.URL.replace(/&amp;/g, "&")}
-        ref={frame => (this.frame = frame)}
-        rel="nofollow noopener"
-        target="_blank"
-      >
-        {props.Thumbnail && (
-          <img alt="" onLoad={this.props.LoadPost} src={props.Thumbnail} />
+      <div>
+        {props["Thumbnail-HighRes"] && (
+          <img alt="" src={props["Thumbnail-HighRes"]} />
         )}
         <div class="link-post-body">
           {props.Host && <h3>{props.Host}</h3>}
@@ -29,7 +21,7 @@ export default class LinkPost extends Loadable {
             />
           )}
         </div>
-      </a>
+      </div>
     );
   }
 }

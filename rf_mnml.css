@@ -27,6 +27,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  font-size: 15px;
 }
 h1,
 h2,
@@ -77,15 +78,20 @@ header {
   font-weight: 500;
   font-family: Oswald, sans-serif;
   text-transform: uppercase;
+  display: contents;
 }
 nav a {
   margin-right: 10px;
 }
 #pages-nav {
-  height: 71px;
+  height: 52px;
   white-space: nowrap;
   overflow: auto;
   padding-right: 10px;
+  line-height: 52px;
+}
+#pages-nav::-webkit-scrollbar {
+  display: none;
 }
 img {
   background: inherit;
@@ -102,12 +108,10 @@ img {
   fill: currentColor;
   z-index: 1;
   vertical-align: top;
-  position: absolute;
+  position: relative;
+  position: sticky;
   width: 100%;
-  left: 0;
-}
-header {
-  padding-bottom: 52px;
+  top: 0;
 }
 svg {
   display: inline-block;
@@ -157,9 +161,6 @@ article time {
 }
 .index article.loaded {
   opacity: 1;
-}
-body {
-  font-size: 18px;
 }
 article {
   margin: 10px 1.4%;
@@ -468,4 +469,25 @@ div.fullwidth {
   position: absolute;
   top: -10px;
   left: -2px;
+}
+.link-post {
+  background-color: #f6f6f6;
+  border-left: 2px solid #33ff99;
+  display: block;
+}
+.link-post p {
+  margin-bottom: 0;
+}
+.link-post:hover {
+  background-image: none;
+}
+.link-post h3 {
+  background-image: linear-gradient(to right, #33ff99, #33ff99);
+  background-repeat: repeat-x;
+  background-position: 0 90%;
+  background-size: 100% 0.18em;
+  display: inline-block;
+}
+.link-post-body {
+  padding: 20px 30px;
 }

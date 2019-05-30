@@ -77,8 +77,8 @@ export default class Tumblog extends Component {
           />
           <Single
             path="/post/:PostID?/:PostSlug?"
-            Posts={() => state.Posts}
             Post={state.Post}
+            Posts={() => state.Posts}
             setPageType={type => this.setPageType(type)}
           />
           <Single
@@ -98,7 +98,8 @@ export default class Tumblog extends Component {
             <a
               href="https://samhaakman.com"
               rel="nofollow noopener"
-              target="_blank">
+              target="_blank"
+            >
               Sam
             </a>
           </div>
