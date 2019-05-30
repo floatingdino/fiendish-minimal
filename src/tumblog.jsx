@@ -15,6 +15,8 @@ export default class Tumblog extends Component {
       Posts: props.Posts || [],
       Post: props.Post || null
     };
+    this.currentURL = null;
+    this.lastIndex = null;
   }
   componentWillMount() {
     document.title = this.props.blog.Title;
@@ -46,15 +48,26 @@ export default class Tumblog extends Component {
       }
     });
   }
+  checkIndexPage(url) {
+    return /^\/$|^\/tagged\/\w+|^\/search/.test(url);
+  }
   handleRoute(e) {
-    if (this.state.Post && /post/.test(e.url)) {
+    // "Unmount" events don't trigger if the router moves between two routes using the same component, so those actions need to be triggered separately
+    if (this.state.Post && this.currentURL != e.url) {
       this.setState({
         Post: null
       });
     }
-    if (this.state && e.url === "/" && this.state.Posts.length <= 0) {
-      this.loadNextPage("/");
+    if (e.url !== this.lastIndex && this.checkIndexPage(e.url)) {
+      this.setState({
+        Posts: []
+      });
+      this.loadNextPage(e.url);
     }
+    if (this.checkIndexPage(e.url)) {
+      this.lastIndex = e.url;
+    }
+    this.currentURL = e.url;
   }
   render(props, state) {
     return (
@@ -98,8 +111,7 @@ export default class Tumblog extends Component {
             <a
               href="https://samhaakman.com"
               rel="nofollow noopener"
-              target="_blank"
-            >
+              target="_blank">
               Sam
             </a>
           </div>

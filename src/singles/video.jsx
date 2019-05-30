@@ -2,6 +2,14 @@ import { h } from "preact";
 
 export default class VideoSingle {
   render(props) {
+    const embed = props.VideoEmbed.replace(/(%[\da-fA-F]{2})/g, m =>
+      decodeURIComponent(m)
+    );
+    this.embedWidth = parseInt(embed.match(/width=(?:'|")(\d+)(?:'|")/)[1], 10);
+    this.embedHeight = parseInt(
+      embed.match(/height=(?:'|")(\d+)(?:'|")/)[1],
+      10
+    );
     return (
       <div
         class="embed-wrapper"

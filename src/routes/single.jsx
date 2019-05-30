@@ -11,6 +11,22 @@ import QuoteSingle from "../singles/quote";
 import TextSingle from "../singles/text";
 import VideoSingle from "../singles/video";
 
+const Posts = {
+  answer: AnswerSingle,
+  audio: AudioSingle,
+  chat: ChatSingle,
+  link: LinkSingle,
+  photo: PhotoSingle,
+  quote: QuoteSingle,
+  text: TextSingle,
+  video: VideoSingle
+};
+
+const PostBody = props => {
+  const Component = Posts[props.PostType];
+  return <Component {...props} />;
+};
+
 export default class Single extends Component {
   constructor(props) {
     super();
@@ -29,6 +45,14 @@ export default class Single extends Component {
       this.fetchPost();
     } else {
       this.fetchNotes();
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.url !== this.props.url) {
+      this.setState({
+        Post: null
+      });
+      this.fetchPost(nextProps.url);
     }
   }
   fetchNotes() {
@@ -50,8 +74,8 @@ export default class Single extends Component {
         });
     }
   }
-  fetchPost() {
-    fetch(this.props.url)
+  fetchPost(url = this.props.url) {
+    fetch(url)
       .then(resp => resp.text())
       .then(resp => {
         const data = getDataFromResponse(resp);
@@ -65,36 +89,31 @@ export default class Single extends Component {
   render(props, state) {
     const post = state.post;
     return (
-      <article class={`${post.PostType} ${post.TagsAsClasses}`}>
-        {post.PostType === "answer" && <AnswerSingle {...post} />}
-        {post.PostType === "audio" && <AudioSingle {...post} />}
-        {post.PostType === "chat" && <ChatSingle {...post} />}
-        {post.PostType === "link" && <LinkSingle {...post} />}
-        {post.PostType === "photo" && <PhotoSingle {...post} />}
-        {post.PostType === "quote" && <QuoteSingle {...post} />}
-        {post.PostType === "text" && <TextSingle {...post} />}
-        {post.PostType === "video" && <VideoSingle {...post} />}
-        {post.Date && <time>{post.Date}</time>}
-        {post.Tags && (
-          <ul class="tags">
-            {post.Tags.map(Tag => (
-              <li class={Tag} key={Tag}>
-                {Tag}
-              </li>
-            ))}
-          </ul>
-        )}
-        {parseInt(post.NoteCount, 10) > 0 && (
-          <div>
-            <h2>{post.NoteCount} Notes</h2>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: decodeURIComponent(post.PostNotes)
-              }}
-            />
-          </div>
-        )}
-      </article>
+      <main class="single-wrapper">
+        <article class={`${post.PostType} ${post.TagsAsClasses}`}>
+          {<PostBody {...post} />}
+          {post.Date && <time>{post.Date}</time>}
+          {post.Tags && (
+            <ul class="tags">
+              {post.Tags.map(Tag => (
+                <li class={Tag} key={Tag}>
+                  {Tag}
+                </li>
+              ))}
+            </ul>
+          )}
+          {parseInt(post.NoteCount, 10) > 0 && (
+            <div>
+              <h2>{post.NoteCount} Notes</h2>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: decodeURIComponent(post.PostNotes)
+                }}
+              />
+            </div>
+          )}
+        </article>
+      </main>
     );
   }
 }

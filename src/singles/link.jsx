@@ -3,7 +3,11 @@ import { h } from "preact";
 export default class LinkSingle {
   render(props) {
     return (
-      <div>
+      <a
+        class="link-post"
+        href={props.URL.replace(/&amp;/g, "&")}
+        rel="nofollow noopener"
+        target="_blank">
         {props["Thumbnail-HighRes"] && (
           <img alt="" src={props["Thumbnail-HighRes"]} />
         )}
@@ -21,7 +25,7 @@ export default class LinkSingle {
             />
           )}
         </div>
-      </div>
+      </a>
     );
   }
 }

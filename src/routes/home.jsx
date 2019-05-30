@@ -26,14 +26,7 @@ export default class Home extends Component {
     this.props.setPageType("index");
   }
   componentDidMount() {
-    this.Masonry = new Masonry(this.grid, {
-      columnWidth: "article.sizer",
-      itemSelector: "article:not(.sizer)",
-      percentPosition: true,
-      initLayout: false,
-      transitionDuration: 0
-    });
-    this.setupInfiniteScroll();
+    this.setupGrid();
 
     // If the images are already cached / first page contains no "loadable" components they can be loaded before this component mounts
     if (this.state.loaded >= this.initialPosts) {
@@ -48,10 +41,7 @@ export default class Home extends Component {
     }
   }
   componentWillUnmount() {
-    // Cleanup
-    this.observer.disconnect();
-    this.observer = null;
-    this.Masonry.destroy();
+    this.cleanupGrid();
   }
   componentDidUpdate(prevProps) {
     // If you load up from a permalink and then go back to the homepage, this will trigger the infinite scroll "prefill"
@@ -62,6 +52,35 @@ export default class Home extends Component {
       !this.state.fetching
     ) {
       this.runLoadNext();
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.Posts && nextProps.Posts.length <= 0) {
+      this.cleanupGrid();
+    }
+    if (this.props.Posts.length <= 0 && nextProps.Posts.length > 0) {
+      this.setupGrid();
+    }
+  }
+  setupGrid() {
+    this.Masonry = new Masonry(this.grid, {
+      columnWidth: "article.sizer",
+      itemSelector: "article:not(.sizer)",
+      stamp: ".tag-header",
+      percentPosition: true,
+      initLayout: false,
+      transitionDuration: 0
+    });
+    this.setupInfiniteScroll();
+  }
+  cleanupGrid() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
+    if (this.Masonry) {
+      this.Masonry.destroy();
+      this.Masonry = null;
     }
   }
   setupInfiniteScroll() {
@@ -119,8 +138,12 @@ export default class Home extends Component {
       <main
         class={state.initialLoaded && "loaded"}
         id="content"
-        ref={grid => (this.grid = grid)}
-      >
+        ref={grid => (this.grid = grid)}>
+        {props.Tag && (
+          <h2 class="tag-header">
+            /tagged/<span class={props.Tag}>{props.Tag}</span>
+          </h2>
+        )}
         {props.Posts.map(post => (
           <Post
             {...post}

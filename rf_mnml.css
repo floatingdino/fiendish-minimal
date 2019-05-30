@@ -19,6 +19,7 @@ figure {
 }
 caption {
   display: block;
+  text-align: inherit;
 }
 body {
   background-color: #fff;
@@ -113,6 +114,9 @@ img {
   width: 100%;
   top: 0;
 }
+.tmblr-iframe-pushdown #title-line {
+  top: 54px;
+}
 svg {
   display: inline-block;
   fill: currentColor;
@@ -129,10 +133,7 @@ svg {
   display: inline-block;
 }
 main {
-  width: auto;
-  display: block;
   margin: 10px auto;
-  opacity: 0;
 }
 .index main {
   opacity: 0;
@@ -141,17 +142,29 @@ main {
   opacity: 1;
   transition: opacity 0.3s;
 }
+.tag-header {
+  text-align: center;
+  margin: 80px 0 30px;
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+}
+.single-wrapper {
+  display: flex;
+  justify-content: center;
+}
 .single {
   max-width: 1280px;
   width: auto;
 }
-.single:after {
-  content: "";
-  display: table;
-  clear: both;
+.single article {
+  margin: 10px auto;
+  float: none;
+  max-width: 500px;
 }
-.tag-header {
-  text-align: center;
+.single article h2 {
+  text-transform: uppercase;
+  clear: both;
 }
 article h2,
 article time {
@@ -159,9 +172,14 @@ article time {
   margin: 10px 0 30px 0;
   font-size: 1em;
 }
-.single article.text {
-  width: 800px;
+article time {
+  margin-top: 30px;
+  display: block;
+}
+.single article.photo,
+.single article.video {
   max-width: 100%;
+  width: 100%;
 }
 .index article {
   opacity: 0;
@@ -223,7 +241,7 @@ article.photo .row:last-child {
 }
 @media screen and (min-width: 768px) {
   .wrapper.index {
-    width: 60%;
+    width: 90%;
   }
   .index article {
     width: 47%;
@@ -233,6 +251,11 @@ article.photo .row:last-child {
   .index .x2 {
     width: 97%;
     margin: 10px 1.4%;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .wrapper.index {
+    width: 65%;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -279,16 +302,6 @@ img {
   border: 0;
   border-bottom: 0px solid #33ff99;
   transition: border 0.3s ease;
-}
-.single article {
-  text-align: center;
-  margin: 10px auto;
-  float: none;
-  /*font-size:22px;*/
-}
-.single article h2 {
-  text-transform: uppercase;
-  clear: both;
 }
 article h2 a {
   text-transform: uppercase;
@@ -373,8 +386,7 @@ article p {
 ul.tags {
   list-style: none;
   padding: 0;
-  margin: 0;
-  text-align: center;
+  margin: 30px 0;
   display: block;
 }
 ul.tags li {
@@ -400,9 +412,6 @@ div.fullwidth {
   min-height: 1.3em;
   margin: 5px 0;
   height: auto;
-}
-.tag-header {
-  text-align: center;
 }
 .theme-author {
   position: fixed;
@@ -501,4 +510,10 @@ div.fullwidth {
 }
 main :not(.notes) a.link-post img:hover {
   border: none;
+}
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+.single blockquote:last-of-type {
+  margin-bottom: 30px;
 }

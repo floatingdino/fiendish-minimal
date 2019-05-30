@@ -90,6 +90,8 @@ Masonry
         "Post": {
           "Permalink": {JSRelativePermalink},
           {block:Posts}
+            "LikeButton": {JSLikeButton},
+            "ReblogButton": {JSReblogButton},
             "PostType": {JSPostType},
             "TagsAsClasses": {JSTagsAsClasses},
             {block:RebloggedFrom}
@@ -340,25 +342,25 @@ Masonry
             width:auto;
             max-width:100%;
         }
-        .{text:Pink Tag} h2 a, h1 .{text:Pink Tag}, .tags li.{text:Pink Tag}{
+        .{text:Pink Tag} h2 a, .tag-header .{text:Pink Tag}, .tags li.{text:Pink Tag}{
             color:#ff3399;
         }
         .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
             border-bottom-color:#ff3399 !important;
         }
-        .{text:Blue Tag} h2 a, h1 .{text:Blue Tag}, .tags li.{text:Blue Tag}{
+        .{text:Blue Tag} h2 a, .tag-header .{text:Blue Tag}, .tags li.{text:Blue Tag}{
             color:#3399ff;
         }
         .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
             border-bottom-color:#3399ff !important;
         }
-        .{text:Green Tag} h2 a, h1 .{text:Green Tag}, .tags li.{text:Green Tag}{
+        .{text:Green Tag} h2 a, .tag-header .{text:Green Tag}, .tags li.{text:Green Tag}{
             color:#33ff99;
         }
         .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
             border-bottom-color:#33ff99 !important;
         }
-        .{text:Yellow Tag} h2 a, h1 .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
+        .{text:Yellow Tag} h2 a, .tag-header .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
             color:#ffe199;
         }
         .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
