@@ -6,7 +6,7 @@ const babelrc = require("./.babelrc");
 module.exports = {
   mode: "development",
   devtool: "cheap-module-eval-source-map",
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   output: {
     filename: "[name].js",
     chunkFilename: "[name].bundle.js",
