@@ -1,11 +1,9 @@
 import { h } from "preact";
 
-import Loadable from "./loadable";
-
-export default class QuotePost extends Loadable {
+export default class QuoteSingle {
   render(props) {
     return (
-      <div ref={frame => (this.frame = frame)}>
+      <div>
         <h3>{props.Quote}</h3>
         {props.Source && (
           <p>

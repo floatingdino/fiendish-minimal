@@ -1,15 +1,15 @@
 import { h, Component } from "preact";
 
-import getDataFromResponse from "../functions/getDataFromResponse";
+import getDataFromResponse from "functions/getDataFromResponse";
 
-import AnswerSingle from "../singles/answer";
-import AudioSingle from "../singles/audio";
-import ChatSingle from "../singles/chat";
-import LinkSingle from "../singles/link";
-import PhotoSingle from "../singles/photo";
-import QuoteSingle from "../singles/quote";
-import TextSingle from "../singles/text";
-import VideoSingle from "../singles/video";
+import AnswerSingle from "posts/answer";
+import AudioSingle from "posts/audio";
+import ChatSingle from "posts/chat";
+import LinkSingle from "posts/link";
+import PhotoSingle from "posts/photo";
+import QuoteSingle from "posts/quote";
+import TextSingle from "posts/text";
+import VideoSingle from "posts/video";
 
 const Posts = {
   answer: AnswerSingle,

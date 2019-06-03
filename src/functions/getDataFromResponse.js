@@ -1,3 +1,4 @@
+// This function finds and prepares the inline "data" from a page and turns it into a JSON object. Very ugly and probably dangerous ¯\_(ツ)_/¯
 export default function getDataFromResponse(resp) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(resp, "text/html");

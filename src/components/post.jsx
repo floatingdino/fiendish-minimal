@@ -1,13 +1,15 @@
-import { h, Component } from "preact";
+import { h } from "preact";
 
-import PhotoPost from "./photo";
-import TextPost from "./text";
-import QuotePost from "./quote";
-import AnswerPost from "./answer";
-import VideoPost from "./video";
-import AudioPost from "./audio";
-import ChatPost from "./chat";
-import LinkPost from "./link";
+import Loadable from "classes/loadable";
+
+import PhotoPost from "posts/photo";
+import TextPost from "posts/text";
+import QuotePost from "posts/quote";
+import AnswerPost from "posts/answer";
+import VideoPost from "posts/video";
+import AudioPost from "posts/audio";
+import ChatPost from "posts/chat";
+import LinkPost from "posts/link";
 
 const Posts = {
   answer: AnswerPost,
@@ -25,40 +27,29 @@ const PostBody = props => {
   return <Component {...props} />;
 };
 
-export default class Post extends Component {
+export default class Post extends Loadable {
   constructor() {
     super();
     this.state = {
       loaded: false
     };
   }
-  componentDidMount() {
-    if (this.props.Masonry()) {
-      this.props.Masonry().appended(this.post);
-    }
-  }
   shouldComponentUpdate(nextProps, nextState) {
     return !(this.state == nextState) || !this.props.Masonry();
-  }
-  loadPost() {
-    this.props.loadPost();
-    this.setState({
-      loaded: true
-    });
   }
   render(props, state) {
     return (
       <article
         class={`${props.PostType} ${props.TagsAsClasses} ${state.loaded &&
-          this.props.Masonry() &&
+          props.Masonry() &&
           "loaded"}`}
-        ref={post => (this.post = post)}>
+        ref={frame => (this.frame = frame)}>
         <h2>
           <a class="black" href={`${props.Permalink}`}>
             x {props.ReblogRootName || ""}
           </a>
         </h2>
-        <PostBody {...props} loadPost={() => this.loadPost()} />
+        <PostBody {...props} />
       </article>
     );
   }

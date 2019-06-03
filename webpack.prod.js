@@ -3,6 +3,8 @@ const path = require("path");
 
 const babelrc = require("./.babelrc");
 
+const resolve = require("./resolve");
+
 module.exports = {
   mode: "production",
   entry: "./src/index.jsx",
@@ -26,7 +28,5 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    extensions: [".js", ".jsx", ".json"]
-  }
+  resolve
 };

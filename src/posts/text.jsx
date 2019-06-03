@@ -1,18 +1,20 @@
 import { h } from "preact";
 
-import Loadable from "./loadable";
-
-export default class TextPost extends Loadable {
+export default class TextSingle {
   render(props) {
     return (
-      <div
-        dangerouslySetInnerHTML={{
-          __html:
-            props.Body &&
-            props.Body.replace(/(%[\da-fA-F]{2})/g, m => decodeURIComponent(m))
-        }}
-        ref={frame => (this.frame = frame)}
-      />
+      <div>
+        {props.Title && <h2>{props.Title}</h2>}
+        <div
+          dangerouslySetInnerHTML={{
+            __html:
+              props.Body &&
+              props.Body.replace(/(%[\da-fA-F]{2})/g, m =>
+                decodeURIComponent(m)
+              )
+          }}
+        />
+      </div>
     );
   }
 }

@@ -17,6 +17,7 @@
     "css-loader": "^2.1.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.32.0",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1"
   },
@@ -24,7 +25,9 @@
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.prod.js"
   },
-  "browserslist": [">3%"],
+  "browserslist": [
+    ">3%"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/floatingdino/fiendish-minimal.git"

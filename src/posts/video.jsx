@@ -1,10 +1,7 @@
 import { h } from "preact";
 
-import Loadable from "./loadable";
-
-export default class VideoPost extends Loadable {
-  constructor(props) {
-    super();
+export default class VideoSingle {
+  render(props) {
     const embed = props.VideoEmbed.replace(/(%[\da-fA-F]{2})/g, m =>
       decodeURIComponent(m)
     );
@@ -13,8 +10,6 @@ export default class VideoPost extends Loadable {
       embed.match(/height=(?:'|")(\d+)(?:'|")/)[1],
       10
     );
-  }
-  render(props) {
     return (
       <div
         class="embed-wrapper"
@@ -25,7 +20,6 @@ export default class VideoPost extends Loadable {
               decodeURIComponent(m)
             )
         }}
-        ref={frame => (this.frame = frame)}
         style={`padding-bottom:${(this.embedHeight / this.embedWidth) * 100}%`}
       />
     );

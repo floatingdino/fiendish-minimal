@@ -1,7 +1,9 @@
 const webpack = require("webpack");
 const path = require("path");
-
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const babelrc = require("./.babelrc");
+
+const resolve = require("./resolve");
 
 module.exports = {
   mode: "development",
@@ -40,10 +42,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  resolve: {
-    extensions: [".js", ".jsx", ".json", ".css"]
-  },
+  plugins: [
+    new BundleAnalyzerPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  ...resolve,
   devServer: {
     disableHostCheck: true,
     headers: { "Access-Control-Allow-Origin": "*" },
