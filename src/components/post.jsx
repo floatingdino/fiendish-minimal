@@ -24,7 +24,8 @@ const Posts = {
 
 const PostBody = props => {
   const Component = Posts[props.PostType];
-  return <Component {...props} />;
+  const highRes = /x2|x3/.test(props.TagsAsClasses);
+  return <Component {...props} highRes={highRes} />;
 };
 
 export default class Post extends Loadable {

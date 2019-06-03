@@ -24,7 +24,7 @@ const Posts = {
 
 const PostBody = props => {
   const Component = Posts[props.PostType];
-  return <Component {...props} />;
+  return <Component {...props} highRes={true} />;
 };
 
 export default class Single extends Component {

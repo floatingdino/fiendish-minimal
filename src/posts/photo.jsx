@@ -4,13 +4,14 @@ import fetchRowPhotos from "functions/fetchRowPhotos";
 
 export default class PhotoSingle {
   render(props) {
+    const photoIndex = props.highRes ? "PhotoURL-HighRes" : "PhotoURL-400";
     return (
       <figure>
-        {props["PhotoURL-HighRes"] && (
+        {props[photoIndex] && (
           <img
             alt={props.PhotoAlt}
             class="post-photo"
-            src={props["PhotoURL-HighRes"]}
+            src={props[photoIndex]}
           />
         )}
         {props.PhotosetLayout &&
@@ -25,8 +26,8 @@ export default class PhotoSingle {
                 <img
                   alt={photo.PhotoAlt}
                   class={`col-${12 / parseInt(layout, 10)} post-photo`}
-                  key={photo["PhotoURL-HighRes"]}
-                  src={photo["PhotoURL-HighRes"]}
+                  key={photo[photoIndex]}
+                  src={photo[photoIndex]}
                 />
               ))}
             </div>

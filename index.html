@@ -17,12 +17,14 @@ Masonry
 -->
 <html>
   <head>
+    <link rel="preload" href="https://static.tumblr.com/ii7qpmy/Aqqpsivb9/rf_mnml.js" as="script" />
     <title>{Title}</title>
     <link rel="shortcut icon" href="{Favicon}" />
     <link rel="alternate" type="application/rss+xml" href="{RSS}" />
     {block:Description}
     <meta name="description" content="{MetaDescription}" />
     {/block:Description}
+    <link href="https://static.tumblr.com/ii7qpmy/5k7psiuj3/rf_mnml.css" rel="stylesheet">
     <link
       href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Oswald:500&display=swap"
       rel="stylesheet"
@@ -53,6 +55,98 @@ Masonry
     <meta name="text:Yellow Tag" content="ruckus" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+        body{
+            background-color:{color:Background};
+            background-image:url({image:Background Image});
+        }
+        body, article, p, h1, h2, h3, em, a.black{
+            color:{color:Text};
+        }
+        article h2 a{
+            color:{color:Links};
+        }
+        main :not(.notes) a img:hover{
+            border-bottom:5px solid {color:Links};
+            transition:border 0.3s ease;
+        }
+        main a img{
+            border-bottom:0px solid {color:Links};
+            transition:border 0.3s ease;
+        }
+        blockquote{
+            margin: 0;
+            padding: 5px 20px;
+            border-left:2px solid {color:Links};
+        }
+        .text blockquote{
+           margin-left:-22px;
+        }
+        .text blockquote :last-child{
+           margin-bottom:0;
+        }
+        blockquote > blockquote{
+           border-left:2px solid #ff3399;
+        }
+        article blockquote a.tumblr_blog{
+           background-image: linear-gradient(to right, #ff3399, #ff3399);
+        }
+        blockquote > blockquote > blockquote{
+           border-left:2px solid #3399ff;
+        }
+        blockquote > blockquote a.tumblr_blog{
+           background-image: linear-gradient(to right, #3399ff, #3399ff);
+        }
+        blockquote > blockquote > blockquote > blockquote{
+           border-left:2px solid #ffe199;
+        }
+        blockquote > blockquote > blockquote a.tumblr_blog{
+           background-image: linear-gradient(to right, #ffe199, #ffe199);
+        }
+        article a.tumblr_blog{
+           background-image: linear-gradient(to right, {color:Links}, {color:Links});
+          background-repeat: repeat-x;
+          background-position: 0 90%;
+          background-size: 100% .18em;
+          text-decoration: none;
+        }
+
+        #logo img{
+            max-height: {text:Header Size};
+            width:auto;
+            max-width:100%;
+        }
+        .{text:Pink Tag} h2 a, .tag-header .{text:Pink Tag}, .tags li.{text:Pink Tag}{
+            color:#ff3399;
+        }
+        .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
+            border-bottom-color:#ff3399 !important;
+        }
+        .{text:Blue Tag} h2 a, .tag-header .{text:Blue Tag}, .tags li.{text:Blue Tag}{
+            color:#3399ff;
+        }
+        .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
+            border-bottom-color:#3399ff !important;
+        }
+        .{text:Green Tag} h2 a, .tag-header .{text:Green Tag}, .tags li.{text:Green Tag}{
+            color:#33ff99;
+        }
+        .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
+            border-bottom-color:#33ff99 !important;
+        }
+        .{text:Yellow Tag} h2 a, .tag-header .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
+            color:#ffe199;
+        }
+        .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
+            border-bottom-color:#ffe199 !important;
+        }
+        .theme-author a{
+           color:{color:Links};
+        }
+
+        {CustomCSS}
+    </style>
 
     <script id="data">
       var data =  {
@@ -274,104 +368,7 @@ Masonry
     </script>
   </head>
   <body>
-    <h1>
-      DON'T FREAK OUT THAT THIS LOOKS BROKEN - THIS THEME IS CURRENTLY UNDER
-      ACTIVE DEVELOPMENT. COME BACK IN A BIT TO SEE THE NEW VERSION!
-    </h1>
-    <script src="//localhost:8080/main.js"></script>
-    <style>
-        body{
-            background-color:{color:Background};
-            background-image:url({image:Background Image});
-        }
-        body, article, p, h1, h2, h3, em, a.black{
-            color:{color:Text};
-        }
-        article h2 a{
-            color:{color:Links};
-        }
-        main :not(.notes) a img:hover{
-            border-bottom:5px solid {color:Links};
-            transition:border 0.3s ease;
-        }
-        main a img{
-            border-bottom:0px solid {color:Links};
-            transition:border 0.3s ease;
-        }
-        blockquote{
-            margin: 0;
-            padding: 5px 20px;
-            border-left:2px solid {color:Links};
-        }
-        .text blockquote{
-           margin-left:-22px;
-        }
-        .text blockquote :last-child{
-           margin-bottom:0;
-      }
-
-
-        blockquote > blockquote{
-           border-left:2px solid #ff3399;
-        }
-        article blockquote a.tumblr_blog{
-           background-image: linear-gradient(to right, #ff3399, #ff3399);
-        }
-        blockquote > blockquote > blockquote{
-           border-left:2px solid #3399ff;
-        }
-        blockquote > blockquote a.tumblr_blog{
-           background-image: linear-gradient(to right, #3399ff, #3399ff);
-        }
-        blockquote > blockquote > blockquote > blockquote{
-           border-left:2px solid #ffe199;
-        }
-        blockquote > blockquote > blockquote a.tumblr_blog{
-           background-image: linear-gradient(to right, #ffe199, #ffe199);
-        }
-        article a.tumblr_blog{
-           background-image: linear-gradient(to right, {color:Links}, {color:Links});
-          background-repeat: repeat-x;
-          background-position: 0 90%;
-          background-size: 100% .18em;
-          text-decoration: none;
-        }
-
-        #logo img{
-            max-height: {text:Header Size};
-            width:auto;
-            max-width:100%;
-        }
-        .{text:Pink Tag} h2 a, .tag-header .{text:Pink Tag}, .tags li.{text:Pink Tag}{
-            color:#ff3399;
-        }
-        .{text:Pink Tag} a img:hover, .{text:Pink Tag} a img{
-            border-bottom-color:#ff3399 !important;
-        }
-        .{text:Blue Tag} h2 a, .tag-header .{text:Blue Tag}, .tags li.{text:Blue Tag}{
-            color:#3399ff;
-        }
-        .{text:Blue Tag} a img:hover, .{text:Blue Tag} a img{
-            border-bottom-color:#3399ff !important;
-        }
-        .{text:Green Tag} h2 a, .tag-header .{text:Green Tag}, .tags li.{text:Green Tag}{
-            color:#33ff99;
-        }
-        .{text:Green Tag} a img:hover, .{text:Green Tag} a img{
-            border-bottom-color:#33ff99 !important;
-        }
-        .{text:Yellow Tag} h2 a, .tag-header .{text:Yellow Tag}, .tags li.{text:Yellow Tag}{
-            color:#ffe199;
-        }
-        .{text:Yellow Tag} a img:hover, .{text:Yellow Tag} a img{
-            border-bottom-color:#ffe199 !important;
-        }
-        .theme-author a{
-           color:{color:Links};
-        }
-
-        {CustomCSS}
-    </style>
+    <script src="https://static.tumblr.com/ii7qpmy/Aqqpsivb9/rf_mnml.js"></script>
   </body>
   <!--nice-->
 </html>

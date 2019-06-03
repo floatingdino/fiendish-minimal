@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
-
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const babelrc = require("./.babelrc");
 
 const resolve = require("./resolve");
@@ -9,7 +9,7 @@ module.exports = {
   mode: "production",
   entry: "./src/index.jsx",
   output: {
-    filename: "[name].js",
+    filename: "rf_mnml.js",
     chunkFilename: "[name].bundle.js"
   },
   module: {
@@ -28,5 +28,10 @@ module.exports = {
       }
     ]
   },
-  resolve
+  plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static"
+    })
+  ],
+  ...resolve
 };
