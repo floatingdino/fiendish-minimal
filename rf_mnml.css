@@ -50,8 +50,6 @@ a {
   color: inherit;
   text-decoration: none;
   border: 0;
-  letter-spacing: 0;
-  transition: letter-spacing 1s ease;
 }
 a:hover {
   background-image: linear-gradient(to right, currentColor, currentColor);
@@ -61,7 +59,6 @@ a:hover {
 }
 .wrapper {
   margin: 0 auto;
-  height: auto;
 }
 #masthead #logo {
   text-align: center;
@@ -109,13 +106,17 @@ img {
   fill: currentColor;
   z-index: 1;
   vertical-align: top;
+  white-space: nowrap;
   position: relative;
+  position: -webkit-sticky;
   position: sticky;
   width: 100%;
   top: 0;
 }
-.tmblr-iframe-pushdown #title-line {
-  top: 54px;
+@supports (position: sticky) or (position: -webkit-sticky) {
+  .tmblr-iframe-pushdown #title-line {
+    top: 54px;
+  }
 }
 svg {
   display: inline-block;
@@ -137,6 +138,7 @@ main {
 }
 .index main {
   opacity: 0;
+  padding-bottom: 100px;
 }
 .index main.loaded {
   opacity: 1;
@@ -183,7 +185,7 @@ article time {
 }
 .index article {
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
 }
 .index article.loaded {
   opacity: 1;
@@ -289,7 +291,7 @@ article.photo .row:last-child {
   }
 }
 article h2:first-child {
-  line-height: 1em;
+  line-height: 1;
   height: 1em;
   overflow: hidden;
   white-space: nowrap;
@@ -302,10 +304,6 @@ img {
   border: 0;
   border-bottom: 0px solid #33ff99;
   transition: border 0.3s ease;
-}
-article h2 a {
-  text-transform: uppercase;
-  color: #33ff99;
 }
 ol.notes {
   list-style: none;
@@ -327,10 +325,7 @@ article h3 {
 }
 article p {
   line-height: 1.2;
-  font-weight: normal;
-  color: inherit;
-  margin: 0;
-  margin-bottom: 15px;
+  margin: 0 0 15px;
 }
 .quote h3 {
   font-size: 1.3em;
@@ -358,9 +353,6 @@ article p {
   margin: 0;
   vertical-align: top;
 }
-.answer img {
-  height: auto;
-}
 @keyframes loader-in {
   0% {
     opacity: 0;
@@ -381,7 +373,7 @@ article p {
   left: 0;
   right: 0;
   text-align: center;
-  animation: loader-in 0.5s ease-in both;
+  animation: loader-in 0.3s ease-in both;
 }
 ul.tags {
   list-style: none;
@@ -396,9 +388,6 @@ ul.tags li {
 }
 ul.tags li:before {
   content: "#";
-}
-a.black {
-  text-transform: lowercase;
 }
 div.fullwidth {
   display: block;
@@ -516,4 +505,24 @@ blockquote p:last-child {
 }
 .single blockquote:last-of-type {
   margin-bottom: 30px;
+}
+.load-more {
+  margin: 20px auto;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+  font: inherit;
+  font-weight: 700;
+  padding: 20px 30px;
+  display: block;
+  background-image: linear-gradient(to right, #33ff99, #33ff99);
+  background-repeat: repeat-x;
+  background-position: 0 90%;
+  background-size: 100% 0.18em;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }

@@ -122,16 +122,21 @@ export default class Home extends Component {
   infiniteScrollCallback(entries) {
     // Keep track of the ratio as this callback only triggers when the element enters or leaves the screen
     this.paginationTriggerInRange = entries[0].intersectionRatio > 0;
-    requestIdleCallback(() => {
-      if (
-        this.paginationTriggerInRange &&
-        !this.state.fetching &&
-        (this.props.Pagination() && this.props.Pagination().NextPage) &&
-        this.state.initialLoaded
-      ) {
+
+    if (
+      this.paginationTriggerInRange &&
+      !this.state.fetching &&
+      (this.props.Pagination() && this.props.Pagination().NextPage) &&
+      this.state.initialLoaded
+    ) {
+      if (!!window.requestIdleCallback) {
+        requestIdleCallback(() => {
+          this.runLoadNext();
+        });
+      } else {
         this.runLoadNext();
       }
-    });
+    }
   }
 
   runLoadNext() {
@@ -144,9 +149,13 @@ export default class Home extends Component {
       });
       // Will keep grabbing pages until the observer threshold is passed ("Prefill")
       if (this.paginationTriggerInRange && this.props.Pagination().NextPage) {
-        requestIdleCallback(() => {
+        if (!!window.requestIdleCallback) {
+          requestIdleCallback(() => {
+            this.runLoadNext();
+          });
+        } else {
           this.runLoadNext();
-        });
+        }
       }
     });
   }
@@ -183,6 +192,15 @@ export default class Home extends Component {
           />
         ))}
         <article class="sizer" />
+        {!window.IntersectionObserver &&
+          !this.state.fetching &&
+          (this.props.Pagination() && this.props.Pagination().NextPage) &&
+          this.state.initialLoaded && (
+            <button class="load-more" onClick={() => this.runLoadNext()}>
+              Load More
+            </button>
+          )}
+
         <div class="page-trigger" ref={trigger => (this.trigger = trigger)} />
         {state.fetching ||
           (state.loaded < props.Posts.length && (

@@ -25,9 +25,7 @@
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.prod.js"
   },
-  "browserslist": [
-    ">3%"
-  ],
+  "browserslist": ["defaults"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/floatingdino/fiendish-minimal.git"
