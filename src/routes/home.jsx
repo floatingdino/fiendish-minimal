@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import { h, Component } from "preact";
 
 import Masonry from "masonry-layout";
@@ -16,6 +15,9 @@ export default class Home extends Component {
     };
     this.initialPosts = props.Posts.length;
     this.Masonry = false;
+
+    // Wait this long for idle callbacks
+    this.maxNotIdle = 750;
 
     // Less aggressive infinite scroll if the user has "Data Saver" turned on
     this.triggerDistance =
@@ -86,6 +88,10 @@ export default class Home extends Component {
         initLayout: false,
         transitionDuration: 0
       });
+      this.Masonry.once("layoutComplete", () => {
+        // Trigger a re-render once Masonry is setup
+        this.setState({});
+      });
       this.setupInfiniteScroll();
     }
   }
@@ -119,9 +125,11 @@ export default class Home extends Component {
     this.observer.observe(this.trigger);
   }
 
-  infiniteScrollCallback(entries) {
+  infiniteScrollCallback(entries = null) {
     // Keep track of the ratio as this callback only triggers when the element enters or leaves the screen
-    this.paginationTriggerInRange = entries[0].intersectionRatio > 0;
+    this.paginationTriggerInRange = entries
+      ? entries[0].intersectionRatio > 0
+      : this.paginationTriggerInRange;
 
     if (
       this.paginationTriggerInRange &&
@@ -130,12 +138,19 @@ export default class Home extends Component {
       this.state.initialLoaded
     ) {
       if (!!window.requestIdleCallback) {
-        requestIdleCallback(() => {
-          this.runLoadNext();
-        });
+        requestIdleCallback(
+          () => {
+            this.runLoadNext();
+          },
+          { timeout: this.maxNotIdle }
+        );
       } else {
         this.runLoadNext();
       }
+    } else if (this.paginationTriggerInRange) {
+      setTimeout(() => {
+        this.infiniteScrollCallback();
+      }, this.maxNotIdle);
     }
   }
 
@@ -150,9 +165,12 @@ export default class Home extends Component {
       // Will keep grabbing pages until the observer threshold is passed ("Prefill")
       if (this.paginationTriggerInRange && this.props.Pagination().NextPage) {
         if (!!window.requestIdleCallback) {
-          requestIdleCallback(() => {
-            this.runLoadNext();
-          });
+          requestIdleCallback(
+            () => {
+              this.runLoadNext();
+            },
+            { timeout: this.maxNotIdle }
+          );
         } else {
           this.runLoadNext();
         }
