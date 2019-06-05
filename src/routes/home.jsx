@@ -130,6 +130,7 @@ export default class Home extends Component {
     this.paginationTriggerInRange = entries
       ? entries[0].intersectionRatio > 0
       : this.paginationTriggerInRange;
+    console.log(this.paginationTriggerInRange);
 
     if (
       this.paginationTriggerInRange &&
@@ -147,7 +148,10 @@ export default class Home extends Component {
       } else {
         this.runLoadNext();
       }
-    } else if (this.paginationTriggerInRange) {
+    } else if (
+      this.paginationTriggerInRange &&
+      (this.props.Pagination() && this.props.Pagination().NextPage)
+    ) {
       setTimeout(() => {
         this.infiniteScrollCallback();
       }, this.maxNotIdle);
