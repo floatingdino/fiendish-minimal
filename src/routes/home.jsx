@@ -130,7 +130,6 @@ export default class Home extends Component {
     this.paginationTriggerInRange = entries
       ? entries[0].intersectionRatio > 0
       : this.paginationTriggerInRange;
-    console.log(this.paginationTriggerInRange);
 
     if (
       this.paginationTriggerInRange &&
