@@ -20,9 +20,10 @@ export default class LoadablePost extends Component {
       });
     } else {
       this.loaded = this.preloaded;
-      this.loadables.forEach(loadable => {
+      for (let i = this.loadables.length - 1; i >= 0; i--) {
+        const loadable = this.loadables[i];
         loadable.addEventListener("load", () => this.handleLoad());
-      });
+      }
     }
   }
   handleLoad() {

@@ -79,7 +79,7 @@ export default class Home extends Component {
 
   setupGrid() {
     if (!this.Masonry && this.props.Posts && this.props.Posts.length > 0) {
-      // Masonry kinda freaks out if you try and set it up with no elements to layout, so I let the first page of elements
+      // Masonry kinda freaks out if you try and set it up with no elements to layout, so I let the first page of elements load before initialising
       this.Masonry = new Masonry(this.grid, {
         columnWidth: "article.sizer",
         itemSelector: "article:not(.sizer)",
@@ -88,15 +88,19 @@ export default class Home extends Component {
         initLayout: false,
         transitionDuration: 0
       });
+
+      // Trigger a re-render once Masonry is setup
       this.Masonry.once("layoutComplete", () => {
-        // Trigger a re-render once Masonry is setup
         this.setState({});
       });
-      this.setupInfiniteScroll();
+      if (!!window.intersectionObserver) {
+        this.setupInfiniteScroll();
+      }
     }
   }
 
   cleanupGrid() {
+    // DESTROY IT ALL
     this.setState({
       loaded: 0,
       initialLoaded: false,

@@ -21,6 +21,10 @@ caption {
   display: block;
   text-align: inherit;
 }
+main {
+  display: block;
+  width: 100%;
+}
 body {
   background-color: #fff;
   margin: 0;
