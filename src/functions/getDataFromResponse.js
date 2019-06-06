@@ -6,7 +6,7 @@ export default function getDataFromResponse(resp) {
 }
 
 export function sanitiseJSON(node) {
-  return node.innerHTML
+  const decoded = node.innerHTML
     .replace("var data =", "")
     .replace(/'/g, '"')
     .replace(/\\x/g, "%")
@@ -15,4 +15,5 @@ export function sanitiseJSON(node) {
     .replace(/,[ \r\n]*}/gs, "}")
     .replace(/\\?[\r\n]+/g, " ")
     .replace(/ +/g, " ");
+  return decoded;
 }

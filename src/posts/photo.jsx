@@ -5,6 +5,10 @@ import fetchRowPhotos from "functions/fetchRowPhotos";
 export default class PhotoSingle {
   render(props) {
     const photoIndex = props.highRes ? "PhotoURL-HighRes" : "PhotoURL-400";
+    let layoutArray = props.PhotosetLayout;
+    if (typeof props.PhotosetLayout === "string") {
+      layoutArray = layoutArray.match(/\d/g);
+    }
     return (
       <figure>
         {props[photoIndex] && (
@@ -15,12 +19,12 @@ export default class PhotoSingle {
           />
         )}
         {props.PhotosetLayout &&
-          props.PhotosetLayout.map((layout, layoutIndex) => (
+          layoutArray.map((layout, layoutIndex) => (
             <div class="row" key={`${props.Permalink}-${layoutIndex}`}>
               {fetchRowPhotos(
                 layout,
                 layoutIndex,
-                props.PhotosetLayout,
+                layoutArray,
                 props.Photos
               ).map(photo => (
                 <img

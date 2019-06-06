@@ -93,7 +93,7 @@ export default class Home extends Component {
       this.Masonry.once("layoutComplete", () => {
         this.setState({});
       });
-      if (!!window.intersectionObserver) {
+      if (!!window.IntersectionObserver) {
         this.setupInfiniteScroll();
       }
     }

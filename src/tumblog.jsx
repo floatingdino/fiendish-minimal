@@ -59,6 +59,7 @@ export default class Tumblog extends Component {
   handleRoute(e) {
     // Post data storage should probably go out to state management to avoid this messiness, but it seems overkill for such a small app
     // "Unmount" events don't trigger if the router moves between two routes using the same component, so those actions need to be triggered separately
+    console.log(e);
     if (this.state.Post && this.currentURL != e.url) {
       this.setState({
         Post: null
@@ -96,6 +97,20 @@ export default class Tumblog extends Component {
             loadNextPage={() => this.loadNextPage()}
             Pagination={() => state.page.Pagination}
             path="/tagged/:Tag"
+            Posts={state.Posts}
+            setPageType={type => this.setPageType(type)}
+          />
+          <Home
+            loadNextPage={() => this.loadNextPage()}
+            Pagination={() => state.page.Pagination}
+            path="/customize_preview_receiver.html"
+            Posts={state.Posts}
+            setPageType={type => this.setPageType(type)}
+          />
+          <Home
+            loadNextPage={() => this.loadNextPage()}
+            Pagination={() => state.page.Pagination}
+            path="/search"
             Posts={state.Posts}
             setPageType={type => this.setPageType(type)}
           />

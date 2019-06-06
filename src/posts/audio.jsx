@@ -5,9 +5,13 @@ export default class AudioSingle {
     const embed = props.AudioEmbed.replace(/(%[\da-fA-F]{2})/g, m =>
       decodeURIComponent(m)
     );
-    this.embedWidth = parseInt(embed.match(/width=(?:'|")(\d+)(?:'|")/)[1], 10);
+    console.log(embed);
+    this.embedWidth = parseInt(
+      embed.match(/width=(?:'|"|&#39;|&quot;)(\d+)(?:'|"|&#39;|&quot;)/)[1],
+      10
+    );
     this.embedHeight = parseInt(
-      embed.match(/height=(?:'|")(\d+)(?:'|")/)[1],
+      embed.match(/height=(?:'|"|&#39;|&quot;)(\d+)(?:'|"|&#39;|&quot;)/)[1],
       10
     );
     return (

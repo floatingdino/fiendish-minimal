@@ -92,7 +92,7 @@ nav a {
   padding-right: 10px;
   line-height: 52px;
 }
-#pages-nav::-webkit-scrollbar {
+#title-line ::-webkit-scrollbar {
   display: none;
 }
 img {
@@ -102,6 +102,11 @@ img {
   transition: margin 0.3s ease-out;
   margin: 0;
   font-size: inherit;
+  overflow: auto;
+}
+#title-line h1 a {
+  display: inline-block;
+  height: 52px;
 }
 #title-line {
   height: 52px;
