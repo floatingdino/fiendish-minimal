@@ -1,0 +1,48 @@
+{
+  "name": "fiendish-minimal",
+  "version": "3.0.0",
+  "description": "3/4 column masonry tumblr theme",
+  "main": "src/index.js",
+  "dependencies": {
+    "masonry-layout": "^4.2.2",
+    "preact": "^8.4.2",
+    "preact-router": "^2.6.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^2.1.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.32.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "browserslist": ["defaults"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floatingdino/fiendish-minimal.git"
+  },
+  "author": "Sam Haakman (floatingdino@gmail.com)",
+  "license": "CCBY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/floatingdino/fiendish-minimal/issues"
+  },
+  "homepage": "https://github.com/floatingdino/fiendish-minimal#readme",
+  "optionalDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "prettier": "^1.17.1",
+    "prettier-eslint": "^8.8.2"
+  }
+}
