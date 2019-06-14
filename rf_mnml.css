@@ -535,3 +535,23 @@ blockquote p:last-child {
   left: 50%;
   transform: translateX(-50%);
 }
+article.text blockquote > figure.tmblr-full {
+  margin-bottom: 10px;
+}
+body div.npf_row {
+  margin: 0 -5px;
+}
+body article div.npf_row > figure.tmblr-full {
+  margin: 5px;
+  padding: 0 !important;
+}
+figure.tmlbr-full {
+  margin-bottom: 10px;
+  display: block;
+}
+figure.tmblr-full img {
+  display: block;
+}
+.npf_row + figure.tmblr-full {
+  margin: 5px 0 10px;
+}
