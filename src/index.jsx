@@ -5,7 +5,7 @@ import Tumblog from "./tumblog";
 
 // import data from "./data.js"
 
-render(<Tumblog {...data} />, document.body);
+render(<Tumblog {...data} />, document.body, document.getElementById("root"));
 
 if (window.navigator.userAgent.indexOf("MSIE ") > 0) {
   const promisePolyfill = document.createElement("script");

@@ -23,7 +23,7 @@ export default class Home extends Component {
     this.triggerDistance =
       "connection" in navigator && navigator.connection.saveData
         ? "0px"
-        : "500px";
+        : "1000px";
   }
 
   componentWillMount() {
