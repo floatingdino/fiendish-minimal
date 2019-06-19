@@ -1,23 +1,23 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+THEME DETAILS:
+RUCKUS FIENDS MINIMAL v. 3.0
+
+DESIGNED BY:
+FLOATINGDINO (floatingdino.tumblr.com)
+
+THEME IS CC BY-NC-SA: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
+
+DEPENDENCIES:
+Preact
+Preact Router
+Masonry
+-->
 <html>
 <head>
-  <!--
-  THEME DETAILS:
-  RUCKUS FIENDS MINIMAL v. 3.0
-
-  DESIGNED BY:
-  FLOATINGDINO (floatingdino.tumblr.com)
-
-  THEME IS CC BY-NC-SA: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
-  CONTACT floatingdino@gmail.com OR TUMBLR ASK BOX FOR ENQUIRIES/BUG REPORTS
-
-  DEPENDENCIES:
-  Preact
-  Preact Router
-  Masonry
-  -->
-  <link rel="preload" href="https://static.tumblr.com/ii7qpmy/EbWpt33g5/rf_mnml.js" as="script" />
+  <link rel="preload" href="https://static.tumblr.com/ii7qpmy/qlbptcak6/rf_mnml.js" as="script" />
   <title>{Title}</title>
   <link rel="shortcut icon" href="{Favicon}" />
   <link rel="alternate" type="application/rss+xml" href="{RSS}" />
@@ -147,8 +147,9 @@
 
       {CustomCSS}
   </style>
-
-  <script id="data">
+</head>
+<body>
+<script id="data">
     var data =  {
       "blog": {
         "Title": {JSTitle},
@@ -366,9 +367,39 @@
       {/block:IndexPage}
     }
   </script>
-</head>
-<body>
-  <script src="https://static.tumblr.com/ii7qpmy/EbWpt33g5/rf_mnml.js"></script>
+  <!-- The whole body of this page is replaced by javascript. Please check out the source code at [GitHub](https://github.com/floatingdino/fiendish-minimal) if you'd like to edit your theme with more than just CSS changes. -->
+  <div id="root">
+    <header id="masthead">
+        {block:IfShowHeader}
+          <div id="logo">
+            <a href="/" title="Home">
+              <img alt="{Title}" src="{image:Header}" />
+            </a>
+          </div>
+        {/block:IfShowHeader}
+        <div id="title-line">
+            <h1 id="title" >
+              <a href="/" title="Home">
+                {Title}
+              </a>
+            </h1>
+          )}
+        </div>
+    </header>
+     {block:IndexPage}
+        {block:Posts}
+            {block:Photo}
+              <article class="{PostType} {TagsAsClasses}">
+                  {block:RebloggedFrom}<h2><a href="{Permalink}#title" class="black">x</a> <a href="{ReblogRootURL}">{ReblogRootName}</a></h2>{/block:RebloggedFrom}
+                  <a href="{Permalink}#title">
+                      <img src="{PhotoURL-400}" alt="{PhotoAlt}">
+                  </a>
+              </article>
+            {/block:Photo}
+        {/block:Posts}
+     {/block:IndexPage}
+   </div>
+  <script src="https://static.tumblr.com/ii7qpmy/qlbptcak6/rf_mnml.js"></script>
 </body>
 <!--nice-->
 </html>
