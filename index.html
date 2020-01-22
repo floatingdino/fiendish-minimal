@@ -372,14 +372,14 @@ Masonry
     <header id="masthead">
         {block:IfShowHeader}
           <div id="logo">
-            <a href="/" title="Home">
+            <a href="/" title="{lang:Home}">
               <img alt="{Title}" src="{image:Header}" />
             </a>
           </div>
         {/block:IfShowHeader}
         <div id="title-line">
             <h1 id="title" >
-              <a href="/" title="Home">
+              <a href="/" title="{lang:Home}">
                 {Title}
               </a>
             </h1>
@@ -400,6 +400,18 @@ Masonry
               <img src="{PhotoURL-400}" alt="{PhotoAlt}">
             </a>
           {/block:Photo}
+          {block:Panorama}
+            <a href="{Permalink}#title">
+              <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}">
+            </a>
+          {/block:Panorama}
+          {block:Photoset}
+            <a href="{Permalink}#title">
+              {block:Photos}
+                <img src="{PhotoURL-400}" alt="{PhotoAlt}">
+              {/block:Photos}
+            </a>
+          {/block:Photoset}
           {block:Text}
             {block:Title}<a href="{Permalink}#title"><h3>{Title}</h3></a>{/block:Title}
             {Body}
