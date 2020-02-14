@@ -555,3 +555,12 @@ figure.tmblr-full img {
 .npf_row + figure.tmblr-full {
   margin: 5px 0 10px;
 }
+.theme-error {
+  text-align: center;
+  position: fixed;
+  bottom: 40px;
+  width: 100%;
+  left: 0;
+  color: #33ff99;
+  font-weight: bold;
+}
